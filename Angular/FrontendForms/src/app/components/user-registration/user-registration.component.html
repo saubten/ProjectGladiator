@@ -1,1 +1,123 @@
-<p>user-registration works!</p>
+
+<div class="register-form" style="text-align:center;">
+    <form [formGroup]="UserLoginForm" (ngSubmit)="onSubmit()">
+        <fieldset>
+
+            <legend style="font-size:larger;"><b>Registration Form</b></legend>
+            <div class="text-center">
+                <br/>
+                <br/>
+                <label for="Title">Title</label>
+                <select id="Title">
+                    <option value=default>--choose Title--</option>
+                    <option>Mr.</option>
+                    <option>Ms.</option>
+                    <option>Mrs.</option>
+                </select>
+
+            </div>
+            <br />
+           
+            <div class="form-group">
+                <label for="FirstName">FirstName<span style="color:red">*</span></label>
+                <input id="FirstName" type="text" formControlName="FirstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }"/>
+                <div *ngIf="submitted && f.FirstName?.errors" class="invalid-feedback">
+                    <div *ngIf="f.FirstName?.errors?.required">Fullname is required</div>
+                </div>
+
+            </div>
+            <br />
+            
+            <div>
+
+                <label for="LastName">LastName<span style="color:red">*</span></label>
+                <input id="LastName" type="text" formControlName="LastName"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }" />
+                <div *ngIf="submitted && f.LastName?.errors" class="invalid-feedback">
+                    <div *ngIf="f.LastName?.errors?.required">Fullname is required</div>
+                </div>
+            </div>
+            <br />
+         
+            <div>
+
+                <label for="Email">Email<span style="color:red">*</span></label>
+                <input id="Email" type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email?.errors }" />
+                <div *ngIf="submitted && f.email?.errors" class="invalid-feedback">
+                    <div *ngIf="f.email?.errors?.required">Email is required</div>
+                    <div *ngIf="f.email?.errors?.email">Email is invalid</div>
+                  </div>
+
+
+                
+            </div>
+            <br />
+            <div>
+
+                <p style="font-size: small;">suggested username:<span style="color:lightgreen">{{ UserLoginForm.get('FirstName').value+"123" }}</span></p>
+                
+                <label for="UserName">UserName<span style="color:red">*</span></label>
+                <input id="UserName" type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username?.errors }" />
+                <div *ngIf="submitted && f.username?.errors" class="invalid-feedback">
+                    <div *ngIf="f.username?.errors?.required">Username is required</div>
+                    <div *ngIf="f.username?.errors?.minlength">
+                      Username must be at least 6 characters
+                    </div>
+                    <div *ngIf="f.username?.errors?.maxlength">
+                      Username must not exceed 20 characters
+                    </div>
+                  </div>
+            </div>
+            <br />
+       
+            <div>
+                <label for="Password">Password<span style="color:red">*</span></label>
+                <input id="Password" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password?.errors }" />
+                <div *ngIf="submitted && f.password?.errors" class="invalid-feedback">
+                    <div *ngIf="f.password?.errors?.required">Password is required</div>
+                    <div *ngIf="f.password?.errors?.minlength">
+                      Password must be at least 6 characters
+                    </div>
+                    <div *ngIf="f.password?.errors?.maxlength">
+                      Username must not exceed 40 characters
+                    </div>
+                  </div>
+            </div>
+            <br />
+         
+            <div>
+                <label for="ConfirmPassword">Confirm Password<span style="color:red">*</span></label>
+                <input id="ConfirmPassword" type="password" formControlName="Confirmpassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Confirmpassword?.errors }" />
+                <div *ngIf="submitted && f.Confirmpassword?.errors" class="invalid-feedback"
+      >
+                    <div *ngIf="f.Confirmpassword?.errors?.required">Confirm Password is required</div>
+                    <div *ngIf="f.Confirmpassword?.errors?.matching"> Confirm Password does not match</div>
+                 </div>
+            </div>
+            <br />
+            
+            <div>
+                <label for="DateOfBirth">Date Of Birth</label>
+                <input id="Date Of Birth" type="date" placeholder="dd-mm-yyyy" formControlName="DOB"  />
+            </div>
+           
+            <br />
+            <br />
+            <div>
+                <label for="PhoneNo">Phone Number</label>
+                <input id="PhoneNo" type="text"formControlName="phoneNo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.PhoneNo?.errors }" />
+            </div>
+            
+            <br />
+            <div>
+                <button type="submit"   class="btn btn-primary">SIGNUP</button> <!--valid is an inbuilt method which checks all validators for all controls are working fine unless the form is valid the button is disabled -->
+            </div>                                                                                               
+            <br />
+  
+            <div>
+                <button type="button" (click)="onReset()" class="btn btn-warning float-right">CANCEL</button>
+            </div>
+            
+        </fieldset>
+
+    </form>
+    </div> 

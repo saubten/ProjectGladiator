@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-add-money-to-wallet',
@@ -12,4 +13,16 @@ export class UserAddMoneyToWalletComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addMoneyToWalletForm = new FormGroup({
+    addMoneyToWallet :new FormControl('',[Validators.required]),
+  })
+  
+
+  submit(){
+    alert(this.addMoneyToWalletForm.value + " is added to your account")
+  }
+
+  get f(){
+    return this.addMoneyToWalletForm.controls;
+  }
 }

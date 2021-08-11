@@ -1,0 +1,234 @@
+<h1 class="text-center">{{tripName}} Seat Selection</h1>
+<div  [ngClass] = "!classBool? 'container businessSeats' : 'container notAccessible'">
+    <div class="text-center">Business Class</div>
+    <div class="row">
+        <div name="1A"  id='0' (click) = "SeatB($event)" [ngClass]="seats[0].isAvailable? 'seat':'seat booked'">1A</div>
+        <div name="1B"  id='1' (click) = "SeatB($event)" [ngClass]="seats[1].isAvailable? 'seat':'seat booked'">1B</div>
+        <div name="1C"  id='2' (click) = "SeatB($event)" [ngClass]="seats[2].isAvailable? 'seat':'seat booked'">1C</div>
+        <div name="1D"  id='3' (click) = "SeatB($event)" [ngClass]="seats[3].isAvailable? 'seat':'seat booked'">1D</div>
+    </div>
+    <div class="row">
+        <div name="2A"  id='4' (click) = "SeatB($event)" [ngClass]="seats[4].isAvailable? 'seat':'seat booked'">2A</div>
+        <div name="2B"  id='5' (click) = "SeatB($event)" [ngClass]="seats[5].isAvailable? 'seat':'seat booked'">2B</div>
+        <div name="2C"  id='6' (click) = "SeatB($event)" [ngClass]="seats[6].isAvailable? 'seat':'seat booked'">2C</div>
+        <div name="2D"  id='7' (click) = "SeatB($event)" [ngClass]="seats[7].isAvailable? 'seat':'seat booked'">2D</div>
+    </div>
+    <div class="row">
+        <div name="3A"  id='8' (click) = "SeatB($event)" [ngClass]="seats[8].isAvailable? 'seat':'seat booked'">3A</div>
+        <div name="3B"  id='9' (click) = "SeatB($event)" [ngClass]="seats[9].isAvailable? 'seat':'seat booked'">3B</div>
+        <div name="3C"  id='10' (click) = "SeatB($event)" [ngClass]="seats[10].isAvailable? 'seat':'seat booked'">3C</div>
+        <div name="3D"  id='11' (click) = "SeatB($event)" [ngClass]="seats[11].isAvailable? 'seat':'seat booked'">3D</div>
+    </div>
+    <div class="row">
+        <div name="4B"  id='13' (click) = "SeatB($event)" [ngClass]="seats[13].isAvailable? 'seat':'seat booked'">4B</div>
+        <div name="4C"  id='14' (click) = "SeatB($event)" [ngClass]="seats[14].isAvailable? 'seat':'seat booked'">4C</div>
+        <div name="4D"  id='15' (click) = "SeatB($event)" [ngClass]="seats[15].isAvailable? 'seat':'seat booked'">4D</div>
+        <div name="4A"  id='12' (click) = "SeatB($event)" [ngClass]="seats[12].isAvailable? 'seat':'seat booked'">4A</div>
+    </div>
+    <div class="row">
+        <div name="5A"  id='16' (click) = "SeatB($event)" [ngClass]="seats[16].isAvailable? 'seat':'seat booked'">5A</div>
+        <div name="5B"  id='17' (click) = "SeatB($event)" [ngClass]="seats[17].isAvailable? 'seat':'seat booked'">5B</div>
+        <div name="5C"  id='18' (click) = "SeatB($event)" [ngClass]="seats[18].isAvailable? 'seat':'seat booked'">5C</div>
+        <div name="5D"  id='19' (click) = "SeatB($event)" [ngClass]="seats[19].isAvailable? 'seat':'seat booked'">5D</div>
+    </div>
+</div>
+
+<div  [ngClass] = "classBool? 'container economySeats' : 'container notAccessible'">
+    <div class="text-center">Economy Class</div>
+    <div class="row">
+        <div name="6E"  id='20' (click) = "SeatE($event)" [ngClass]="seats[20].isAvailable? 'seat':'seat booked'">6E</div>
+        <div name="6F"  id='21' (click) = "SeatE($event)" [ngClass]="seats[21].isAvailable? 'seat':'seat booked'">6F</div>
+        <div name="6G"  id='22' (click) = "SeatE($event)" [ngClass]="seats[22].isAvailable? 'seat':'seat booked'">6G</div>
+        <div name="6H"  id='23' (click) = "SeatE($event)" [ngClass]="seats[23].isAvailable? 'seat':'seat booked'">6H</div>
+        <div name="6I"  id='24' (click) = "SeatE($event)" [ngClass]="seats[24].isAvailable? 'seat':'seat booked'">6I</div>
+        <div name="6J"  id='25' (click) = "SeatE($event)" [ngClass]="seats[25].isAvailable? 'seat':'seat booked'">6J</div>
+    </div>
+    <div class="row">
+        <div name="7E"  id='26' (click) = "SeatE($event)" [ngClass]="seats[26].isAvailable? 'seat':'seat booked'">7E</div>
+        <div name="7F"  id='27' (click) = "SeatE($event)" [ngClass]="seats[27].isAvailable? 'seat':'seat booked'">7F</div>
+        <div name="7G"  id='28' (click) = "SeatE($event)" [ngClass]="seats[28].isAvailable? 'seat':'seat booked'">7G</div>
+        <div name="7H"  id='29' (click) = "SeatE($event)" [ngClass]="seats[29].isAvailable? 'seat':'seat booked'">7H</div>
+        <div name="7I"  id='30' (click) = "SeatE($event)" [ngClass]="seats[30].isAvailable? 'seat':'seat booked'">7I</div>
+        <div name="7J"  id='31' (click) = "SeatE($event)" [ngClass]="seats[31].isAvailable? 'seat':'seat booked'">7J</div>
+    </div>
+    <div class="row">
+        <div name="8E"  id='32' (click) = "SeatE($event)" [ngClass]="seats[32].isAvailable? 'seat':'seat booked'">8E</div>
+        <div name="8F"  id='33' (click) = "SeatE($event)" [ngClass]="seats[33].isAvailable? 'seat':'seat booked'">8F</div>
+        <div name="8G"  id='34' (click) = "SeatE($event)" [ngClass]="seats[34].isAvailable? 'seat':'seat booked'">8G</div>
+        <div name="8H"  id='35' (click) = "SeatE($event)" [ngClass]="seats[35].isAvailable? 'seat':'seat booked'">8H</div>
+        <div name="8I"  id='36' (click) = "SeatE($event)" [ngClass]="seats[36].isAvailable? 'seat':'seat booked'">8I</div>
+        <div name="8J"  id='37' (click) = "SeatE($event)" [ngClass]="seats[37].isAvailable? 'seat':'seat booked'">8J</div>
+    </div>
+    <div class="row">
+        <div name="9E"  id='38' (click) = "SeatE($event)" [ngClass]="seats[38].isAvailable? 'seat':'seat booked'">9E</div>
+        <div name="9F"  id='39' (click) = "SeatE($event)" [ngClass]="seats[39].isAvailable? 'seat':'seat booked'">9F</div>
+        <div name="9G"  id='40' (click) = "SeatE($event)" [ngClass]="seats[40].isAvailable? 'seat':'seat booked'">9G</div>
+        <div name="9H"  id='41' (click) = "SeatE($event)" [ngClass]="seats[41].isAvailable? 'seat':'seat booked'">9H</div>
+        <div name="9I"  id='42' (click) = "SeatE($event)" [ngClass]="seats[42].isAvailable? 'seat':'seat booked'">9I</div>
+        <div name="9J"  id='43' (click) = "SeatE($event)" [ngClass]="seats[43].isAvailable? 'seat':'seat booked'">9J</div>
+    </div>
+    <div class="row">
+        <div name="10E"  id='44' (click) = "SeatE($event)" [ngClass]="seats[44].isAvailable? 'seat':'seat booked'">10E</div>
+        <div name="10F"  id='45' (click) = "SeatE($event)" [ngClass]="seats[45].isAvailable? 'seat':'seat booked'">10F</div>
+        <div name="10G"  id='46' (click) = "SeatE($event)" [ngClass]="seats[46].isAvailable? 'seat':'seat booked'">10G</div>
+        <div name="10H"  id='47' (click) = "SeatE($event)" [ngClass]="seats[47].isAvailable? 'seat':'seat booked'">10H</div>
+        <div name="10I"  id='48' (click) = "SeatE($event)" [ngClass]="seats[48].isAvailable? 'seat':'seat booked'">10I</div>
+        <div name="10J"  id='49' (click) = "SeatE($event)" [ngClass]="seats[49].isAvailable? 'seat':'seat booked'">10J</div>
+    </div>
+    <div class="row">
+        <div name="11E"  id='50' (click) = "SeatE($event)" [ngClass]="seats[50].isAvailable? 'seat':'seat booked'">11E</div>
+        <div name="11F"  id='51' (click) = "SeatE($event)" [ngClass]="seats[51].isAvailable? 'seat':'seat booked'">11F</div>
+        <div name="11G"  id='52' (click) = "SeatE($event)" [ngClass]="seats[52].isAvailable? 'seat':'seat booked'">11G</div>
+        <div name="11H"  id='53' (click) = "SeatE($event)" [ngClass]="seats[53].isAvailable? 'seat':'seat booked'">11H</div>
+        <div name="11I"  id='54' (click) = "SeatE($event)" [ngClass]="seats[54].isAvailable? 'seat':'seat booked'">11I</div>
+        <div name="11J"  id='55' (click) = "SeatE($event)" [ngClass]="seats[55].isAvailable? 'seat':'seat booked'">11J</div>
+    </div>
+    <div class="row">
+        <div name="12E"  id='56' (click) = "SeatE($event)" [ngClass]="seats[56].isAvailable? 'seat':'seat booked'">12E</div>
+        <div name="12F"  id='57' (click) = "SeatE($event)" [ngClass]="seats[57].isAvailable? 'seat':'seat booked'">12F</div>
+        <div name="12G"  id='58' (click) = "SeatE($event)" [ngClass]="seats[58].isAvailable? 'seat':'seat booked'">12G</div>
+        <div name="12H"  id='59' (click) = "SeatE($event)" [ngClass]="seats[59].isAvailable? 'seat':'seat booked'">12H</div>
+        <div name="12I"  id='60' (click) = "SeatE($event)" [ngClass]="seats[60].isAvailable? 'seat':'seat booked'">12I</div>
+        <div name="12J"  id='61' (click) = "SeatE($event)" [ngClass]="seats[61].isAvailable? 'seat':'seat booked'">12J</div>
+    </div>
+    <div class="row">
+        <div name="13E"  id='62' (click) = "SeatE($event)" [ngClass]="seats[62].isAvailable? 'seat':'seat booked'">13E</div>
+        <div name="13F"  id='63' (click) = "SeatE($event)" [ngClass]="seats[63].isAvailable? 'seat':'seat booked'">13F</div>
+        <div name="13G"  id='64' (click) = "SeatE($event)" [ngClass]="seats[64].isAvailable? 'seat':'seat booked'">13G</div>
+        <div name="13H"  id='65' (click) = "SeatE($event)" [ngClass]="seats[65].isAvailable? 'seat':'seat booked'">13H</div>
+        <div name="13I"  id='66' (click) = "SeatE($event)" [ngClass]="seats[66].isAvailable? 'seat':'seat booked'">13I</div>
+        <div name="13J"  id='67' (click) = "SeatE($event)" [ngClass]="seats[67].isAvailable? 'seat':'seat booked'">13J</div>
+    </div>
+    <div class="row">
+        <div name="14E"  id='68' (click) = "SeatE($event)" [ngClass]="seats[68].isAvailable? 'seat':'seat booked'">14E</div>
+        <div name="14F"  id='69' (click) = "SeatE($event)" [ngClass]="seats[69].isAvailable? 'seat':'seat booked'">14F</div>
+        <div name="14G"  id='70' (click) = "SeatE($event)" [ngClass]="seats[70].isAvailable? 'seat':'seat booked'">14G</div>
+        <div name="14H"  id='71' (click) = "SeatE($event)" [ngClass]="seats[71].isAvailable? 'seat':'seat booked'">14H</div>
+        <div name="14I"  id='72' (click) = "SeatE($event)" [ngClass]="seats[72].isAvailable? 'seat':'seat booked'">14I</div>
+        <div name="14J"  id='73' (click) = "SeatE($event)" [ngClass]="seats[73].isAvailable? 'seat':'seat booked'">14J</div>
+    </div>
+    <div class="row">
+        <div name="15E"  id='74' (click) = "SeatE($event)" [ngClass]="seats[74].isAvailable? 'seat':'seat booked'">15E</div>
+        <div name="15F"  id='75' (click) = "SeatE($event)" [ngClass]="seats[75].isAvailable? 'seat':'seat booked'">15F</div>
+        <div name="15G"  id='76' (click) = "SeatE($event)" [ngClass]="seats[76].isAvailable? 'seat':'seat booked'">15G</div>
+        <div name="15H"  id='77' (click) = "SeatE($event)" [ngClass]="seats[77].isAvailable? 'seat':'seat booked'">15H</div>
+        <div name="15I"  id='78' (click) = "SeatE($event)" [ngClass]="seats[78].isAvailable? 'seat':'seat booked'">15I</div>
+        <div name="15J"  id='79' (click) = "SeatE($event)" [ngClass]="seats[79].isAvailable? 'seat':'seat booked'">15J</div>
+    </div>
+    <div class="row">
+        <div name="16E"  id='80' (click) = "SeatE($event)" [ngClass]="seats[80].isAvailable? 'seat':'seat booked'">16E</div>
+        <div name="16F"  id='81' (click) = "SeatE($event)" [ngClass]="seats[81].isAvailable? 'seat':'seat booked'">16F</div>
+        <div name="16G"  id='82' (click) = "SeatE($event)" [ngClass]="seats[82].isAvailable? 'seat':'seat booked'">16G</div>
+        <div name="16H"  id='83' (click) = "SeatE($event)" [ngClass]="seats[83].isAvailable? 'seat':'seat booked'">16H</div>
+        <div name="16I"  id='84' (click) = "SeatE($event)" [ngClass]="seats[84].isAvailable? 'seat':'seat booked'">16I</div>
+        <div name="16J"  id='85' (click) = "SeatE($event)" [ngClass]="seats[85].isAvailable? 'seat':'seat booked'">16J</div>
+    </div>
+    <div class="row">
+        <div name="17E"  id='86' (click) = "SeatE($event)" [ngClass]="seats[86].isAvailable? 'seat':'seat booked'">17E</div>
+        <div name="17F"  id='87' (click) = "SeatE($event)" [ngClass]="seats[87].isAvailable? 'seat':'seat booked'">17F</div>
+        <div name="17G"  id='88' (click) = "SeatE($event)" [ngClass]="seats[88].isAvailable? 'seat':'seat booked'">17G</div>
+        <div name="17H"  id='89' (click) = "SeatE($event)" [ngClass]="seats[89].isAvailable? 'seat':'seat booked'">17H</div>
+        <div name="17I"  id='90' (click) = "SeatE($event)" [ngClass]="seats[90].isAvailable? 'seat':'seat booked'">17I</div>
+        <div name="17J"  id='91' (click) = "SeatE($event)" [ngClass]="seats[91].isAvailable? 'seat':'seat booked'">17J</div>
+    </div>
+    <div class="row">
+        <div name="18E"  id='92' (click) = "SeatE($event)" [ngClass]="seats[92].isAvailable? 'seat':'seat booked'">18E</div>
+        <div name="18F"  id='93' (click) = "SeatE($event)" [ngClass]="seats[93].isAvailable? 'seat':'seat booked'">18F</div>
+        <div name="18G"  id='94' (click) = "SeatE($event)" [ngClass]="seats[94].isAvailable? 'seat':'seat booked'">18G</div>
+        <div name="18H"  id='95' (click) = "SeatE($event)" [ngClass]="seats[95].isAvailable? 'seat':'seat booked'">18H</div>
+        <div name="18I"  id='96' (click) = "SeatE($event)" [ngClass]="seats[96].isAvailable? 'seat':'seat booked'">18I</div>
+        <div name="18J"  id='97' (click) = "SeatE($event)" [ngClass]="seats[97].isAvailable? 'seat':'seat booked'">18J</div>
+    </div>
+    <div class="row">
+        <div name="19E"  id='98' (click) = "SeatE($event)" [ngClass]="seats[98].isAvailable? 'seat':'seat booked'">19E</div>
+        <div name="19F"  id='99' (click) = "SeatE($event)" [ngClass]="seats[99].isAvailable? 'seat':'seat booked'">19F</div>
+        <div name="19G"  id='100' (click) = "SeatE($event)" [ngClass]="seats[100].isAvailable? 'seat':'seat booked'">19G</div>
+        <div name="19H"  id='101' (click) = "SeatE($event)" [ngClass]="seats[101].isAvailable? 'seat':'seat booked'">19H</div>
+        <div name="19I"  id='102' (click) = "SeatE($event)" [ngClass]="seats[102].isAvailable? 'seat':'seat booked'">19I</div>
+        <div name="19J"  id='103' (click) = "SeatE($event)" [ngClass]="seats[103].isAvailable? 'seat':'seat booked'">19J</div>
+    </div>
+    <div class="row">
+        <div name="20E"  id='104' (click) = "SeatE($event)" [ngClass]="seats[104].isAvailable? 'seat':'seat booked'">20E</div>
+        <div name="20F"  id='105' (click) = "SeatE($event)" [ngClass]="seats[105].isAvailable? 'seat':'seat booked'">20F</div>
+        <div name="20G"  id='106' (click) = "SeatE($event)" [ngClass]="seats[106].isAvailable? 'seat':'seat booked'">20G</div>
+        <div name="20H"  id='107' (click) = "SeatE($event)" [ngClass]="seats[107].isAvailable? 'seat':'seat booked'">20H</div>
+        <div name="20I"  id='108' (click) = "SeatE($event)" [ngClass]="seats[108].isAvailable? 'seat':'seat booked'">20I</div>
+        <div name="20J"  id='109' (click) = "SeatE($event)" [ngClass]="seats[109].isAvailable? 'seat':'seat booked'">20J</div>
+    </div>
+    <div class="row">
+        <div name="21E"  id='110' (click) = "SeatE($event)" [ngClass]="seats[110].isAvailable? 'seat':'seat booked'">21E</div>
+        <div name="21F"  id='111' (click) = "SeatE($event)" [ngClass]="seats[111].isAvailable? 'seat':'seat booked'">21F</div>
+        <div name="21G"  id='112' (click) = "SeatE($event)" [ngClass]="seats[112].isAvailable? 'seat':'seat booked'">21G</div>
+        <div name="21H"  id='113' (click) = "SeatE($event)" [ngClass]="seats[113].isAvailable? 'seat':'seat booked'">21H</div>
+        <div name="21I"  id='114' (click) = "SeatE($event)" [ngClass]="seats[114].isAvailable? 'seat':'seat booked'">21I</div>
+        <div name="21J"  id='115' (click) = "SeatE($event)" [ngClass]="seats[115].isAvailable? 'seat':'seat booked'">21J</div>
+    </div>
+    <div class="row">
+        <div name="22E"  id='116' (click) = "SeatE($event)" [ngClass]="seats[116].isAvailable? 'seat':'seat booked'">22E</div>
+        <div name="22F"  id='117' (click) = "SeatE($event)" [ngClass]="seats[117].isAvailable? 'seat':'seat booked'">22F</div>
+        <div name="22G"  id='118' (click) = "SeatE($event)" [ngClass]="seats[118].isAvailable? 'seat':'seat booked'">22G</div>
+        <div name="22H"  id='119' (click) = "SeatE($event)" [ngClass]="seats[119].isAvailable? 'seat':'seat booked'">22H</div>
+        <div name="22I"  id='120' (click) = "SeatE($event)" [ngClass]="seats[120].isAvailable? 'seat':'seat booked'">22I</div>
+        <div name="22J"  id='121' (click) = "SeatE($event)" [ngClass]="seats[121].isAvailable? 'seat':'seat booked'">22J</div>
+    </div>
+    <div class="row">
+        <div name="23E"  id='122' (click) = "SeatE($event)" [ngClass]="seats[122].isAvailable? 'seat':'seat booked'">23E</div>
+        <div name="23F"  id='123' (click) = "SeatE($event)" [ngClass]="seats[123].isAvailable? 'seat':'seat booked'">23F</div>
+        <div name="23G"  id='124' (click) = "SeatE($event)" [ngClass]="seats[124].isAvailable? 'seat':'seat booked'">23G</div>
+        <div name="23H"  id='125' (click) = "SeatE($event)" [ngClass]="seats[125].isAvailable? 'seat':'seat booked'">23H</div>
+        <div name="23I"  id='126' (click) = "SeatE($event)" [ngClass]="seats[126].isAvailable? 'seat':'seat booked'">23I</div>
+        <div name="23J"  id='127' (click) = "SeatE($event)" [ngClass]="seats[127].isAvailable? 'seat':'seat booked'">23J</div>
+    </div>
+    <div class="row">
+        <div name="24E"  id='129' (click) = "SeatE($event)" [ngClass]="seats[129].isAvailable? 'seat':'seat booked'">24E</div>
+        <div name="24F"  id='130' (click) = "SeatE($event)" [ngClass]="seats[130].isAvailable? 'seat':'seat booked'">24F</div>
+        <div name="24G"  id='131' (click) = "SeatE($event)" [ngClass]="seats[131].isAvailable? 'seat':'seat booked'">24G</div>
+        <div name="24H"  id='132' (click) = "SeatE($event)" [ngClass]="seats[132].isAvailable? 'seat':'seat booked'">24H</div>
+        <div name="24I"  id='128' (click) = "SeatE($event)" [ngClass]="seats[128].isAvailable? 'seat':'seat booked'">24I</div>
+        <div name="24J"  id='133' (click) = "SeatE($event)" [ngClass]="seats[133].isAvailable? 'seat':'seat booked'">24J</div>
+    </div>
+    <div class="row">
+        <div name="25E"  id='134' (click) = "SeatE($event)" [ngClass]="seats[134].isAvailable? 'seat':'seat booked'">25E</div>
+        <div name="25F"  id='135' (click) = "SeatE($event)" [ngClass]="seats[135].isAvailable? 'seat':'seat booked'">25F</div>
+        <div name="25G"  id='136' (click) = "SeatE($event)" [ngClass]="seats[136].isAvailable? 'seat':'seat booked'">25G</div>
+        <div name="25H"  id='137' (click) = "SeatE($event)" [ngClass]="seats[137].isAvailable? 'seat':'seat booked'">25H</div>
+        <div name="25I"  id='138' (click) = "SeatE($event)" [ngClass]="seats[138].isAvailable? 'seat':'seat booked'">25I</div>
+        <div name="25J"  id='139' (click) = "SeatE($event)" [ngClass]="seats[139].isAvailable? 'seat':'seat booked'">25J</div>
+    </div>
+    <div class="row">
+        <div name="26E"  id='140' (click) = "SeatE($event)" [ngClass]="seats[140].isAvailable? 'seat':'seat booked'">26E</div>
+        <div name="26F"  id='141' (click) = "SeatE($event)" [ngClass]="seats[141].isAvailable? 'seat':'seat booked'">26F</div>
+        <div name="26G"  id='142' (click) = "SeatE($event)" [ngClass]="seats[142].isAvailable? 'seat':'seat booked'">26G</div>
+        <div name="26H"  id='143' (click) = "SeatE($event)" [ngClass]="seats[143].isAvailable? 'seat':'seat booked'">26H</div>
+        <div name="26I"  id='144' (click) = "SeatE($event)" [ngClass]="seats[144].isAvailable? 'seat':'seat booked'">26I</div>
+        <div name="26J"  id='145' (click) = "SeatE($event)" [ngClass]="seats[145].isAvailable? 'seat':'seat booked'">26J</div>
+    </div>
+    <div class="row">
+        <div name="27E"  id='148' (click) = "SeatE($event)" [ngClass]="seats[146].isAvailable? 'seat':'seat booked'">27E</div>
+        <div name="27F"  id='149' (click) = "SeatE($event)" [ngClass]="seats[147].isAvailable? 'seat':'seat booked'">27F</div>
+        <div name="27G"  id='150' (click) = "SeatE($event)" [ngClass]="seats[148].isAvailable? 'seat':'seat booked'">27G</div>
+        <div name="27H"  id='151' (click) = "SeatE($event)" [ngClass]="seats[149].isAvailable? 'seat':'seat booked'">27H</div>
+        <div name="27I"  id='152' (click) = "SeatE($event)" [ngClass]="seats[150].isAvailable? 'seat':'seat booked'">27I</div>
+        <div name="27J"  id='153' (click) = "SeatE($event)" [ngClass]="seats[151].isAvailable? 'seat':'seat booked'">27J</div>
+    </div>
+    <div class="row">
+        <div name="28E"  id='152' (click) = "SeatE($event)" [ngClass]="seats[152].isAvailable? 'seat':'seat booked'">28E</div>
+        <div name="28F"  id='153' (click) = "SeatE($event)" [ngClass]="seats[153].isAvailable? 'seat':'seat booked'">28F</div>
+        <div name="28G"  id='154' (click) = "SeatE($event)" [ngClass]="seats[154].isAvailable? 'seat':'seat booked'">28G</div>
+        <div name="28H"  id='155' (click) = "SeatE($event)" [ngClass]="seats[155].isAvailable? 'seat':'seat booked'">28H</div>
+        <div name="28I"  id='156' (click) = "SeatE($event)" [ngClass]="seats[156].isAvailable? 'seat':'seat booked'">28I</div>
+        <div name="28J"  id='157' (click) = "SeatE($event)" [ngClass]="seats[157].isAvailable? 'seat':'seat booked'">28J</div>
+    </div>
+</div>
+<div class="d-grid gap-2 w-25 mx-auto" *ngIf="!isReturn">
+    <button class="btn btn-primary" [disabled]="selectedSeatsId.length != freezeCheck" [routerLink]="['/payment']" type="submit" (click) = "Submit()">Freeze</button>
+</div> 
+
+<div class="d-grid gap-2 w-25 mx-auto" *ngIf="isReturn">
+    <button class="btn btn-primary" [disabled]="selectedSeatsId.length != freezeCheck" type="submit" (click) = "Submit()">Freeze</button>
+</div> 
+
+<!-- <div>
+    <h1>Seat selection</h1>
+    <button class="btn btn-primary" routerLink = "/payment">Continue</button>
+</div> -->

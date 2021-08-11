@@ -1,1 +1,55 @@
-<p>user-add-passenger works!</p>
+<h1 class="text-center">Add Passenger</h1>
+<div class="container">
+    <div class="mx-auto w-50 p-3" *ngIf="count">
+        <form class="mt-2" [formGroup] = "form" (ngSubmit)="add(form)">    
+                <h4>Passenger {{passengerList.length + 1}} </h4>
+                <label >First Name</label>
+                <input class="form-control" formControlName = "passFirstName">
+                <div *ngIf="f.passFirstName.touched && f.passFirstName.invalid" class="text-danger">
+                    <small *ngIf="f.passFirstName.errors?.required">*Firstname is required.</small>
+                </div>
+                <label >Last Name</label>
+                <input class="form-control" formControlName = "passLastName">
+                <div *ngIf="f.passLastName.touched && f.passLastName.invalid" class="text-danger">
+                    <small *ngIf="f.passLastName.errors?.required">*Lastname is required.</small>
+                </div>
+                <label >Age</label>
+                <input class="form-control" type="number" formControlName = "passAge">
+                <div *ngIf="f.passAge.touched && f.passAge.invalid" class="text-danger">
+                    <small *ngIf="f.passAge.errors?.required">*Age is required.</small>
+                </div>
+                <label >Phone</label>
+                <input class="form-control" formControlName = "passPhone">
+                <div *ngIf="f.passPhone.touched && f.passPhone.invalid" class="text-danger">
+                    <small *ngIf="f.passPhone.errors?.required">*Phone number is required.</small>
+                    <small *ngIf="f.passPhone.errors?.pattern">10 digit phone number.</small> 
+                </div> 
+                <div class="d-grid gap-2 mt-2">
+                    <button class="btn btn-primary" [disabled]="form.invalid" type="submit">Add</button>
+                </div>   
+        </form>  
+    </div>
+    <div class="container">
+        <table class="table table-primary table-bordered" *ngIf="passengerList.length">
+            <thead >
+                <tr>
+                    <th>Sr.No.</th>
+                    <th>Passenger Name</th>
+                    <th>Passenger Age</th>
+                    <th>Passenger Phone</th>
+                </tr>
+            </thead>
+            <tbody *ngFor = "let p of passengerList; let i = index;">
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{p.passFirstName + " " + p.passLastName}}</td>
+                    <td>{{p.passAge}}</td>
+                    <td>{{p.passPhone}}</td>   
+                </tr>
+            </tbody>
+            <button class="btn btn-success" [disabled]="count"  [routerLink]="['/seatSelection']" (click)="onDone()">Done</button>
+        </table>
+    </div>
+</div>
+
+<!-- [routerLink]="['/seatSelection',passengerList.length]" -->

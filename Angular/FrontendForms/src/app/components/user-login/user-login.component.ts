@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AppComponent } from 'src/app/app.component';
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserLoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(public AC : AppComponent) { }
 
   ngOnInit(): void {
   }
 
+  onLogin(){
+    this.AC.navbarTrigger = false;
+  }
 }

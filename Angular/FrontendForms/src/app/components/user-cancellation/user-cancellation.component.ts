@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-cancellation',
@@ -12,4 +13,16 @@ export class UserCancellationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  form = new FormGroup({
+    BookingID : new FormControl('',[Validators.required]),
+  });
+ 
+
+  get f(){
+    return this.form.controls;
+  }
+
+  enter(f : FormGroup){
+    console.log(f.value['BookingID'])
+  }
 }

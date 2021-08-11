@@ -1,1 +1,13 @@
-<p>user-add-money-to-wallet works!</p>
+<h1 class="text-center">Add Money</h1>
+
+<form [formGroup]='addMoneyToWalletForm' class="mx-auto w-25 p-3" (ngSubmit)="submit()">
+    <label>Amount</label>
+    <input class="form-control" type="number" formControlName = "addMoneyToWallet">
+    <div *ngIf="f.addMoneyToWallet.touched && f.addMoneyToWallet.invalid" class="alert alert-danger">
+        <div *ngIf="f.addMoneyToWallet.errors?.required">Amount is required.</div>
+    </div>
+
+    <div class="d-grid gap-2 mt-2">
+        <button class="btn btn-primary" [disabled]="addMoneyToWalletForm.invalid" type="submit">Enter</button>
+    </div>
+</form>

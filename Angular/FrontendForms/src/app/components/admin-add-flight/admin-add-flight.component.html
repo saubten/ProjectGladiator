@@ -1,1 +1,105 @@
-<p>admin-add-flight works!</p>
+<span class="border-0"></span>
+<h1 align="Middle"> AirTickets</h1>
+<div class="container" style="width:1200px;">
+ <form [formGroup]="AirTickets">
+
+<hr><h2 align="Middle"> <button style="background-color:rgba(44, 139, 0, 0.692)">Add Tickets</button></h2>
+   
+<div class="form-group">
+      <hr> <b><label>Enter Flight number:</label></b>
+           <input type="varchar"  formControlName="FlightNo" class="form-control" id="FlightNo" >
+           <div *ngIf="!AirTickets.get('FlightNo')?.valid && (AirTickets.get('FlightNo')?.dirty || AirTickets.get('FlightNo')?.touched) "
+       class="error">
+       <div *ngIf="AirTickets.get('FlightNo')?.errors?.required" >
+           <small class="text-danger">Flight no. is required</small>
+       
+       </div> </div>
+     
+</div>
+         
+       
+<div class="form-group">
+     <b><label>From:</label></b>
+     <input type="text"  formControlName="from" class="form-control" id="from">
+     <div *ngIf="!AirTickets.get('from')?.valid && (AirTickets.get('from')?.dirty || AirTickets.get('from')?.touched) "
+       class="error">
+       <div *ngIf="AirTickets.get('from')?.errors?.required" >
+           <small class="text-danger">destination is required</small>
+       </div> 
+     </div>
+   </div>
+   
+
+     
+     
+   <div class="form-group">
+      <b><label>To:</label></b>
+     <input type="text"  formControlName="to" class="form-control" id="to">
+     <div *ngIf="!AirTickets.get('to')?.valid && (AirTickets.get('to')?.dirty || AirTickets.get('to')?.touched) "
+       class="error">
+       <div *ngIf="AirTickets.get('to')?.errors?.required" >
+           <small class="text-danger">destination is required</small>
+       </div> </div></div>
+ 
+
+       
+       
+       <div class="form-group">
+     <b><label>Departure Date :</label></b>
+     <input type="date"  class="form-control" formControlName="DepDate" ></div>
+
+
+
+     <b><label>Departure Time :</label></b>
+     <input type="time" class="form-control" formControlName="Deptime" >
+
+
+
+     <div class="form-group">
+    <b> <label>Arrival Date :</label></b>
+     <input type="date" class="form-control" formControlName="ArrDate" min={{maxdate}}></div>
+
+     <div class="form-group">
+     <b><label>Arrival Time :</label></b>
+       <input type="time" class="form-control" formControlName="ArrTime" >
+
+       
+
+     <div class="form-group">
+   <b><label>Economy class Price:</label></b>
+       <input type="number"   formControlName="EconomyPrice" class="form-control" id="EconomyPrice">
+     <div *ngIf="!AirTickets.get('EconomyPrice' )?.valid && (AirTickets.get('EconomyPrice')?.dirty || AirTickets.get('EconomyPrice')?.touched) "
+       class="error">
+       <div *ngIf="AirTickets.get('EconomyPrice')?.errors?.required" >
+           <small class="text-danger">Price is required</small>
+</div></div></div>
+
+
+
+      <div class="form-group">
+     <b><label> class Price:</label></b>
+       <input type="number"   formControlName="BussPrice" class="form-control" id="BussPrice" >
+     <div *ngIf="!AirTickets.get('BussPrice' )?.valid && (AirTickets.get('BussPrice')?.dirty || AirTickets.get('BussPrice')?.touched) "
+     class="error">
+     <div *ngIf="AirTickets.get('BussPrice')?.errors?.required" >
+         <small class="text-danger">Price is required</small></div></div></div>
+     
+
+
+     <p align="left"><b>Available Economy Seats:<input type="number" ></b></p>
+     <p align="left"><b>Available Bussiness Seats:<input type="number" ></b></p>
+     
+     <hr><p align="Middle"><b><button style="background-color:rgba(44, 139, 0, 0.692)">ADD</button></b></p>
+     <hr><h2 align="Middle"><b><button style="background-color:rgba(44, 139, 0, 0.692)">Delete Tickets </button></b></h2>
+  
+  
+   <div class="form-group">
+   <b><label> number:</label></b>
+   <input type="varchar" formControlName="FlightNo" class="form-control" id="FlightNo">
+   <div *ngIf="!AirTickets.get('FlightNo' )?.valid && (AirTickets.get('FlightNo')?.dirty || AirTickets.get('FlightNo')?.touched) "
+   class="error">
+   <div *ngIf="AirTickets.get('FlightNo')?.errors?.required" >
+       <small class="text-danger">Price is required</small></div></div></div>
+
+ 
+ <hr><p align="Middle"><b><button style="background-color:rgba(44, 139, 0, 0.692)">Delete</button></b></p>

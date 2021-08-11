@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +20,9 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { AdminAddFlightComponent } from './components/admin-add-flight/admin-add-flight.component';
 import { AdminDeleteFlightComponent } from './components/admin-delete-flight/admin-delete-flight.component';
+import { UserSeatSelectionComponent } from './components/user-seat-selection/user-seat-selection.component';
+import { HomeComponent } from './components/home/home.component';
+import { FlightService } from './services/flights.service';
 
 
 
@@ -37,13 +43,18 @@ import { AdminDeleteFlightComponent } from './components/admin-delete-flight/adm
     AdminLoginComponent,
     AdminAddFlightComponent,
     AdminDeleteFlightComponent,
+    UserSeatSelectionComponent,
+    HomeComponent,
 
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [FlightService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
