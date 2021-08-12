@@ -11,47 +11,84 @@ export class UserFlightSelectComponent implements OnInit {
 
   oneway?:any;
   twoway?:any;
-  flag:boolean=false;
+  flag:boolean;
   onewaydata:any;
   twowaydata:any;
-  selectedEntry:any;
-  selectedEntryReturn:any;
-  selectedData:any; 
-  selectedDataReturn:any;
+
+  pCount : number;
+
+  OWboolArray : boolean[] = Array().fill(false);
+  RTboolArray : boolean[] = Array().fill(false);
+  OWbtnTrigger : boolean[] =Array().fill(false);
+  RTbtnTrigger : boolean[] =Array().fill(false);
+  OWselect : boolean = false;
+  RTselect : boolean = false;
+  OWprice : number;
+  RTprice : number;
+  OWflightSelect : any;
+  RTflightSelect : any;
+  OWflightClass : boolean;
+  RTflightClass : boolean;
 
   constructor() { }
 
- onSelectionChange(selFlight:any) {
-  
-    this.selectedEntry = selFlight;
-    console.log(this.selectedEntry);
-    localStorage.setItem("onewayDetails",JSON.stringify(this.selectedEntry)); 
-  }
-       
-  onSelectionChangeReturn(selFlight:any) {
 
-    this.selectedEntryReturn = selFlight;
-    console.log(this.selectedEntryReturn);
-    localStorage.setItem("roundtripDetails",JSON.stringify(this.selectedEntryReturn));
 
+  OWSelect(index : number,obj : any){
+    this.OWbtnTrigger.fill(false);
+    this.OWboolArray.fill(false);
+    this.OWselect = false;
+    this.OWboolArray[index] = true;
+    this.OWflightSelect = obj;
   }
 
-
-  x?:string
-  clsName(i:number){
-    this.x=i+" "
-    return (this.x);
+  RTSelect(index : number,obj : any){
+    this.RTbtnTrigger.fill(false);
+    this.RTboolArray.fill(false);
+    this.RTselect = false;
+    this.RTboolArray[index] = true;
+    this.RTflightSelect = obj;
   }
 
-  y?:string
-  clsNameReturn(i:number){
-    this.y= i + 10 + " "
-    return (this.y);
+  OWpriceSelect(event : any){
+    this.OWbtnTrigger.fill(false);
+    this.OWbtnTrigger[Number((event.target.id).slice(0,1))] =true;
+    if(Number((event.target.id).slice(0,1)) == 0){
+      this.OWflightClass = false;
+    }
+    else{
+      this.OWflightClass = true;
+    }
+    console.log(event.target.value);
+    this.OWselect = true;
+    this.OWprice = Number(event.target.value)
   }
 
+  RTpriceSelect(event : any){
+    this.RTbtnTrigger.fill(false);
+    this.RTbtnTrigger[Number((event.target.id).slice(0,1))] =true;
+    if(Number((event.target.id).slice(0,1)) == 0){
+      this.RTflightClass = false;
+    }
+    else{
+      this.RTflightClass = true;
+    }
+    this.RTselect = true;
+    this.RTprice = Number(event.target.value)
+  }
 
+  Continue(){
+    console.log(this.OWflightSelect,this.RTflightSelect)
+    localStorage.setItem("onewayDetails",JSON.stringify(this.OWflightSelect));
+    localStorage.setItem("OWflightType",JSON.stringify(this.OWflightClass));
+    if(this.flag){
+      localStorage.setItem("roundtripDetails",JSON.stringify(this.RTflightSelect));
+      localStorage.setItem("RTflightType",JSON.stringify(this.RTflightClass));
+    } 
+  }
 
   ngOnInit(): void {
+    this.pCount =Number(localStorage.getItem('passengervalue'))
     this.flag=JSON.parse(localStorage.getItem('flagTripType')!);
     if(this.flag)
     {

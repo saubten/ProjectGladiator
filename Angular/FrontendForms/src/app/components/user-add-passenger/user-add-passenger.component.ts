@@ -1,5 +1,3 @@
-
-import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -22,7 +20,9 @@ export class UserAddPassengerComponent implements OnInit {
   showPassengerForms: boolean;
   passenger : Passenger = {};
   passengerList : Passenger[] = [];
-  count : number ;
+  editPassenger : Passenger ={};
+  ind : number
+  count : number;
   
   phonePattern = "^[0-9]{10}$";
 
@@ -64,4 +64,12 @@ export class UserAddPassengerComponent implements OnInit {
     localStorage.setItem('passengerList',JSON.stringify(this.passengerList))
   }
 
+  edit(index : number){
+    this.editPassenger = this.passengerList[index];
+    console.log(this.editPassenger)
+  }
+
+  onSubmitTemplateBased(){
+    this.passengerList[this.ind] = this.editPassenger;
+  }
 }

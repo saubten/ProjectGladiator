@@ -1,5 +1,5 @@
 <h1 class="text-center">{{tripName}} Seat Selection</h1>
-<div  [ngClass] = "!classBool? 'container businessSeats' : 'container notAccessible'">
+<div  [ngClass] = "classBool? 'container businessSeats' : 'container notAccessible'">
     <div class="text-center">Business Class</div>
     <div class="row">
         <div name="1A"  id='0' (click) = "SeatB($event)" [ngClass]="seats[0].isAvailable? 'seat':'seat booked'">1A</div>
@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<div  [ngClass] = "classBool? 'container economySeats' : 'container notAccessible'">
+<div  [ngClass] = "!classBool? 'container economySeats' : 'container notAccessible'">
     <div class="text-center">Economy Class</div>
     <div class="row">
         <div name="6E"  id='20' (click) = "SeatE($event)" [ngClass]="seats[20].isAvailable? 'seat':'seat booked'">6E</div>

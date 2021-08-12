@@ -1,8 +1,24 @@
 <h1 class="text-center"> Flight Search </h1>
 <div class="container">
     <form [formGroup]='flightsearchform' class="mx-auto w-50" (ngSubmit)="getflightSearch()" >
+
+        <div class="form-group">
+            <label for="From">From</label>
+            <select  name="From" id="From" class="form-control"  placeholder="enter city" formControlName="from" (click)=c()>
+            <option >Choose Source</option>  
+            <option *ngFor="let x of scopys;let i = index"  >{{x}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">  
+          <label for="To">To</label>
+          <select name="To" id="To" placeholder="enter city" class="form-control" formControlName="to">
+          <option style="display:none;"></option>
+          <option *ngFor="let x of s;let i = index">{{x}}</option>
+          </select>
+        </div>
         
-        <div class="form-group ">
+        <!-- <div class="form-group ">
             <label>From:</label>
             <input class="form-control" type="text" formControlName="from" placeholder="Enter City" >
 
@@ -32,7 +48,7 @@
                     <small class="text-danger">City name cannot contain numbers</small>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="form-group">
             <label>Ticket Type:</label> &nbsp;

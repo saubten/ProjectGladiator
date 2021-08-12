@@ -12,7 +12,7 @@ export class Flights
     ArrivalTime?:Time;
     EconomyPrice?:number;
     BusinessPrice?:number;
-    AvailableEcononmySeats?:number;
+    AvailableEconomySeats?:number;
     AvailableBusinessSeats?:number;
     isCancelled?:BinaryType;
 

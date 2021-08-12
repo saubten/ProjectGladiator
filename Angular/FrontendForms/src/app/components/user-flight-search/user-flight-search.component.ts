@@ -19,6 +19,12 @@ export class UserFlightSearchComponent implements OnInit {
 
   flightsearchform:FormGroup;
 
+
+  s:string[]=["Mumbai","Chennai","Delhi","Bangalore","Pune","Jammu","Hyderabad"].sort();;
+  scopys:string[]=["Mumbai","Chennai","Delhi","Bangalore","Pune","Jammu","Hyderabad"].sort();
+  name?:string;
+  index?:number;
+  DDlbox : FormGroup;
   constructor(private flightservice:FlightService,private http:HttpClient,private route:Router) {    
 
     this.flightsearchform = new FormGroup({
@@ -30,6 +36,20 @@ export class UserFlightSearchComponent implements OnInit {
       passengersCount: new FormControl(null) 
     });
 
+  }
+
+  c(){
+    console.log(this.flightsearchform.value['from']);
+    this.s=["Mumbai","Chennai","Delhi","Bangalore","Pune","Jammu","Hyderabad"].sort();
+    this.index=this.s.findIndex(a=>a===this.flightsearchform.value['from'])
+    console.log(this.index)
+    if(this.index!=-1){
+      this.s.splice(this.index,1);
+
+    }
+    
+    console.log(this.s);
+    
   }
 
   changeTrip(e:any) {
@@ -82,7 +102,6 @@ export class UserFlightSearchComponent implements OnInit {
     //For round trip
     if(this.flightsearchform.value["returnDate"]!=null)
     {
-      debugger;
       localStorage.clear();
       this.flag=true;
       localStorage.setItem("flagTripType",JSON.stringify(this.flag));
@@ -141,8 +160,8 @@ export class UserFlightSearchComponent implements OnInit {
 
 
   ngOnInit(){
+    localStorage.clear();
     this.pastdatedisable();
-    //this.getflightSearch();
   }
 }
 

@@ -1,56 +1,40 @@
 <div class="container">
-    <div class='parent grid-parent'>
-        <div class='child'>
+    <div class='parent d-flex grid-parent'>
+        <div class='child flex-fill'>
             <h2>{{oneway[0].fromLocation}} <span style='font-size:60px;'>&#8680;</span> {{oneway[0].toLocation}} </h2>
             <h3>{{oneway[0].departureDate.slice(0,10)}}</h3>
 
-            <div class="radio-toolbar-child" *ngFor="let o of oneway; let i = index" [attr.data-index]="i">
-
-                <input type="radio" [id]="clsName(i)" name="radioFlight" [value]="clsName(i)"
-                    (click)="onSelectionChange(o)">
-
-                <label [for]="clsName(i)"> {{o.flightNumber}}
-
-                    <h4>{{o.departureTime}} -------------------- {{o.arrivalTime}}</h4> <br />
-
-                    <input type="checkbox" id="economy1" name="economy1" value="economy1">
-                    <label for="economy1"> Economy Class: ₹ {{o.economyPrice}}</label>
-
-                    <input type="checkbox" id="business1" name="business1" value="business1">
-                    <label for="business1"> Business Class: ₹ {{o.businessPrice}}</label>
-
-                </label>
+            <div class="box d-flex" *ngFor="let o of oneway;let i = index;" 
+                [ngClass]="OWboolArray[i]? 'select': 'unselect'">
+                <div id="details_{{i}}" (click)="OWSelect(i,o)" class="box flex-fill">
+                    {{o.flightNumber}}
+                    <h4>{{o.departureTime}} -------------------- {{o.arrivalTime}}</h4> 
+                </div>
+                <button id="0_{{i}}" [disabled]="!(OWboolArray[i] && (o.availableEconomySeats >= pCount))" (click)="OWpriceSelect($event)" [ngClass]="OWbtnTrigger[0] && OWboolArray[i]?'btn btn-success': 'btn btn-primary'" [value]="o.economyPrice" class="box flex-fill">Economy Class: ₹ {{o.economyPrice}}</button>
+                <button id="1_{{i}}" [disabled]="!(OWboolArray[i] && (o.availableBusinessSeats >= pCount))" (click)="OWpriceSelect($event)" [ngClass]="OWbtnTrigger[1] && OWboolArray[i]?'btn btn-success': 'btn btn-primary'" [value]="o.businessPrice" class="box flex-fill">Business Class: ₹ {{o.businessPrice}}</button>
             </div>
         </div>
 
-        <div class='child' *ngIf="flag">
-
+        <div class='child flex-fill' *ngIf="flag">
             <h2>{{twoway[0].fromLocation}} <span style='font-size:60px;'>&#8680;</span> {{twoway[0].toLocation}} </h2>
             <h3>{{twoway[0].departureDate.slice(0,10)}}</h3>
 
-            <div class="radio-toolbar-child" *ngFor="let t of twoway; let i = index" [attr.data-index]="i">
-
-                <input type="radio" [id]="clsNameReturn(i)" name="radioFlightReturn" [value]="clsNameReturn(i)"
-                    (click)="onSelectionChangeReturn(t)">
-
-                <label [for]="clsNameReturn(i)">
-
+            <div class="box d-flex" *ngFor="let t of twoway; let i = index;" [ngClass]="RTboolArray[i]? 'select': 'unselect'">
+                <div id="details_{{i}}" (click)="RTSelect(i,t)" class="box flex-fill">
                     {{t.flightNumber}}
-                    <h4>{{t.departureTime}} -------------------- {{t.arrivalTime}}</h4> <br />
-
-                    <input type="checkbox" id="economy2" name="economy2" value="economy2">
-                    <label for="economy1"> Economy Class: ₹ {{t.economyPrice}}</label>
-
-                    <input type="checkbox" id="business2" name="business2" value="business2">
-                    <label for="business1"> Business Class: ₹ {{t.businessPrice}}</label>
-
-                </label>
+                    <h4>{{t.departureTime}} -------------------- {{t.arrivalTime}}</h4> 
+                </div>
+                <button id="0_{{i}}" [disabled]="!(RTboolArray[i] && (t.availableEconomySeats >= pCount))" (click)="RTpriceSelect($event)" [ngClass]="RTbtnTrigger[0] && RTboolArray[i]?'btn btn-success': 'btn btn-primary'" [value]="t.economyPrice" class="box flex-fill">Economy Class: ₹ {{t.economyPrice}}</button>
+                <button id="1_{{i}}" [disabled]="!(RTboolArray[i] && (t.availableBusinessSeats >= pCount))" (click)="RTpriceSelect($event)" [ngClass]="RTbtnTrigger[1] && RTboolArray[i]?'btn btn-success': 'btn btn-primary'" [value]="t.businessPrice" class="box flex-fill">Business Class: ₹ {{t.businessPrice}}</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="mx-auto w-50 d-grid gap-2">
-    <button class="btn btn-primary" [routerLink]="['/addPassenger']">Continue</button>
+<div class="mx-auto w-50 d-grid gap-2" *ngIf="!flag">
+    <button class="btn btn-primary" [disabled]="!(OWselect)" [routerLink]="['/addPassenger']" (click)="Continue()">Continue</button>
+</div>
+<div class="mx-auto w-50 d-grid gap-2" *ngIf="flag">
+    <button class="btn btn-primary" [disabled]="!(OWselect && RTselect)" [routerLink]="['/addPassenger']" (click)="Continue()">Continue</button>
 </div>
 

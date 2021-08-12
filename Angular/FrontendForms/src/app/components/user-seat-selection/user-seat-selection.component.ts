@@ -1,6 +1,4 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Seats } from 'src/app/models/seats';
 import { SeatService } from 'src/app/services/seats.service';
 
@@ -35,14 +33,7 @@ export class UserSeatSelectionComponent implements OnInit {
     tripName : string;
   
     constructor(private service : SeatService) {
-      this.seatCount = Number(JSON.parse(localStorage.getItem('passengerList')!).length)
-      this.classBool = true; // False for Economy Type and True For Business
-      this.freezeCheck = this.seatCount;
-
-      this.OWflightNumber = JSON.parse(localStorage.getItem('onewayDetails')!)['flightNumber']//Value will be taken from either localStorage or sessionStorage
-      this.RTflightNumber = JSON.parse(localStorage.getItem('roundtripDetails')!)['flightNumber']
-      this.isReturn = JSON.parse(localStorage.getItem('flagTripType')!);
-      this.tripName = "One Way"
+      
     }
   
     // SEAT SELECTION METHOD 
@@ -109,18 +100,21 @@ export class UserSeatSelectionComponent implements OnInit {
     }
   
     Submit(){
+      debugger;
       this.updateSelectedSeats();
       if(!this.availableBool){
         this.updateAvailableSeatsInDb(this.OWflightNumber);
       }
       else{
-        this.updateAvailableSeatsInDb(this.RTflightNumber);
+        this.updateAvailableSeatsInDb(this.RTflightNumber!);
       }
       if(this.isReturn){
         this.availableBool = true;
         this.isReturn = false;
         this.tripName = "Round Trip";
-        this.seatCount = Number(JSON.parse(localStorage.getItem('passengerList')!).length)
+        this.classBool = Boolean(JSON.parse(localStorage.getItem('RTflightType')!));
+        this.RTflightNumber = JSON.parse(localStorage.getItem('roundtripDetails')!)['flightNumber'];
+        this.seatCount = Number(JSON.parse(localStorage.getItem('passengerList')!).length);
         this.seatTogglers.forEach((value,index) =>{
           if(value == true)
           value = false;
@@ -128,7 +122,7 @@ export class UserSeatSelectionComponent implements OnInit {
           this.element = this.temp;
           this.element?.setAttribute("class",'seat');
         })
-        this.getSeats(this.RTflightNumber)
+        this.getSeats(this.RTflightNumber!);
       }
       this.selectedSeats =[];
       this.selectedSeatsId =[];
@@ -136,8 +130,17 @@ export class UserSeatSelectionComponent implements OnInit {
   
     
     ngOnInit(): void {
-      this.getSeats(this.OWflightNumber)
-      console.log(Number(JSON.parse(localStorage.getItem('passengerList')!).length))
+      
+      console.log(Number(JSON.parse(localStorage.getItem('passengerList')!).length));
+      this.seatCount = Number(JSON.parse(localStorage.getItem('passengerList')!).length)
+      this.classBool = Boolean(JSON.parse(localStorage.getItem('OWflightType')!))
+      this.freezeCheck = this.seatCount;
+
+      this.OWflightNumber = JSON.parse(localStorage.getItem('onewayDetails')!)['flightNumber']//Value will be taken from either localStorage or sessionStorage
+      
+      this.isReturn = JSON.parse(localStorage.getItem('flagTripType')!);
+      this.tripName = "One Way"
+      this.getSeats(this.OWflightNumber);
     }
   
   
@@ -150,10 +153,11 @@ export class UserSeatSelectionComponent implements OnInit {
         },
         err => { 
         console.log(err);
-        })
+        });
     }
   
     updateSelectedSeats(){
+      debugger;
       this.service.updateSeats(this.selectedSeatsId).subscribe(data => 
         {
           console.log(data);
@@ -164,7 +168,14 @@ export class UserSeatSelectionComponent implements OnInit {
     }
 
     updateAvailableSeatsInDb(flightNumber : string){
-      this.service.availbleSeatsUpdate(flightNumber,this.classBool,this.freezeCheck)
+      debugger;
+      this.service.availbleSeatsUpdate(flightNumber,this.classBool,this.freezeCheck).subscribe(data => 
+        {
+          console.log(data);
+        },(err) =>{
+          console.log(err)
+        }
+      );
     }
   }
 
