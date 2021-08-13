@@ -48,7 +48,7 @@ namespace MainWebAPI.Controllers
         }
 
         [HttpPut]
-        [Route("UpdAvailableSeat")]
+        [Route("updAvailableSeat")]
         public IActionResult UpdateAvailableSeats([FromQuery(Name = "flightNumber")] string FlightNumber,[FromQuery(Name = "classBool")] bool ClassType, [FromQuery(Name = "seatsToUpdate")] int UpdatedSeats)
         {
             try

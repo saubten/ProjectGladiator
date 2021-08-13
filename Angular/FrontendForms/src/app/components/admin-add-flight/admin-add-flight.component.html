@@ -1,105 +1,164 @@
-<span class="border-0"></span>
-<h1 align="Middle"> AirTickets</h1>
-<div class="container" style="width:1200px;">
- <form [formGroup]="AirTickets">
-
-<hr><h2 align="Middle"> <button style="background-color:rgba(44, 139, 0, 0.692)">Add Tickets</button></h2>
-   
-<div class="form-group">
-      <hr> <b><label>Enter Flight number:</label></b>
-           <input type="varchar"  formControlName="FlightNo" class="form-control" id="FlightNo" >
-           <div *ngIf="!AirTickets.get('FlightNo')?.valid && (AirTickets.get('FlightNo')?.dirty || AirTickets.get('FlightNo')?.touched) "
-       class="error">
-       <div *ngIf="AirTickets.get('FlightNo')?.errors?.required" >
-           <small class="text-danger">Flight no. is required</small>
-       
-       </div> </div>
-     
-</div>
-         
-       
-<div class="form-group">
-     <b><label>From:</label></b>
-     <input type="text"  formControlName="from" class="form-control" id="from">
-     <div *ngIf="!AirTickets.get('from')?.valid && (AirTickets.get('from')?.dirty || AirTickets.get('from')?.touched) "
-       class="error">
-       <div *ngIf="AirTickets.get('from')?.errors?.required" >
-           <small class="text-danger">destination is required</small>
-       </div> 
-     </div>
-   </div>
-   
-
-     
-     
-   <div class="form-group">
-      <b><label>To:</label></b>
-     <input type="text"  formControlName="to" class="form-control" id="to">
-     <div *ngIf="!AirTickets.get('to')?.valid && (AirTickets.get('to')?.dirty || AirTickets.get('to')?.touched) "
-       class="error">
-       <div *ngIf="AirTickets.get('to')?.errors?.required" >
-           <small class="text-danger">destination is required</small>
-       </div> </div></div>
- 
-
-       
-       
-       <div class="form-group">
-     <b><label>Departure Date :</label></b>
-     <input type="date"  class="form-control" formControlName="DepDate" ></div>
 
 
-
-     <b><label>Departure Time :</label></b>
-     <input type="time" class="form-control" formControlName="Deptime" >
+<h1 class="text-center" style="text-align: center;"> Add Flight </h1>
 
 
+<form [formGroup]='adminAddFlightForm' class="mx-auto w-25" (ngSubmit)="addFlight()">
 
-     <div class="form-group">
-    <b> <label>Arrival Date :</label></b>
-     <input type="date" class="form-control" formControlName="ArrDate" min={{maxdate}}></div>
+    <div class="form-group ">
+        <label>Registration Number:</label>
+        <input class="form-control" type="text" formControlName="RegistrationNumber" placeholder="Enter Registration Number" [(ngModel)]="flightdetails.registrationNumber" >
 
-     <div class="form-group">
-     <b><label>Arrival Time :</label></b>
-       <input type="time" class="form-control" formControlName="ArrTime" >
+        <div *ngIf="!adminAddFlightForm.get('RegistrationNumber')?.valid && (adminAddFlightForm.get('RegistrationNumber')?.dirty || adminAddFlightForm.get('RegistrationNumber')?.touched) "
+        class="error">
+        <div *ngIf="adminAddFlightForm.get('RegistrationNumber')?.errors?.required" >
+            <small class="text-danger">Registration Number is required</small>
+        </div>   
 
-       
+    </div>
+    </div>
 
-     <div class="form-group">
-   <b><label>Economy class Price:</label></b>
-       <input type="number"   formControlName="EconomyPrice" class="form-control" id="EconomyPrice">
-     <div *ngIf="!AirTickets.get('EconomyPrice' )?.valid && (AirTickets.get('EconomyPrice')?.dirty || AirTickets.get('EconomyPrice')?.touched) "
-       class="error">
-       <div *ngIf="AirTickets.get('EconomyPrice')?.errors?.required" >
-           <small class="text-danger">Price is required</small>
-</div></div></div>
+    <div class="form-group ">
+        <label>Flight Number:</label>
+        <input class="form-control" type="text" formControlName="FlightNumber" placeholder="Enter Flight Number" [(ngModel)]="flightdetails.flightNumber">
 
+        <div *ngIf="!adminAddFlightForm.get('FlightNumber')?.valid && (adminAddFlightForm.get('FlightNumber')?.dirty || adminAddFlightForm.get('FlightNumber')?.touched) "
+        class="error">
+        <div *ngIf="adminAddFlightForm.get('FlightNumber')?.errors?.required" >
+            <small class="text-danger">Flight Number is required</small>
+        </div>   
 
-
-      <div class="form-group">
-     <b><label> class Price:</label></b>
-       <input type="number"   formControlName="BussPrice" class="form-control" id="BussPrice" >
-     <div *ngIf="!AirTickets.get('BussPrice' )?.valid && (AirTickets.get('BussPrice')?.dirty || AirTickets.get('BussPrice')?.touched) "
-     class="error">
-     <div *ngIf="AirTickets.get('BussPrice')?.errors?.required" >
-         <small class="text-danger">Price is required</small></div></div></div>
-     
+    </div>
+    </div>
 
 
-     <p align="left"><b>Available Economy Seats:<input type="number" ></b></p>
-     <p align="left"><b>Available Bussiness Seats:<input type="number" ></b></p>
-     
-     <hr><p align="Middle"><b><button style="background-color:rgba(44, 139, 0, 0.692)">ADD</button></b></p>
-     <hr><h2 align="Middle"><b><button style="background-color:rgba(44, 139, 0, 0.692)">Delete Tickets </button></b></h2>
-  
-  
-   <div class="form-group">
-   <b><label> number:</label></b>
-   <input type="varchar" formControlName="FlightNo" class="form-control" id="FlightNo">
-   <div *ngIf="!AirTickets.get('FlightNo' )?.valid && (AirTickets.get('FlightNo')?.dirty || AirTickets.get('FlightNo')?.touched) "
-   class="error">
-   <div *ngIf="AirTickets.get('FlightNo')?.errors?.required" >
-       <small class="text-danger">Price is required</small></div></div></div>
+    <div class="form-group ">
+        <label>From:</label>
+        <input class="form-control" type="text" formControlName="FromLocation" placeholder="Enter From Location" [(ngModel)]="flightdetails.fromLocation" >
 
- 
- <hr><p align="Middle"><b><button style="background-color:rgba(44, 139, 0, 0.692)">Delete</button></b></p>
+        <div *ngIf="!adminAddFlightForm.get('FromLocation')?.valid && (adminAddFlightForm.get('FromLocation')?.dirty || adminAddFlightForm.get('FromLocation')?.touched) "
+        class="error">
+        <div *ngIf="adminAddFlightForm.get('FromLocation')?.errors?.required" >
+            <small class="text-danger">City is required</small>
+        </div>  
+        
+        <div *ngIf="adminAddFlightForm.get('to')?.errors?.pattern" >
+            <small class="text-danger">City name cannot contain numbers</small>
+        </div>
+
+    </div>
+    </div>
+
+    <div class="form-group ">
+        <label>Destination:</label>
+        <input class="form-control" type="text" formControlName="ToLocation" placeholder="Enter Destination Location" [(ngModel)]="flightdetails.toLocation" >
+
+        <div *ngIf="!adminAddFlightForm.get('ToLocation')?.valid && (adminAddFlightForm.get('ToLocation')?.dirty || adminAddFlightForm.get('ToLocation')?.touched) "
+        class="error">
+        <div *ngIf="adminAddFlightForm.get('ToLocation')?.errors?.required" >
+            <small class="text-danger">City is required</small>
+        </div>  
+
+        <div *ngIf="adminAddFlightForm.get('to')?.errors?.pattern" >
+            <small class="text-danger">City name cannot contain numbers</small>
+        </div>
+
+    </div>
+    </div>
+
+    <div class="form-group">
+        <label>Departure Date:</label>
+        <input class="form-control" type="date" formControlName="DepartureDate" min="{{maxdate}}" [(ngModel)]="flightdetails.departureDate" >
+
+    </div>
+
+    <div class="form-group">
+        <label>Departure Time:</label>
+        <input class="form-control" type="time" formControlName="DepartureTime" [(ngModel)]="flightdetails.departureTime">
+
+    </div>
+
+    <div class="form-group">
+        <label>Arrival Date:</label>
+        <input class="form-control" type="date" formControlName="ArrivalDate" min="{{maxdate}}" [(ngModel)]="flightdetails.arrivalDate">
+
+    </div>
+
+    <div class="form-group">
+        <label>Arrival Time:</label>
+        <input class="form-control" type="time" formControlName="ArrivalTime" [(ngModel)]="flightdetails.arrivalTime">
+
+    </div>
+
+    <div class="form-group ">
+        <label>Economy Class Price:</label>
+        <input class="form-control" type="text" formControlName="EconomyPrice" placeholder="Enter Amount" [(ngModel)]="flightdetails.economyPrice" >
+
+        <div *ngIf="!adminAddFlightForm.get('EconomyPrice')?.valid && (adminAddFlightForm.get('EconomyPrice')?.dirty || adminAddFlightForm.get('EconomyPrice')?.touched) "
+        class="error">
+        <div *ngIf="adminAddFlightForm.get('EconomyPrice')?.errors?.required" >
+            <small class="text-danger">Amount is required</small>
+        </div>         
+
+    </div>
+    </div>
+
+    <div class="form-group ">
+        <label>Business Class Price:</label>
+        <input class="form-control" type="text" formControlName="BusinessPrice" placeholder="Enter Amount" [(ngModel)]="flightdetails.businessPrice" >
+
+        <div *ngIf="!adminAddFlightForm.get('BusinessPrice')?.valid && (adminAddFlightForm.get('BusinessPrice')?.dirty || adminAddFlightForm.get('BusinessPrice')?.touched) "
+        class="error">
+        <div *ngIf="adminAddFlightForm.get('BusinessPrice')?.errors?.required" >
+            <small class="text-danger">Amount is required</small>
+        </div>         
+
+    </div>
+    </div>
+
+    <div class="form-group ">
+        <label>Economy Class Seats:</label>
+        <input class="form-control" type="number" formControlName="AvailableEconomySeats" placeholder="Enter available Seats" [(ngModel)]="flightdetails.availableEconomySeats" >
+
+        <div *ngIf="!adminAddFlightForm.get('AvailableEconomySeats')?.valid && (adminAddFlightForm.get('AvailableEconomySeats')?.dirty || adminAddFlightForm.get('AvailableEconomySeats')?.touched) "
+        class="error">
+        <div *ngIf="adminAddFlightForm.get('AvailableEconomySeats')?.errors?.required" >
+            <small class="text-danger">This field is required</small>
+        </div>         
+
+    </div>
+    </div>
+
+    <div class="form-group ">
+        <label>Business Class Seats:</label>
+        <input class="form-control" type="number" formControlName="AvailableBusinessSeats" placeholder="Enter available Seats"  [(ngModel)]="flightdetails.availableBusinessSeats">
+
+        <div *ngIf="!adminAddFlightForm.get('AvailableBusinessSeats')?.valid && (adminAddFlightForm.get('AvailableBusinessSeats')?.dirty || adminAddFlightForm.get('AvailableBusinessSeats')?.touched) "
+        class="error">
+        <div *ngIf="adminAddFlightForm.get('AvailableBusinessSeats')?.errors?.required" >
+            <small class="text-danger">This field is required</small>
+        </div>         
+
+    </div>
+    </div>
+
+    <div class="form-group ">
+        <label>Flight availability:</label>
+        <input class="form-control" type="number" formControlName="IsCancelled" placeholder="Is Flight Avalilable" [(ngModel)] = "flightdetails.isCancelled" >
+
+        <div *ngIf="!adminAddFlightForm.get('IsCancelled')?.valid && (adminAddFlightForm.get('IsCancelled')?.dirty || adminAddFlightForm.get('IsCancelled')?.touched) "
+        class="error">
+        <div *ngIf="adminAddFlightForm.get('IsCancelled')?.errors?.required" >
+            <small class="text-danger">This field is required</small>
+        </div>         
+
+    </div>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary btn-lg" type="submit" [disabled]="!adminAddFlightForm.valid">ADD</button>
+    </div>
+
+</form>
+
+

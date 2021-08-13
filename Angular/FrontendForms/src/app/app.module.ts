@@ -17,12 +17,15 @@ import { UserAddMoneyToWalletComponent } from './components/user-add-money-to-wa
 import { UserCancellationComponent } from './components/user-cancellation/user-cancellation.component';
 import { UserForgotPasswordComponent } from './components/user-forgot-password/user-forgot-password.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
-import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { AdminAddFlightComponent } from './components/admin-add-flight/admin-add-flight.component';
 import { AdminDeleteFlightComponent } from './components/admin-delete-flight/admin-delete-flight.component';
 import { UserSeatSelectionComponent } from './components/user-seat-selection/user-seat-selection.component';
 import { HomeComponent } from './components/home/home.component';
 import { FlightService } from './services/flights.service';
+import { AdminFlightScheduleComponent } from './components/admin-flight-schedule/admin-flight-schedule.component';
+import { SeatService } from './services/seats.service';
+import { AdminService } from './services/admin.service';
+
 
 
 
@@ -40,11 +43,11 @@ import { FlightService } from './services/flights.service';
     UserCancellationComponent,
     UserForgotPasswordComponent,
     AdminDashboardComponent,
-    AdminLoginComponent,
     AdminAddFlightComponent,
     AdminDeleteFlightComponent,
     UserSeatSelectionComponent,
     HomeComponent,
+    AdminFlightScheduleComponent,
 
   ],
   imports: [
@@ -54,7 +57,7 @@ import { FlightService } from './services/flights.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [FlightService,],
+  providers: [FlightService,SeatService,AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

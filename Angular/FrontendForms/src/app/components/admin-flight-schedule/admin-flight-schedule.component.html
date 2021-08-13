@@ -1,0 +1,46 @@
+<div class="pl-0 pr-0">
+
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search by Name"
+        style="width: 300px;" [(ngModel)]="searchTerm" />
+    </div>
+
+
+<table class="table table-success table-striped table-bordered table-hover">
+    <thead>
+        <tr class="d-flex">
+            <th class="col-1">Registration Number</th>
+            <th class="col-1">Flight Number</th>
+            <th class="col-1">Source</th>
+            <th class="col-1">Destination</th>
+            <th class="col-1">Departure Date</th>
+            <th class="col-1">Departure Time</th>
+            <th class="col-1">Arrival Date</th>
+            <th class="col-1">Arrival Time</th>
+            <th class="col-1">Economy Class Price</th>
+            <th class="col-1">Business Class Price</th>
+            <th class="col-1">Economy class Seats</th>
+            <th class="col-1">Business Class Seats</th>
+            <th class="col-1">Cancellation Status</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let f of flightDetails ">
+        <tr  class="d-flex">
+            <td class="col-1">{{f.registrationNumber}}</td>
+            <td class="col-1">{{f.flightNumber}}</td>
+            <td class="col-1">{{f.fromLocation}}</td>
+            <td class="col-1">{{f.toLocation}}</td>
+            <td class="col-1">{{f.departureDate.slice(0,10)}}</td>
+            <td class="col-1">{{f.departureTime}}</td>
+            <td class="col-1">{{f.arrivalDate.slice(0,10)}}</td>
+            <td class="col-1">{{f.arrivalTime}}</td>
+            <td class="col-1">{{f.economyPrice}}</td>
+            <td class="col-1">{{f.businessPrice}}</td>
+            <td class="col-1">{{f.availableEconomySeats}}</td>
+            <td class="col-1">{{f.availableBusinessSeats}}</td>
+            <td class="col-1">{{f.isCancelled}}</td>
+        </tr>
+    </tbody>
+</table>
+
+</div>

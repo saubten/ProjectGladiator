@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 @Component({
@@ -8,20 +9,34 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class UserLoginComponent implements OnInit {
 
-  constructor(private route : ActivatedRoute,private router : Router) { }
-
+  pattern="^[ a-zA-Z][a-zA-Z ]*$";
+  flightloginform:FormGroup;
   flowTrigger : string;
   tempReader : any;
 
+  constructor(private route : ActivatedRoute,private router : Router) { 
+    this.flightloginform=new FormGroup({
+    userType : new FormControl('',Validators.required),
+    username:new FormControl('',[Validators.required,Validators.email]),
+    password:new FormControl('',[Validators.required])
+
+  },
+  )}
+ 
+  get f(){
+    return this.flightloginform.controls
+  }
+
   boolUserAdmin : boolean;
   ngOnInit(): void {
+    
     this.tempReader = this.route.snapshot.paramMap.get('id');
     this.flowTrigger = this.tempReader
-    console.log(this.flowTrigger)
+    console.log(this.f.userType.value)
   }
 
   onLogin(){
-    if(!this.boolUserAdmin){
+    if(this.f.userType.value == 1){
       this.router.navigate(['/adminDashboard']);
     }
     else{
@@ -44,5 +59,12 @@ export class UserLoginComponent implements OnInit {
 
   Admin(){
     this.boolUserAdmin = false;
+  }
+  
+
+  onSubmit1(){
+    console.warn(this.flightloginform.value);
+    alert("you have successfully regiistered");
+    alert("thank you for registering")
   }
 }

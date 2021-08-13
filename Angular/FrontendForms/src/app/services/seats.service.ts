@@ -21,6 +21,6 @@ export class SeatService{
     }
 
     availbleSeatsUpdate(flightNumber : string,classBool : boolean,seatsToUpdate : number){
-        return this.http.put(`${this.url}/UpdAvailableSeat?flightNumber=${flightNumber}&classBool=${classBool}&seatsToUpdate=${seatsToUpdate}`,null,{responseType : "text"})
+        return this.http.put(`${this.url}/updAvailableSeat?flightNumber=${flightNumber}&classBool=${classBool}&seatsToUpdate=${seatsToUpdate}`,null,{responseType : "text"})
     }
 }

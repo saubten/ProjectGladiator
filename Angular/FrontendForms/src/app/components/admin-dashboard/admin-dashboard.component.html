@@ -1,27 +1,29 @@
 <div>
-    <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-primary bg-light">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">SAKK Airlines</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                  <a class="nav-link active" aria-current="page" href="#">Flight Search</a>
-                  <a class="nav-link" href="#">See Bookings</a>
-                  <a class="nav-link" href="#">Cancellation</a>
-                </div>
+  <div>
+      <nav class="navbar navbar-expand-lg navbar-light bg-primary bg-light">
+          <div class="container-fluid">
+            <a class="navbar-brand" >Airline Name</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-link" routerLink="flightSchedule" routerLinkActive="active">Flight Schedule</a>
+                <a class="nav-link" routerLink="addFlight" routerLinkActive="active">Add Flight</a>
+                <a class="nav-link" routerLink="deleteFlight" routerLinkActive="active">Delete Flight</a>
+                <a class="nav-link float-end active" aria-current="page" >Admin</a>
               </div>
             </div>
-          </nav>
+          </div>
+        </nav>
 
-          <!-- FLights -->
+        <!-- FLights -->
 
-          <!-- router outlet of child components -->
-          <!-- <div class="container"> -->
-              <router-outlet></router-outlet>
-          <!-- </div> -->
-    </div>
+        <!-- router outlet of child components -->
+
+        <router-outlet></router-outlet>
+
+  </div>
 </div>
+
 

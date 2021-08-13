@@ -19,4 +19,10 @@ export class FlightService
         console.log(params.toString());
         return this.http.get(this.url,{params : params});
     }
+
+    getFlights() 
+    {
+        //debugger;
+        return this.http.get(this.url);
+    }
   }

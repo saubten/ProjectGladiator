@@ -1,5 +1,55 @@
 <h1 class="text-center">Login Page</h1>
-<button class="btn btn-primary" (click) = "User()">User</button>
-<button class="btn btn-primary" (click) = "Admin()">Admin</button>
-<button class="btn btn-primary" (click) = "Register()">Register</button>
-<button class="btn btn-primary" (click)= "onLogin()">Login</button>
+
+
+<div class="container mx-auto w-50">
+
+    <form method="post" [formGroup]="flightloginform">
+        <h4 class="font-italic" style="color:rgba(95, 136, 212, 0.884)">Welcome to <span>SAKK!</span></h4><br>
+        <p style="color:rgba(95, 136, 212, 0.884)">Welcome back! Log in to your account to book tickets:</p>
+        <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+        
+       
+        
+        <div class="form-group mb-2">
+            <label>User Type:</label> &nbsp;
+            <select class="form-select" formControlName="userType" name="userType">
+                <option value ="" disabled>User Type</option>
+                <option value ="1" >Admin</option>
+                <option value ="2" >Consumer</option>
+            </select>
+            <div *ngIf="!flightloginform.get('userType')?.valid && (flightloginform.get('userType')?.dirty || flightloginform.get('Username')?.touched) "
+            class="has-error">
+                <div *ngIf="flightloginform.get('userType')?.errors?.required" >
+                    <small class="text-danger">User type is required</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="UserName">Username: (Email ID)</label>
+            <input class="form-control" id="userName" type="text" formControlName="username" placeholder="Enter UserName"/>
+            <div *ngIf="!flightloginform.get('Username')?.valid && (flightloginform.get('Username')?.dirty || flightloginform.get('Username')?.touched) "
+            class="has-error">
+                <div *ngIf="flightloginform.get('username')?.errors?.required" ><small class="text-danger">UserName is required</small></div>
+                <div *ngIf="flightloginform.get('username')?.errors?.email" >
+                    <small class="text-danger">email is not allowed</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="UserName">Password:</label>
+            <input class="form-control" id="Password" type="password" formControlName="password" placeholder="Enter Password"/>
+            <div *ngIf="!flightloginform.get('password')?.valid && (flightloginform.get('password')?.dirty || flightloginform.get('password')?.touched) "
+            class="has-error">
+                <div *ngIf="flightloginform.get('password')?.errors?.required"  >
+                    <small class="text-danger">Password is required</small>
+                </div>
+            </div>    
+        </div>
+
+        <div class="form-group"><button [disabled]="flightloginform.invalid" class="btn btn-primary btn-block" type="submit" (click)= "onLogin()">Log In</button></div>
+        <div class="d-flex justify-content-end"><a (click) = "Register()" class="active " >Register</a></div>
+        <div class="d-flex justify-content-end"><a href="#" class="forgot">Forgot password?</a></div>
+    </form>
+</div>

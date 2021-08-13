@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Flights } from 'src/app/models/flights';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-admin-add-flight',
@@ -8,46 +11,94 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AdminAddFlightComponent implements OnInit {
 
-  constructor() { }
+  adminAddFlightForm:FormGroup;
+  pattern="^[ a-zA-Z][a-zA-Z ]*$"
+  maxdate:any;
+   pastdatedisable(){
+     var date = new Date();
+     var todayDate:any = date.getDate();
+     var month:any = date.getMonth()+1;
+     var year = date.getFullYear();
+ 
+     if(todayDate < 10){
+       todayDate = '0' + todayDate;
+     }
+ 
+     if(month<10){
+       month = '0' + month;
+     }
+     console.log(month);
+     console.log(year);
+ 
+     this.maxdate = year + "-" + month + "-" +todayDate;  
+     console.log(this.maxdate)  
+ 
+   }
 
-  AirTickets:FormGroup;
-  title = 'PROJECTGLAD';
 
-  ngOnInit(){
-    this.AirTickets=new FormGroup({
-    FlightNo :new FormControl(null,Validators.required),
-    from :new FormControl('',Validators.required),
-    to: new FormControl('',Validators.required),
-    EconomyPrice :new FormControl('',Validators.required),
-    BussPrice :new FormControl('',Validators.required),
-    AvlEcoseat : new FormControl('',Validators.required),
-    AvlBussseat: new FormControl('',Validators.required),
-    DepDate:new FormControl(''),
-    DepTime :new FormControl(''),
-    ArrDate: new FormControl(''),
-    ArrTime: new FormControl(''),
-  }
+  constructor(private http:HttpClient,private adminService : AdminService) {
 
-  );
-}
-maxdate:any;
-pastdatedisable(){
-  var date = new Date();
-  var todayDate:any = date.getDate();
-  var month:any = date.getMonth()+1;
-  var year = date.getFullYear();
+    this.adminAddFlightForm = new FormGroup({
+      RegistrationNumber: new FormControl(null,Validators.required),
+      FlightNumber: new FormControl(null,Validators.required),
+      FromLocation: new FormControl(null,[Validators.required,Validators.pattern(this.pattern)]),
+      ToLocation: new FormControl(null,[Validators.required,Validators.pattern(this.pattern)]),
+      DepartureDate: new FormControl(null,Validators.required),
+      DepartureTime: new FormControl(null,Validators.required),
+      ArrivalTime: new FormControl(null,Validators.required),
+      ArrivalDate: new FormControl(null,Validators.required),
+      EconomyPrice: new FormControl(null,Validators.required),
+      BusinessPrice: new FormControl(null,Validators.required),
+      AvailableEconomySeats: new FormControl(null,Validators.required),
+      AvailableBusinessSeats: new FormControl(null,Validators.required),
+      IsCancelled: new FormControl(null,Validators.required)
+    });
 
-  if(todayDate < 10){
-    todayDate = '0' + todayDate;
-  }
 
-  if(month<10){
-    month = '0' + month;
-  }
-  console.log(month);
-  console.log(year);
-  this.maxdate = year + "-" + month + "-" +todayDate;
+   }
 
-}
+
+    flightdetails: Flights={}
+    flight:Flights[] = []
+    fli:any;
+
+    getFlightdetails()
+    {
+     
+      this.adminService.getFlights().subscribe((res : any)=>{
+
+      console.log(res);
+      this.fli=res;
+      this.flight=this.fli;
+      console.log(this.flight)
+      },(err : any)=>{
+      console.log(err)
+
+      })   
+    }
+
+
+
+    msgAdd:any;
+    addFlight(){
+
+    console.log(this.flightdetails);
+    this.adminService.addFlights(this.flightdetails).subscribe((res : any)=>
+    {
+      console.log(res);
+      this.msgAdd = "Flight added successfully!!!"
+      alert(this.msgAdd);
+      this.getFlightdetails();
+
+    },(err : any)=>{
+      console.log(err)
+    })
+
+    }
+
+    ngOnInit(): void {
+      this.getFlightdetails();
+      this.pastdatedisable();
+    }
 
 }
