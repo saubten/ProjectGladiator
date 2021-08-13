@@ -30,7 +30,7 @@ export class UserFlightSelectComponent implements OnInit {
   OWflightClass : boolean;
   RTflightClass : boolean;
 
-  constructor() { }
+  constructor(private route : ActivatedRoute, private router : Router) { }
 
 
 
@@ -81,10 +81,13 @@ export class UserFlightSelectComponent implements OnInit {
     console.log(this.OWflightSelect,this.RTflightSelect)
     localStorage.setItem("onewayDetails",JSON.stringify(this.OWflightSelect));
     localStorage.setItem("OWflightType",JSON.stringify(this.OWflightClass));
+    localStorage.setItem("OWprice",JSON.stringify(this.OWprice));
     if(this.flag){
       localStorage.setItem("roundtripDetails",JSON.stringify(this.RTflightSelect));
       localStorage.setItem("RTflightType",JSON.stringify(this.RTflightClass));
+      localStorage.setItem("RTprice",JSON.stringify(this.RTprice));
     } 
+    this.router.navigate(['../','addPassenger'],{relativeTo : this.route})
   }
 
   ngOnInit(): void {

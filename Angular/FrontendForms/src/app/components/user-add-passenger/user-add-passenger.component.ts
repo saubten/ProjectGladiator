@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Passenger } from 'src/app/models/passengers';
 
-
-class Passenger{
-  public passFirstName?: string;
-  public passLastName?: string;
-  public passAge?:number;
-  public passPhone?:string;
-}
 
 @Component({
   selector: 'app-user-add-passenger',
@@ -34,7 +29,7 @@ export class UserAddPassengerComponent implements OnInit {
   })
 
   
-  constructor() {
+  constructor(private route : ActivatedRoute, private router : Router) {
     this.showPassengerForms = false;
     this.count = Number(localStorage.getItem('passengervalue'));
   }
@@ -61,7 +56,8 @@ export class UserAddPassengerComponent implements OnInit {
   }
    
   onDone(){
-    localStorage.setItem('passengerList',JSON.stringify(this.passengerList))
+    localStorage.setItem('passengerList',JSON.stringify(this.passengerList));
+    this.router.navigate(['../','seatSelection'],{relativeTo : this.route})
   }
 
   edit(index : number){

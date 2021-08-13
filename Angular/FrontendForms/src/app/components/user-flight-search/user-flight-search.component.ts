@@ -3,7 +3,7 @@ import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { HttpClient } from '@angular/common/http';
 import { Flights } from 'src/app/models/flights';
 import { FlightService } from 'src/app/services/flights.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -24,8 +24,8 @@ export class UserFlightSearchComponent implements OnInit {
   scopys:string[]=["Mumbai","Chennai","Delhi","Bangalore","Pune","Jammu","Hyderabad"].sort();
   name?:string;
   index?:number;
-  DDlbox : FormGroup;
-  constructor(private flightservice:FlightService,private http:HttpClient,private route:Router) {    
+
+  constructor(private flightservice:FlightService,private http:HttpClient,private router:Router,private route : ActivatedRoute) {    
 
     this.flightsearchform = new FormGroup({
       tripType : new FormControl('',Validators.required),
@@ -122,7 +122,7 @@ export class UserFlightSearchComponent implements OnInit {
         localStorage.setItem("roundtripDetails",JSON.stringify(this.roundtripdetails));
         console.log(res); 
         localStorage.setItem("passengervalue",JSON.stringify(this.flightsearchform.value['passengersCount']));
-        this.route.navigate(['flightSelect'])     
+        this.router.navigate(['../','flightSelect'],{relativeTo : this.route})     
         },
         (err : any) => {
           console.log(err)
@@ -149,7 +149,7 @@ export class UserFlightSearchComponent implements OnInit {
       localStorage.setItem("onewayDetails",JSON.stringify(this.onewaydetails));
       console.log(res);
       localStorage.setItem("passengervalue",JSON.stringify(this.flightsearchform.value['passengersCount']));
-      this.route.navigate(['flightSelect'])
+      this.router.navigate(['../','flightSelect'],{relativeTo : this.route})
       },
       (err : any)=>{
         console.log(err)
@@ -162,6 +162,7 @@ export class UserFlightSearchComponent implements OnInit {
   ngOnInit(){
     localStorage.clear();
     this.pastdatedisable();
+    console.log(this.route.routeConfig?.path)
   }
 }
 

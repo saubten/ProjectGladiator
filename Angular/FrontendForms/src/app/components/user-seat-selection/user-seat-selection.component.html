@@ -220,11 +220,11 @@
         <div name="28J"  id='157' (click) = "SeatE($event)" [ngClass]="seats[157].isAvailable? 'seat':'seat booked'">28J</div>
     </div>
 </div>
-<div class="d-grid gap-2 w-25 mx-auto" *ngIf="!isReturn">
+<!-- <div class="d-grid gap-2 w-25 mx-auto" *ngIf="!isReturn">
     <button class="btn btn-primary" [disabled]="selectedSeatsId.length != freezeCheck" [routerLink]="['/payment']" type="submit" (click) = "Submit()">Freeze</button>
-</div> 
+</div>  -->
 
-<div class="d-grid gap-2 w-25 mx-auto" *ngIf="isReturn">
+<div class="d-grid gap-2 w-25 mx-auto" > <!--*ngIf="isReturn"-->
     <button class="btn btn-primary" [disabled]="selectedSeatsId.length != freezeCheck" type="submit" (click) = "Submit()">Freeze</button>
 </div> 
 

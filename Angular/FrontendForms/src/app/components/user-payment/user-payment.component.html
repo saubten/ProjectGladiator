@@ -1,7 +1,98 @@
-<h1 class="text-center">Payment details</h1>
-<div class="container">
-
+<h1 class="bg-primary text-center">Payment details</h1>
+<div class="container mt-2 mb-2">
+    <div class="row">
+        <h2 class="col">From : {{onewayDetails.fromLocation}}</h2>
+        <h2 class="col">To : {{onewayDetails.toLocation}}</h2>
+    </div>
+    <div class="row">
+        <h3 class="col">Flight Number : {{onewayDetails.flightNumber}}</h3>
+    </div>
+    <div class="row">
+        <h4 class="col">Departure Date : {{onewayDetails.departureDate.slice(0,10)}}</h4>
+        <h4 class="col">Departure Time : {{onewayDetails.departureTime}}</h4>
+    </div>
+    <div class="row">
+        <h4 class="col">Arrival Date : {{onewayDetails.arrivalDate.slice(0,10)}}</h4>
+        <h4 class="col">Arrival Time : {{onewayDetails.arrivalTime}}</h4>
+    </div>
+    <div class="row" *ngIf="!OWclassBool">
+        <h3 class="col">Class : Economy</h3>
+    </div>
+    <div class="row" *ngIf="OWclassBool">
+        <h3 class="col">Class : Business</h3>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name of Passenger</th>
+                    <th>Seat Numbers</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let passenger of passengerList; let i = index;">
+                    <td>{{passenger.passFirstName + " " + passenger.passLastName}}</td>
+                    <td>{{OWseatsSelected[i]}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <h3>Ticket Fare : ₹ {{passengerList.length * OWprice}}</h3>
+    </div>
 </div>
+
+<div class="container mt-2 mb-2" *ngIf="tripType">
+    <div class="row">
+        <h2 class="col">From : {{roundtripDetails.fromLocation}}</h2>
+        <h2 class="col">To : {{roundtripDetails.toLocation}}</h2>
+    </div>
+    <div class="row">
+        <h3 class="col">Flight Number : {{roundtripDetails.flightNumber}}</h3>
+    </div>
+    <div class="row">
+        <h4 class="col">Departure Date : {{roundtripDetails.departureDate.slice(0,10)}}</h4>
+        <h4 class="col">Departure Time : {{roundtripDetails.departureTime}}</h4>
+    </div>
+    <div class="row">
+        <h4 class="col">Arrival Date : {{roundtripDetails.arrivalDate.slice(0,10)}}</h4>
+        <h4 class="col">Arrival Time : {{roundtripDetails.arrivalTime}}</h4>
+    </div>
+    <div class="row" *ngIf="!RTclassBool">
+        <h3 class="col">Class : Economy</h3>
+    </div>
+    <div class="row" *ngIf="RTclassBool">
+        <h3 class="col">Class : Business</h3>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name of Passenger</th>
+                    <th>Seat Numbers</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let passenger of passengerList; let i = index;">
+                    <td>{{passenger.passFirstName + " " + passenger.passLastName}}</td>
+                    <td>{{RTseatsSelected[i]}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <h3>Ticket Fare : ₹ {{passengerList.length * RTprice}}</h3>
+        </div>
+    </div>
+</div>
+
+
+<div class="bg-info text-center" *ngIf="tripType">
+    <h3>Total Fare : ₹ {{(passengerList.length * OWprice) + (passengerList.length * RTprice)}}</h3>
+  </div>
+<div class="bg-info text-center" *ngIf="!tripType">
+<h3>Total Fare : ₹ {{(passengerList.length * OWprice)}}</h3>
+</div>
+
 
 <div class="mx-auto w-25 d-grid gap-2 mt-2">
     <button class="btn btn-success">Approve</button>

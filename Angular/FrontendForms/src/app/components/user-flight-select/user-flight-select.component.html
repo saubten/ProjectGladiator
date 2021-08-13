@@ -1,7 +1,9 @@
 <div class="container">
     <div class='parent d-flex grid-parent'>
         <div class='child flex-fill'>
-            <h2>{{oneway[0].fromLocation}} <span style='font-size:60px;'>&#8680;</span> {{oneway[0].toLocation}} </h2>
+            <h2>{{oneway[0].fromLocation}} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+              </svg> {{oneway[0].toLocation}} </h2>
             <h3>{{oneway[0].departureDate.slice(0,10)}}</h3>
 
             <div class="box d-flex" *ngFor="let o of oneway;let i = index;" 
@@ -16,7 +18,9 @@
         </div>
 
         <div class='child flex-fill' *ngIf="flag">
-            <h2>{{twoway[0].fromLocation}} <span style='font-size:60px;'>&#8680;</span> {{twoway[0].toLocation}} </h2>
+            <h2>{{twoway[0].fromLocation}} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+              </svg>  {{twoway[0].toLocation}} </h2>
             <h3>{{twoway[0].departureDate.slice(0,10)}}</h3>
 
             <div class="box d-flex" *ngFor="let t of twoway; let i = index;" [ngClass]="RTboolArray[i]? 'select': 'unselect'">
@@ -32,9 +36,9 @@
 </div>
 
 <div class="mx-auto w-50 d-grid gap-2" *ngIf="!flag">
-    <button class="btn btn-primary" [disabled]="!(OWselect)" [routerLink]="['/addPassenger']" (click)="Continue()">Continue</button>
+    <button class="btn btn-primary" [disabled]="!(OWselect)" (click)="Continue()">Continue</button>
 </div>
 <div class="mx-auto w-50 d-grid gap-2" *ngIf="flag">
-    <button class="btn btn-primary" [disabled]="!(OWselect && RTselect)" [routerLink]="['/addPassenger']" (click)="Continue()">Continue</button>
+    <button class="btn btn-primary" [disabled]="!(OWselect && RTselect)"(click)="Continue()">Continue</button>
 </div>
 

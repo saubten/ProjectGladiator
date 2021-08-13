@@ -17,38 +17,6 @@
           <option *ngFor="let x of s;let i = index">{{x}}</option>
           </select>
         </div>
-        
-        <!-- <div class="form-group ">
-            <label>From:</label>
-            <input class="form-control" type="text" formControlName="from" placeholder="Enter City" >
-
-            <div *ngIf="!flightsearchform.get('from')?.valid && (flightsearchform.get('from')?.dirty || flightsearchform.get('from')?.touched) "
-            class="error">
-                <div *ngIf="flightsearchform.get('from')?.errors?.required" >
-                    <small class="text-danger">City is required</small>
-                </div>
-
-                <div *ngIf="flightsearchform.get('from')?.errors?.pattern" >
-                    <small class="text-danger">City name cannot contain numbers</small>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Destination:</label>
-            <input class="form-control" type="text" formControlName="to" placeholder="Enter City" >
-
-            <div *ngIf="!flightsearchform.get('to')?.valid && (flightsearchform.get('to')?.dirty || flightsearchform.get('to')?.touched) "
-            class="error">
-                <div *ngIf="flightsearchform.get('to')?.errors?.required" >
-                    <small class="text-danger">City is required</small>
-                </div>
-
-                <div *ngIf="flightsearchform.get('to')?.errors?.pattern" >
-                    <small class="text-danger">City name cannot contain numbers</small>
-                </div>
-            </div>
-        </div> -->
 
         <div class="form-group">
             <label>Ticket Type:</label> &nbsp;

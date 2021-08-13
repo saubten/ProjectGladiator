@@ -140,7 +140,11 @@ Insert into FlightSeats (FlightNumber,SeatNo,isAvailable) values
 end
 
 select * from FlightSeats where FlightNumber in ('K1234','B5678')
-select * from Flights order by DepartureDate
+select * from Flights where FlightNumber in ('K1234','B5678') order by DepartureDate 
 sp_flightSeatsInsert 'K1234'
 
-update Flights set AvailableBusinessSeats = 17 where FlightNumber = 'H9876'
+update Flights set AvailableBusinessSeats = 20 where AvailableBusinessSeats <> 20
+update Flights set AvailableEconomySeats = 138 where AvailableEconomySeats <> 138
+alter table RoundTrip add isBusiness bit
+
+update FlightSeats set isAvailable = 1 where isAvailable = 0
