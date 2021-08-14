@@ -26,7 +26,8 @@ import { AdminFlightScheduleComponent } from './components/admin-flight-schedule
 import { SeatService } from './services/seats.service';
 import { AdminService } from './services/admin.service';
 
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { UserServices } from './services/user.service';
 
 
 @NgModule({
@@ -55,9 +56,10 @@ import { AdminService } from './services/admin.service';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2SearchPipeModule
   ],
-  providers: [FlightService,SeatService,AdminService],
+  providers: [FlightService,SeatService,AdminService,UserServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

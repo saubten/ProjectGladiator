@@ -80,6 +80,7 @@ CREATE TABLE RoundTrip (
 	FlightNumber nvarchar(20) NOT NULL,
 	TicketFare money NOT NULL,
 	isCancelled bit NOT NULL,
+	isBusiness bit NOT NULL,
 	CONSTRAINT pk_RoundTrip PRIMARY KEY (RoundTripID),
 	CONSTRAINT fk_BookingsRoundTrip FOREIGN KEY (BookingID) REFERENCES Bookings(BookingID) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT fk_FlightsRoundTrip FOREIGN KEY (FlightNumber) REFERENCES Flights(FlightNumber),

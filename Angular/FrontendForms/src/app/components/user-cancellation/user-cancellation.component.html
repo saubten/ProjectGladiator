@@ -1,12 +1,46 @@
-<h1 class="text-center">Cancellation</h1>
-<div  class="mx-auto w-25 mt-2" >
-    <form [formGroup]="form" class="d-grid gap-2" (ngSubmit)="enter(form)">
-        <label>Enter Your Booking ID</label>
-        <input  class="form-control" type="number" formControlName="BookingID">
-        <div *ngIf="f.BookingID.touched && f.BookingID.invalid" class="alert alert-danger">
-            <div *ngIf="f.BookingID.errors?.required">BookingID is required.</div>
+<div class="container mx-auto px-auto my-2 py-auto border border-primary rounded" *ngFor = "let o of owBookings">
+    <div *ngIf = "!o.bCancelled">
+        <div class="container mx-auto px-auto my-2 py-auto border border-primary rounded">
+            <div class="row">BookingID : {{o.bookingID}}</div>
+            <div class="row">Flight Number : {{o.oFlight}}</div>
+            <div class="row">
+                <div class="col">From : {{o.oSource}}</div>
+                <div class="col">To : {{o.oDestination}}</div>
+                <div class="col">Departure Date : {{o.oDepartureDate.toString().slice(0,10)}}</div>
+            </div>
+            <div class="row">
+                <div class="col">Class : {{o.oClass ?"Business" : "Economy"}}</div>
+                <div class="col">Fare : {{o.oTicketFare}}</div>
+            </div>
+            
         </div>
-        <button class="btn btn-primary" [disabled]="form.invalid" type="submit">Enter</button>
-    </form>
-</div >
+        <div *ngIf = "o.rTripBool">
+           <div *ngFor = "let r of rtBookings">
+               <div *ngIf = "r.rBookingId == o.bookingID && !r.rCancelled">
+                   <div class="container mx-auto px-auto my-2 py-auto border border-primary rounded">
+                        <div class="row">Flight Number : {{r.rFlight}}</div>
+                        <div class="row">
+                            <div class="col">From : {{r.rSource}}</div>
+                            <div class="col">To : {{r.rDestination}}</div>
+                            <div class="col">Departure Date : {{r.rDepartureDate.toString().slice(0,10)}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">Class : {{r.rClass ?"Business" : "Economy"}}</div>
+                            <div class="col">Fare : {{r.rTicketFare}}</div>
+                        </div>
+                   </div>
+               </div>
+           </div>
+        </div>
+        <div class="row">
+            <button *ngIf = "o.rTripBool" class="btn btn-danger border border-dark mx-auto w-25">Return Trip Cancel</button>
+            <button class="btn btn-danger border border-dark mx-auto w-25">Booking Cancel</button>
+        </div>
+    </div>
+    
+
+</div>
+
+
+
 

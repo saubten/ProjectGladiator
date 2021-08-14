@@ -7,12 +7,14 @@ Insert into Users(EmailID,Title,FirstName,LastName,Password,DOB,PhoneNumber,Wall
 
 update Users set PhoneNumber='9623871237' where UserID=14
 select * from Users
+delete from Users where LastName = 'Mane'
+
 
 Insert into Airplanes(RegistrationNumber,EconomySeats,BusinessSeats) Values ('AB123',138,20),('CD456',138,20),('EF789',138,20),('GH012',138,20),('IJ345',138,20)
 
 select * from Airplanes
 
-
+Select * from Users
 
 Insert into Flights(RegistrationNumber,FlightNumber,FromLocation,ToLocation,DepartureDate,DepartureTime,ArrivalDate,ArrivalTime,EconomyPrice,BusinessPrice,AvailableEconomySeats,AvailableBusinessSeats,isCancelled) values
 ('CD456','B5678','Pune','Bangalore','2021-09-25','4:30 PM','2021-09-25','6:30 PM',1000,3000,138,20,0),
@@ -81,8 +83,9 @@ select * from Admins
 
 /* all tables */
 
-select * from Users
+
 select * from Airplanes
+select * from Users
 select * from Flights
 select * from TransactionTb
 select * from Bookings
@@ -148,3 +151,45 @@ update Flights set AvailableEconomySeats = 138 where AvailableEconomySeats <> 13
 alter table RoundTrip add isBusiness bit
 
 update FlightSeats set isAvailable = 1 where isAvailable = 0
+
+insert into TransactionTb(UserID,TransactionAmount) values (2,8000),(2,9000),(3,4000),(4,5000),(2,4000),(3,2500)
+
+
+alter table TransactionTb Add constraint DF_Transaction default(GETDATE()) for DateOfTransaction 
+
+select * from Users
+select * from Flights
+select * from TransactionTb
+select * from Bookings
+select * from RoundTrip
+
+insert into Bookings(FlightNumber,TransactionID,Passengers,TicketFare,isBusiness,isCancelled,isReturn) values
+('K1234',1,3,3000,1,0,0),
+('J9876',2,2,4000,1,0,1),
+('P5678',3,4,4000,0,0,0),
+('K1234',4,3,6000,0,0,1),
+('H9876',5,1,1500,0,0,0),
+('D6543',6,1,4000,1,0,1)
+
+insert into RoundTrip (BookingID,FlightNumber,TicketFare,isBusiness,isCancelled) values
+(2,'S3456',2000,0,0),
+(4,'D6543',3000,1,0),
+(6,'H9876',4000,0,0)
+
+drop table RoundTrip
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

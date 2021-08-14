@@ -206,6 +206,8 @@ namespace MainWebAPI.Models
                     .IsRequired()
                     .HasMaxLength(20);
 
+                entity.Property(e => e.IsBusiness).HasColumnName("isBusiness");
+
                 entity.Property(e => e.IsCancelled).HasColumnName("isCancelled");
 
                 entity.Property(e => e.TicketFare).HasColumnType("money");
@@ -231,7 +233,9 @@ namespace MainWebAPI.Models
 
                 entity.Property(e => e.TransactionId).HasColumnName("TransactionID");
 
-                entity.Property(e => e.DateOfTransaction).HasColumnType("datetime");
+                entity.Property(e => e.DateOfTransaction)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.TransactionAmount).HasColumnType("money");
 

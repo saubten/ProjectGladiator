@@ -6,6 +6,7 @@ import { AdminDeleteFlightComponent } from './components/admin-delete-flight/adm
 import { AdminFlightScheduleComponent } from './components/admin-flight-schedule/admin-flight-schedule.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserAddPassengerComponent } from './components/user-add-passenger/user-add-passenger.component';
+import { UserCancellationComponent } from './components/user-cancellation/user-cancellation.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { UserFlightSearchComponent } from './components/user-flight-search/user-flight-search.component';
 import { UserFlightSelectComponent } from './components/user-flight-select/user-flight-select.component';
@@ -51,6 +52,9 @@ const routes: Routes = [
       {
         path : "seatSelection" , component:UserSeatSelectionComponent
       },
+      {
+        path : "bookings" ,component : UserCancellationComponent
+      }
     ]
   },
   {

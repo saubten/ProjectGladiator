@@ -1,8 +1,8 @@
 <div class="pl-0 pr-0">
 
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search by Name"
-        style="width: 300px;" [(ngModel)]="searchTerm" />
+        <input type="text" class="form-control"
+        style="width: 300px;" [(ngModel)]="term" />
     </div>
 
 
@@ -24,7 +24,7 @@
             <th class="col-1">Cancellation Status</th>
         </tr>
     </thead>
-    <tbody *ngFor="let f of flightDetails ">
+    <tbody *ngFor="let f of flightDetails | filter :term ">
         <tr  class="d-flex">
             <td class="col-1">{{f.registrationNumber}}</td>
             <td class="col-1">{{f.flightNumber}}</td>

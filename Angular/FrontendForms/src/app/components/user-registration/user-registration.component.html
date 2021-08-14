@@ -1,123 +1,94 @@
 
-<div class="register-form" style="text-align:center;">
-    <form [formGroup]="UserLoginForm" (ngSubmit)="onSubmit()">
-        <fieldset>
 
-            <legend style="font-size:larger;"><b>Registration Form</b></legend>
+<h1 class="text-center">Register Here!</h1>
+<div class="register-form" style="text-align:center;">
+    <form [formGroup]="userRegistrationForm" class="mx-auto w-25 p-3">
+        <fieldset>
+        <legend style="font-size:larger;"><b>Registration Form</b></legend>
             <div class="text-center">
-                <br/>
-                <br/>
-                <label for="Title">Title</label>
-                <select id="Title">
-                    <option value=default>--choose Title--</option>
+                <label for="title">Title</label>
+                <select id="title" formControlName="title" class="form-control">
+                    <option value=default>--Choose Title--</option>
                     <option>Mr.</option>
                     <option>Ms.</option>
                     <option>Mrs.</option>
-                </select>
-
+                </select>                      
             </div>
-            <br />
-           
             <div class="form-group">
-                <label for="FirstName">FirstName<span style="color:red">*</span></label>
-                <input id="FirstName" type="text" formControlName="FirstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }"/>
-                <div *ngIf="submitted && f.FirstName?.errors" class="invalid-feedback">
-                    <div *ngIf="f.FirstName?.errors?.required">Fullname is required</div>
-                </div>
-
-            </div>
-            <br />
-            
-            <div>
-
-                <label for="LastName">LastName<span style="color:red">*</span></label>
-                <input id="LastName" type="text" formControlName="LastName"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }" />
-                <div *ngIf="submitted && f.LastName?.errors" class="invalid-feedback">
-                    <div *ngIf="f.LastName?.errors?.required">Fullname is required</div>
+                <label for="firstName"><p class="glyphicon glyphicon-plane"></p>FirstName<span class="text-danger">*</span></label>
+                <input id="firstName" type="text" formControlName="firstName" class="form-control" placeholder="Enter FirstName"  /> 
+                <div *ngIf="!userRegistrationForm.get('firstName')?.valid && (userRegistrationForm.get('firstName')?.dirty || userRegistrationForm.get('firstName')?.touched) "class="alert alert-danger">
+                    <div *ngIf="userRegistrationForm.get('firstName')?.errors?.required" ><small class="text-danger">Please Enter Firstname</small></div>   
+                    <div *ngIf="userRegistrationForm.get('firstName')?.errors?.pattern" ><small class="text-danger">No Numbers allowed in Firstname</small> </div>     
                 </div>
             </div>
-            <br />
-         
-            <div>
+            <div class="form-group">
+                <label for="LastName"><p class="glyphicon glyphicon-plane"></p>LastName<span class="text-danger">*</span></label>
+                <input id="LastName" type="text" formControlName="lastName"  class="form-control" placeholder="Enter LastName"  />
+                <div *ngIf="!userRegistrationForm.get('lastName')?.valid && (userRegistrationForm.get('lastName')?.dirty || userRegistrationForm.get('lastName')?.touched) "class="alert alert-danger">
+                    <div *ngIf="userRegistrationForm.get('lastName')?.errors?.required" ><small class="text-danger">Please Enter the LastName</small></div>    
+                    <div *ngIf="userRegistrationForm.get('lastName')?.errors?.pattern" ><small class="text-danger">No Numbers in LastName</small></div>  
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Email"><p class="glyphicon glyphicon-plane"></p>Email<span class="text-danger">*</span></label>
+                <input id="Email" type="email" formControlName="email" class="form-control" placeholder="Enter Email"/>
+                  <div *ngIf="!userRegistrationForm.get('email')?.valid && (userRegistrationForm.get('email')?.dirty || userRegistrationForm.get('email')?.touched) "class="alert alert-danger">
+                    <div *ngIf="userRegistrationForm.get('email')?.errors?.required" ><small class="text-danger">email is mandatory</small></div>    
+                    <div *ngIf="userRegistrationForm.get('email')?.errors?.email" ><small class="text-danger">email is not allowed</small></div>    
+                </div>    
+            </div>
+            <div class="form-group">
+                <label for="Password"><p class="glyphicon glyphicon-plane"></p>Password<span class="text-danger">*</span></label>
+                <input id="Password" type="password" formControlName="password" class="form-control" placeholder="Enter password"   />
+                <div *ngIf="!userRegistrationForm.get('password')?.valid && (userRegistrationForm.get('password')?.dirty || userRegistrationForm.get('password')?.touched) "class="alert alert-danger">
+                    <div *ngIf="userRegistrationForm.get('password')?.errors?.required"><small class="text-danger">password is required</small></div>
+                    <div *ngIf="userRegistrationForm.get('password')?.errors?.minlength"><small class="text-danger">Password must be at least 6 characters</small></div>
+                    <div *ngIf="userRegistrationForm.get('password')?.errors?.maxlength"><small class="text-danger">Username must not exceed 20 characters</small></div>
+                    <div *ngIf="userRegistrationForm.get('password')?.errors?.pattern" ><small class="text-danger"><ul>Password Must contain<li>One character</li>
+                    <li>One number</li><li>One special character</li><li>One Capital Character</li></ul></small></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Confirmpassword"><p class="glyphicon glyphicon-plane"></p>ConfirmPassword<span class="text-danger">*</span></label>
+                <input id="Confirmpassword" type="password" formControlName="confirmpassword" class="form-control" placeholder="Enter confirm Password" />
+                <div *ngIf="!userRegistrationForm.get('confirmpassword')?.valid && (userRegistrationForm.get('confirmpassword')?.dirty || userRegistrationForm.get('confirmpassword')?.touched) "
+                class="alert alert-danger">
+                    <div *ngIf="userRegistrationForm.get('confirmpassword')?.errors?.required" >
+                        <small class="text-danger">Confirm Password is required</small></div></div> 
 
-                <label for="Email">Email<span style="color:red">*</span></label>
-                <input id="Email" type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email?.errors }" />
-                <div *ngIf="submitted && f.email?.errors" class="invalid-feedback">
-                    <div *ngIf="f.email?.errors?.required">Email is required</div>
-                    <div *ngIf="f.email?.errors?.email">Email is invalid</div>
-                  </div>
-
-
-                
+                <div *ngIf="!(userRegistrationForm.get('confirmpassword')?.value==userRegistrationForm.get('password')?.value) && userRegistrationForm.get('confirmpassword')?.dirty"  class="alert alert-danger"><small class="text-danger">Confirm Password is not matching</small></div>                               
             </div>
-            <br />
+            <div class="form-group">
+                <label for="DateOfBirth"><p class="glyphicon glyphicon-plane"></p>Date Of Birth<span class="text-danger">*</span></label>
+                <input id="Date Of Birth" type="date" placeholder="dd-mm-yyyy" formControlName="DOB"   max="{{maxdate}}" />
+                <div *ngIf="!userRegistrationForm.get('DOB')?.valid && (userRegistrationForm.get('DOB')?.dirty || userRegistrationForm.get('DOB')?.touched) "
+                class="alert alert-danger">
+                    <div *ngIf="userRegistrationForm.get('DOB')?.errors?.required" >
+                        <small class="text-danger">email is mandatory</small>
+                    </div></div>
+            </div>           
             <div>
-
-                <p style="font-size: small;">suggested username:<span style="color:lightgreen">{{ UserLoginForm.get('FirstName').value+"123" }}</span></p>
-                
-                <label for="UserName">UserName<span style="color:red">*</span></label>
-                <input id="UserName" type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username?.errors }" />
-                <div *ngIf="submitted && f.username?.errors" class="invalid-feedback">
-                    <div *ngIf="f.username?.errors?.required">Username is required</div>
-                    <div *ngIf="f.username?.errors?.minlength">
-                      Username must be at least 6 characters
-                    </div>
-                    <div *ngIf="f.username?.errors?.maxlength">
-                      Username must not exceed 20 characters
-                    </div>
-                  </div>
+                <label for="PhoneNumber"><p class="glyphicon glyphicon-plane"></p>Phone Number<span class="text-danger">*</span></label>
+                <input id="PhoneNumber" type="text"formControlName="phoneNumber" class="form-control" placeholder="Enter PhoneNumber" />
+                <div *ngIf="!userRegistrationForm.get('phoneNumber')?.valid && (userRegistrationForm.get('phoneNumber')?.dirty || userRegistrationForm.get('phoneNumber')?.touched) "class="alert alert-danger">
+                    <div *ngIf="userRegistrationForm.get('phoneNumber')?.errors?.required"><small class="text-danger">PhoneNumber is required</small></div>
+                    <div *ngIf="userRegistrationForm.get('phoneNumber')?.errors?.pattern"><small class="text-danger">format should be +91_ _ _ _ _ _ _ _ _ _</small></div>                        
+                </div>
             </div>
-            <br />
-       
-            <div>
-                <label for="Password">Password<span style="color:red">*</span></label>
-                <input id="Password" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password?.errors }" />
-                <div *ngIf="submitted && f.password?.errors" class="invalid-feedback">
-                    <div *ngIf="f.password?.errors?.required">Password is required</div>
-                    <div *ngIf="f.password?.errors?.minlength">
-                      Password must be at least 6 characters
-                    </div>
-                    <div *ngIf="f.password?.errors?.maxlength">
-                      Username must not exceed 40 characters
-                    </div>
-                  </div>
+            <div class="form-group">
+                <label for="WalletAmount"><p class="glyphicon glyphicon-plane"></p>WalletAmount<span class="text-danger">*</span></label>
+                <input id="WalletAmount" type="number" formControlName="walletAmount" class="form-control" placeholder="Enter WalletAmount"/>
+                <div *ngIf="!userRegistrationForm.get('walletAmount')?.valid && (userRegistrationForm.get('walletAmount')?.dirty || userRegistrationForm.get('walletAmount')?.touched) "
+                class="alert alert-danger">
+                    <div *ngIf="userRegistrationForm.get('walletAmount')?.errors?.required" >
+                        <small class="text-danger">WalletAmount required</small></div>
+                </div>
             </div>
-            <br />
-         
-            <div>
-                <label for="ConfirmPassword">Confirm Password<span style="color:red">*</span></label>
-                <input id="ConfirmPassword" type="password" formControlName="Confirmpassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Confirmpassword?.errors }" />
-                <div *ngIf="submitted && f.Confirmpassword?.errors" class="invalid-feedback"
-      >
-                    <div *ngIf="f.Confirmpassword?.errors?.required">Confirm Password is required</div>
-                    <div *ngIf="f.Confirmpassword?.errors?.matching"> Confirm Password does not match</div>
-                 </div>
-            </div>
-            <br />
-            
-            <div>
-                <label for="DateOfBirth">Date Of Birth</label>
-                <input id="Date Of Birth" type="date" placeholder="dd-mm-yyyy" formControlName="DOB"  />
-            </div>
-           
-            <br />
-            <br />
-            <div>
-                <label for="PhoneNo">Phone Number</label>
-                <input id="PhoneNo" type="text"formControlName="phoneNo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.PhoneNo?.errors }" />
-            </div>
-            
-            <br />
-            <div>
-                <button type="submit"   class="btn btn-primary">SIGNUP</button> <!--valid is an inbuilt method which checks all validators for all controls are working fine unless the form is valid the button is disabled -->
+            <div class="form-group">
+                <button type="submit" [disabled]="userRegistrationForm.invalid || confirmPasswordValidator()" (click)="onSubmit1()"  class="btn btn-primary">SIGNUP</button>   
+                <span><button type="button" (click)="OnReset()" class="btn btn-warning ">CANCEL</button></span>
             </div>                                                                                               
-            <br />
-  
-            <div>
-                <button type="button" (click)="onReset()" class="btn btn-warning float-right">CANCEL</button>
-            </div>
-            
         </fieldset>
-
     </form>
-    </div> 
+</div>

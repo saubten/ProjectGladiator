@@ -15,7 +15,7 @@ export class AdminFlightScheduleComponent implements OnInit {
   constructor(private http:HttpClient,private adminService : AdminService) { }
 
 
-searchTerm:any
+  term:any;
 
   flight:Flights[] = []
    flightDetails:any;
