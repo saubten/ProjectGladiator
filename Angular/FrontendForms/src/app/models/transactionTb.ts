@@ -1,8 +1,5 @@
 export class TransactionTb
 {
-    TransactionID?:number
-    UserID?:number
+    UserId?:number
     TransactionAmount?:number
-    DateOfTransaction?:Date
-
 }

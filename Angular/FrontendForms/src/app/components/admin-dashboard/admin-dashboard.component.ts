@@ -11,7 +11,7 @@ export class AdminDashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.fullname = localStorage.getItem("AdminFullName")!
+    this.fullname = sessionStorage.getItem("AdminFullName")!
   }
 
 }

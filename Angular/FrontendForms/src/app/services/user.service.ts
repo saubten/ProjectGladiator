@@ -37,4 +37,8 @@ export class UserServices{
     updatePassword(newpassword : string,email : string){
         return this.http.put(`${this.url}/updatepassword?newpassword=${newpassword}&email=${email}`,null,{responseType : "text"});
     }
+
+    getUserID(email : string){
+        return this.http.get(`${this.url}/getUserId?email=${email}`);
+    }
 }

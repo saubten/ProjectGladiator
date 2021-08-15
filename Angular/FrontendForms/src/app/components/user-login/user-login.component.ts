@@ -76,9 +76,9 @@ export class UserLoginComponent implements OnInit {
           this.user = data as Users;
           console.log(data);
           if (data != "Invalid") {
-            localStorage.setItem('LoginCheckCode', 'F');
-            localStorage.setItem('EmailId', this.user.emailId!);
-            localStorage.setItem('UserFullName',this.user.firstName! +" "+this.user.lastName!)
+            sessionStorage.setItem('LoginCheckCode', 'F');
+            sessionStorage.setItem('EmailId', this.user.emailId!);
+            sessionStorage.setItem('UserFullName',this.user.firstName! +" "+this.user.lastName!)
             if(this.flowTrigger.localeCompare('1') == 0){
               this.router.navigate(['/payment'])
             }

@@ -18,19 +18,22 @@ namespace MainWebAPI.Controllers
         {
             db = context;
         }
-        [HttpPost]
-        public IActionResult OneWayBooking([FromBody] Booking booking)
+        [HttpPost("{id}")]
+        public IActionResult OneWayBooking(int id,[FromBody] Booking booking)
         {
             try
             {
                 db.Bookings.Add(booking);
                 db.SaveChanges();
+
+                var b = db.Bookings.Where(x => x.TransactionId == id).FirstOrDefault();
+                return Ok (b);
             }
             catch (Exception e)
             {
                 return BadRequest("Invalid data");
             }
-            return Ok(db.Bookings);
+            
 
         }
 
@@ -40,17 +43,28 @@ namespace MainWebAPI.Controllers
         {
             try
             {
-
                 db.RoundTrips.Add(roundTrip);
                 db.SaveChanges();
+                return Ok("Proceed to Passenger Addition");
             }
-
             catch (Exception e)
             {
                 return BadRequest("Invalid data");
             }
 
-            return Ok(db.RoundTrips);
+
+        }
+
+        [HttpGet]
+        public IActionResult GetBookingID([FromQuery(Name ="userId")] int UserID)
+        {
+
+            var tid = (from t in db.TransactionTbs
+                       where t.UserId == UserID
+                       select new { t.TransactionId }).ToList().OrderByDescending(c => c.TransactionId).First();
+
+            return Ok(tid);
+
         }
     }
 }

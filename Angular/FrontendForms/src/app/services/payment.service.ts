@@ -4,6 +4,7 @@ import{HttpClient, HttpParams} from '@angular/common/http';
 import { Bookings } from "src/app/models/bookings";
 import { TransactionTb } from "src/app/models/transactionTb";
 import { RoundTrip } from "src/app/models/roundTrip";
+import { BookingPassenger } from "../models/bookingPassenger";
 
 @Injectable({providedIn:"root"})
 
@@ -15,24 +16,42 @@ export class PaymentService
 
     }
 
-    urip="https://localhost:44358/api/Payment"
+    urip="http://localhost:13972/api/Payment"
 
     updateTransactionDetails(transaction : TransactionTb)
     {
         return this.http.post(this.urip,transaction);
     }
 
-    urib="https://localhost:44358/api/Bookings"
-
-    updateBookingsDetails(booking: Bookings)
+    getTransactionID(userID:number)
     {
-        return this.http.post(this.urib,booking);
+        let params:any = new HttpParams().set('UserID',userID);
+
+        console.log(params);
+        return this.http.get(this.urip,{params:params});
+    }
+
+    urib="http://localhost:13972/api/Booking"
+
+    updateBookingsDetails(booking: Bookings,transId : number)
+    {
+        return this.http.post(`${this.urib}/${transId}`,booking);
     }
 
     updateRoundTripBooking(roundtrip: RoundTrip)
     {
-        return this.http.post(this.urib+"/api/Bookings/RoundTableBooking",roundtrip);
+        return this.http.post(this.urib+"/RoundTripBooking",roundtrip,{responseType : "text"});
     }
 
+    getBookingId(userId : number){
+        return this.http.get(`${this.urib}?userId=${userId}`)
+    }
+
+    urix="http://localhost:13972/api/Passenger"
+
+    updatePassengerDetails(passenger : BookingPassenger[])
+    {
+        return this.http.post(this.urix,passenger);
+    }
 
 }

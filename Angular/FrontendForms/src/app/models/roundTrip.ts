@@ -1,7 +1,7 @@
 export class RoundTrip
 {
-    RoundTripID?:number
-    BookingsID?:number
+    RoundTripId?:number
+    BookingId?:number
     FlightNumber?:string
     TicketFare?:number
     isCancelled?:boolean

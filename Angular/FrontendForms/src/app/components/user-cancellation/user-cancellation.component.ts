@@ -19,8 +19,8 @@ export class UserCancellationComponent implements OnInit {
   rtBookings : RTbookings[];
 
   ngOnInit(): void {
-    this.userEmail = "saubten.mane@gmail.com";
-    this.getBookings(this.userEmail)
+    this.userEmail = sessionStorage.getItem('EmailId')!;
+    this.getBookings(this.userEmail);
   }
 
   form = new FormGroup({

@@ -1,4 +1,5 @@
 ﻿using MainWebAPI.Models;
+using MainWebAPI.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,21 +21,27 @@ namespace MainWebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTransaction([FromBody] TransactionTb transactionTb)
+        public IActionResult AddTransaction([FromBody] AddTransaction transactionTb)
         {
             try
             {
-
-                db.TransactionTbs.Add(transactionTb);
+                TransactionTb t = new TransactionTb();
+                t.UserId = transactionTb.UserId;
+                t.TransactionAmount = transactionTb.TransactionAmount;
+                
+                db.TransactionTbs.Add(t);
                 db.SaveChanges();
+
+                var tnew = db.TransactionTbs.Where(u => u.UserId == t.UserId).OrderByDescending(d => d.DateOfTransaction).FirstOrDefault();
+                return Ok(tnew);
+
             }
 
             catch (Exception e)
             {
                 return BadRequest("Invalid data");
             }
-
-            return Ok(db.TransactionTbs);
+            
         }
 
         [HttpGet]

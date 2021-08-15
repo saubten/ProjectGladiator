@@ -14,7 +14,7 @@ export class UserDashboardComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.fullname = localStorage.getItem('UserFullName')!
+    this.fullname = sessionStorage.getItem('UserFullName')!
   }
 
 }

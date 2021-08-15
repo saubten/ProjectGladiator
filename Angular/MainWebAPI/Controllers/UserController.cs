@@ -164,7 +164,7 @@ namespace MainWebAPI.Controllers
         [Route("getUserId")]
         public IActionResult GetUserId([FromQuery(Name = "email")] string email)
         {
-            var id = db.Users.Where(u => u.EmailId == email).Select(u => u.UserId).First();
+            var id = db.Users.Where(u => u.EmailId == email).Select(u => u.UserId).FirstOrDefault();
             return Ok(id);
         }
 
