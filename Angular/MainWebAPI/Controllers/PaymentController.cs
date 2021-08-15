@@ -36,5 +36,17 @@ namespace MainWebAPI.Controllers
 
             return Ok(db.TransactionTbs);
         }
+
+        [HttpGet]
+        public IActionResult GetTransactionId([FromQuery] int UserID)
+        {
+
+            var tid = (from t in db.TransactionTbs
+                       where t.UserId == UserID
+                       select new { t.TransactionId }).ToList().OrderByDescending(c => c.TransactionId).First();
+
+            return Ok(tid);
+
+        }
     }
 }

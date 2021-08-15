@@ -4,7 +4,7 @@
 
         <div class="form-group">
             <label for="From">From</label>
-            <select  name="From" id="From" class="form-control"  placeholder="enter city" formControlName="from" (click)=c()>
+            <select  name="From" id="From" class="form-select"  placeholder="enter city" formControlName="from" (click)=c()>
             <option >Choose Source</option>  
             <option *ngFor="let x of scopys;let i = index"  >{{x}}</option>
           </select>
@@ -12,7 +12,7 @@
 
         <div class="form-group">  
           <label for="To">To</label>
-          <select name="To" id="To" placeholder="enter city" class="form-control" formControlName="to">
+          <select name="To" id="To" placeholder="enter city" class="form-select" formControlName="to">
           <option style="display:none;"></option>
           <option *ngFor="let x of s;let i = index">{{x}}</option>
           </select>

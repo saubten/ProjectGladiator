@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { of } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
+import { Admins } from 'src/app/models/admins';
+import { Users } from 'src/app/models/users';
+import { AdminService } from 'src/app/services/admin.service';
+import { UserServices } from 'src/app/services/user.service';
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
@@ -10,26 +15,35 @@ import { AppComponent } from 'src/app/app.component';
 export class UserLoginComponent implements OnInit {
 
   pattern="^[ a-zA-Z][a-zA-Z ]*$";
+  
   flightloginform:FormGroup;
+  
   flowTrigger : string;
   tempReader : any;
+  user : Users;
+  admin : Admins;
+  err : string
 
-  constructor(private route : ActivatedRoute,private router : Router) { 
+  
+
+  
+  constructor(private route : ActivatedRoute,private router : Router, private userService : UserServices ,private adminService : AdminService) { 
     this.flightloginform=new FormGroup({
     userType : new FormControl('',Validators.required),
     username:new FormControl('',[Validators.required,Validators.email]),
     password:new FormControl('',[Validators.required])
 
   },
-  )}
+  )
+  }
  
   get f(){
     return this.flightloginform.controls
   }
+ 
 
   boolUserAdmin : boolean;
   ngOnInit(): void {
-    
     this.tempReader = this.route.snapshot.paramMap.get('id');
     this.flowTrigger = this.tempReader
     console.log(this.f.userType.value)
@@ -37,34 +51,62 @@ export class UserLoginComponent implements OnInit {
 
   onLogin(){
     if(this.f.userType.value == 1){
-      this.router.navigate(['/adminDashboard']);
+      this.adminService.adminVerification(this.f.username.value, this.f.password.value).subscribe(
+        data => {
+          this.admin = data as Admins;
+          console.log(data);
+          if (data != "Invalid") {
+            localStorage.setItem('LoginCheckCode', 'F');
+            localStorage.setItem('EmailId', this.admin.adminId!);
+            localStorage.setItem('AdminFullName',(this.admin.firstName+" "+this.admin.lastName))
+            this.router.navigate(['/adminDashboard']);
+          } 
+          else {
+            this.err = "Invalid username or password!!";
+          }
+        },
+        err => {
+          console.log(err)
+        }
+      )
     }
     else{
-      if(this.flowTrigger.localeCompare('1') == 0){
-        this.router.navigate(['/payment'])
-      }
-      else{
-        this.router.navigate(['userDashboard',this.flowTrigger])
-      }
+      this.userService.userVerification(this.f.username.value, this.f.password.value).subscribe(
+        data => {
+          this.user = data as Users;
+          console.log(data);
+          if (data != "Invalid") {
+            localStorage.setItem('LoginCheckCode', 'F');
+            localStorage.setItem('EmailId', this.user.emailId!);
+            localStorage.setItem('UserFullName',this.user.firstName! +" "+this.user.lastName!)
+            if(this.flowTrigger.localeCompare('1') == 0){
+              this.router.navigate(['/payment'])
+            }
+            else{
+              this.router.navigate(['userDashboard',this.flowTrigger])
+            }
+          } else {
+            this.err = "Invalid username or password!!";
+          }
+        },
+        err => {
+          console.log(err)
+        }
+      )
+      
     }
-  }
-
-  User(){
-    this.boolUserAdmin = true;
   }
 
   Register(){
     this.router.navigate(['/register']);
   }
 
-  Admin(){
-    this.boolUserAdmin = false;
+  Forgot(){
+    this.router.navigate(['/forgot',this.flowTrigger]);
   }
-  
 
   onSubmit1(){
     console.warn(this.flightloginform.value);
-    alert("you have successfully regiistered");
-    alert("thank you for registering")
   }
+
 }

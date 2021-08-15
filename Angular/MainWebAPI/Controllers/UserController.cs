@@ -34,7 +34,7 @@ namespace MainWebAPI.Controllers
                 Credentials = new NetworkCredential("SAKKairlines@gmail.com","SAKK@123"),
             };
 
-            string subject = "SAKK Airlines OTP";
+            string subject = "SAKK Airlines OTP (Forgot Password)";
             Random rand = new Random();
             int otp = rand.Next(100000, 999999);
             string body = "OTP : " + otp;
@@ -49,14 +49,62 @@ namespace MainWebAPI.Controllers
             }   
         }
         [HttpGet]
-        [Route("OTP")]
-        public IActionResult SendOTPtoEmail([FromQuery(Name ="userEmail")] string Email)
+        [Route("forgotpassword")]
+        public IActionResult SendOTPtoEmail([FromQuery(Name = "regId")] int regId, [FromQuery(Name = "email")] string email)
         {
-            User user = db.Users.Where(u => u.EmailId == Email).FirstOrDefault();
+            try
+            {
+                string Email = db.Users.Where(u => u.UserId == regId && u.EmailId == email).Select(u => u.EmailId).FirstOrDefault();
+                using SmtpClient smtp = new SmtpClient
+                {
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    EnableSsl = true,
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    Credentials = new NetworkCredential("SAKKairlines@gmail.com", "SAKK@123"),
+                };
 
-            int otp = SendEmailOtp(Email);
-            return Ok(new { otp = otp } );
+                string subject = "SAKK Airlines OTP (Forgot Password)";
+                Random rand = new Random();
+                int otp = rand.Next(100000, 999999);
+                string body = "OTP : " + otp;
+                try
+                {
+                    smtp.Send("SAKKairlines@gmail.com", email, subject, body);
+                    return Ok(otp);
+                    
+                }
+                catch (Exception e)
+                {
+                    return BadRequest("Connection issue");
+                }
+            }
+            catch(Exception e)
+            {
+                return BadRequest("Invalid");
+            }
+        }
 
+        [HttpPut]
+        [Route("updatepassword")]
+        public IActionResult updatePassword([FromQuery(Name ="newpassword")] string newpassword, [FromQuery(Name = "email")] string email)
+        {
+            try
+            {
+                User usr = (from u in db.Users
+                            where u.EmailId == email
+                            select u).FirstOrDefault();
+
+                usr.Password = newpassword;
+                db.Users.Update(usr);
+                db.SaveChanges();
+                return Ok("Password Updated Re-login");
+            }
+            catch(Exception eeyy)
+            {
+                return BadRequest("Invalid");
+            }
         }
 
         [HttpGet]
@@ -202,6 +250,26 @@ namespace MainWebAPI.Controllers
             return Ok(new {OWbookings,RTbookings});
         }
 
-
+        [HttpGet]
+        [Route("login")]
+        public IActionResult checkLogin([FromQuery(Name ="email")] string email, [FromQuery(Name = "password")] string password)
+        {
+            try
+            {
+                var result = db.Users.Where(x => x.EmailId == email && x.Password == password).FirstOrDefault();
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return Ok("Invalid");
+                }
+            }
+            catch (Exception e)
+            {
+                return Ok(e.Message);
+            }
+        }
     }
 }

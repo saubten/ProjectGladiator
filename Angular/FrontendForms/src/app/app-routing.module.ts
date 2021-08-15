@@ -10,6 +10,7 @@ import { UserCancellationComponent } from './components/user-cancellation/user-c
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { UserFlightSearchComponent } from './components/user-flight-search/user-flight-search.component';
 import { UserFlightSelectComponent } from './components/user-flight-select/user-flight-select.component';
+import { UserForgotPasswordComponent } from './components/user-forgot-password/user-forgot-password.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { UserPaymentComponent } from './components/user-payment/user-payment.component';
 import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
@@ -65,6 +66,9 @@ const routes: Routes = [
   },
   {
     path : "payment" , component:UserPaymentComponent
+  },
+  {
+    path : "forgot/:id", component : UserForgotPasswordComponent
   },
   {
     path : "adminDashboard" , component:AdminDashboardComponent,

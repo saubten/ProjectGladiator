@@ -45,8 +45,31 @@ namespace MainWebAPI.Controllers
         public IActionResult  PostFlight([FromBody] Flight flight)
         {
             db.Flights.Add(flight);
+            db.SaveChanges();
            
             return Ok("Flight Added");
+        }
+
+        [HttpGet]
+        [Route("login")]
+        public IActionResult checkLogin([FromQuery(Name = "email")] string email, [FromQuery(Name = "password")] string password)
+        {
+            try
+            {
+                var result = db.Admins.Where(x => x.AdminId == email && x.Password == password).FirstOrDefault();
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return Ok("Invalid");
+                }
+            }
+            catch (Exception e)
+            {
+                return Ok(e.Message);
+            }
         }
     }
 }

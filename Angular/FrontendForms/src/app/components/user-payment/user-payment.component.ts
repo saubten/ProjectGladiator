@@ -66,6 +66,7 @@ export class UserPaymentComponent implements OnInit {
 
   addRoundTripBooking()
   {
+
     this.paymentservice.updateRoundTripBooking(this.roundtripDetails).subscribe((res)=>{
 
       console.log(res)
@@ -76,23 +77,26 @@ export class UserPaymentComponent implements OnInit {
     })   
   }
   ngOnInit(): void {
+    debugger;
     this.passengerCount = Number(localStorage.getItem('passengervalue')!);
     this.passengerList = JSON.parse(localStorage.getItem('passengerList')!);
     this.onewayDetails = JSON.parse(localStorage.getItem('onewayDetails')!);
-    this.tripType = Boolean(localStorage.getItem('flagTripType')!)
-    this.OWflightType = Boolean(localStorage.getItem('OWflighttype')!)
+    this.tripType = JSON.parse(localStorage.getItem('flagTripType')!)
+    this.OWflightType = JSON.parse(localStorage.getItem('OWflighttype')!)
     this.OWseatsSelected = JSON.parse(localStorage.getItem('OWseatsSelected')!)
     this.OWseatsSelectedId = JSON.parse(localStorage.getItem('OWseatsSelectedId')!)
     this.OWclassBool = JSON.parse(localStorage.getItem('OWclassBool')!)
     this.OWprice = JSON.parse(localStorage.getItem('OWprice')!)
     if(this.tripType){
       this.roundtripDetails = JSON.parse(localStorage.getItem('roundtripDetails')!);
-      this.RTflightType = Boolean(localStorage.getItem('RTflightType')!)
+      this.RTflightType = JSON.parse(localStorage.getItem('RTflightType')!)
       this.RTseatsSelected = JSON.parse(localStorage.getItem('RTseatsSelected')!)
       this.RTseatsSelectedId = JSON.parse(localStorage.getItem('OWseatsSelectedId')!)
       this.RTclassBool = JSON.parse(localStorage.getItem('OWclassBool')!)
       this.RTprice = JSON.parse(localStorage.getItem('RTprice')!)
     }
+
+    console.log(this.tripType);
   }
 
 }

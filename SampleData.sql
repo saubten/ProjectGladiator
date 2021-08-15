@@ -162,6 +162,7 @@ select * from Flights
 select * from TransactionTb
 select * from Bookings
 select * from RoundTrip
+select * from Passegers
 
 insert into Bookings(FlightNumber,TransactionID,Passengers,TicketFare,isBusiness,isCancelled,isReturn) values
 ('K1234',1,3,3000,1,0,0),
@@ -179,10 +180,12 @@ insert into RoundTrip (BookingID,FlightNumber,TicketFare,isBusiness,isCancelled)
 drop table RoundTrip
 
 
+select * from FlightSeats
 
-
-
-
+insert into Admins (AdminID , Password,FirstName , LastName) values 
+('admin.123@gmail.com','admin123','John','Doe'),
+('admin.456@gmail.com','admin456','David','Friss'),
+('admin.789@gmail.com','admin789','Eren','Yeager')
 
 
 

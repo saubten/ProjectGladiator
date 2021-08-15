@@ -30,4 +30,7 @@ export class AdminService
         return this.http.put(`${this.url}/softFDeleteFlight?flightNumber=${flightnumber}`,null,{responseType : "text"});
     }
     
+    adminVerification(useremail : string , userpassword : string){
+        return this.http.get(`${this.url}/login?email=${useremail}&password=${userpassword}`);
+    }
 }
