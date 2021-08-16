@@ -234,10 +234,10 @@ export class UserPaymentComponent implements OnInit {
         isCancelled: this.roundtripDetails.isCancelled,
         isBusiness: this.RTflightType
       }
-      this.TotalFare = this.OWprice + this.RTprice;
+      this.TotalFare = (this.OWprice + this.RTprice) * this.passengerCount;
     }
     else{
-      this.TotalFare = this.OWprice;
+      this.TotalFare = (this.OWprice) * this.passengerCount;
     }
     
   }

@@ -61,6 +61,7 @@ export class UserFlightSearchComponent implements OnInit {
     })
   } 
   maxdate:any;
+  ddate : Date;
   pastdatedisable(){
     var date = new Date();
     var todayDate:any = date.getDate();
@@ -74,8 +75,6 @@ export class UserFlightSearchComponent implements OnInit {
     if(month<10){
       month = '0' + month;
     }
-    console.log(month);
-    console.log(year);
 
     this.maxdate = year + "-" + month + "-" +todayDate;    
 

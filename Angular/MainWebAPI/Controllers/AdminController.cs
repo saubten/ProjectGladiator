@@ -44,10 +44,17 @@ namespace MainWebAPI.Controllers
         [HttpPost]
         public IActionResult  PostFlight([FromBody] Flight flight)
         {
-            db.Flights.Add(flight);
-            db.SaveChanges();
-           
-            return Ok("Flight Added");
+            try
+            {
+                db.Flights.Add(flight);
+                db.SaveChanges();
+
+                return Ok("Flight Added");
+            }
+            catch (Exception e)
+            {
+                return NotFound("Already Exists");
+            }
         }
 
         [HttpGet]

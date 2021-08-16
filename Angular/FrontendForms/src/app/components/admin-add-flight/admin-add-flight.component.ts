@@ -15,6 +15,7 @@ export class AdminAddFlightComponent implements OnInit {
   adminAddFlightForm:FormGroup;
   pattern="^[ a-zA-Z][a-zA-Z ]*$"
   maxdate:any;
+  err : string;
    pastdatedisable(){
      var date = new Date();
      var todayDate:any = date.getDate();
@@ -52,7 +53,6 @@ export class AdminAddFlightComponent implements OnInit {
       BusinessPrice: new FormControl(null,Validators.required),
       AvailableEconomySeats: new FormControl(null,Validators.required),
       AvailableBusinessSeats: new FormControl(null,Validators.required),
-      IsCancelled: new FormControl(null,Validators.required)
     });
 
 
@@ -91,10 +91,12 @@ export class AdminAddFlightComponent implements OnInit {
       alert(this.msgAdd);
       this.getFlightdetails();
 
-    },(err : any)=>{
-      console.log(err)
+    },err => {
+      if(err.error == "Already Exists"){
+        this.err = "Flight already exists";
+        console.log(this.err)
+      }
     })
-
     }
 
     ngOnInit(): void {

@@ -29,12 +29,12 @@
 
         <div class="form-group">
             <label>Departure Date:</label>
-            <input class="form-control dateCursor" type="date" formControlName="departureDate" min="{{maxdate}}">
+            <input class="form-control dateCursor" [(ngModel)] = "ddate" type="date" formControlName="departureDate" min="{{maxdate}}">
         </div>
 
         <div class="form-group" *ngIf="f.tripType.value == 'RT'">
             <label>Return Date:</label>
-            <input class="form-control dateCursor" type="date" formControlName="returnDate" min="{{maxdate}}">
+            <input class="form-control dateCursor" type="date" formControlName="returnDate" min="{{ddate}}">
             <div *ngIf="!flightsearchform.get('returndate')?.valid && (flightsearchform.get('returndate')?.dirty || flightsearchform.get('returndate')?.touched) "
         class="error">
                 <div *ngIf="flightsearchform.get('returndate')?.errors?.required" >

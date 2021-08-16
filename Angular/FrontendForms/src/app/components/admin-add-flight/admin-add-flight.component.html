@@ -141,24 +141,11 @@
 
     </div>
     </div>
-
-    <div class="form-group ">
-        <label>Flight availability:</label>
-        <input class="form-control" type="number" formControlName="IsCancelled" placeholder="Is Flight Avalilable" [(ngModel)] = "flightdetails.isCancelled" >
-
-        <div *ngIf="!adminAddFlightForm.get('IsCancelled')?.valid && (adminAddFlightForm.get('IsCancelled')?.dirty || adminAddFlightForm.get('IsCancelled')?.touched) "
-        class="error">
-        <div *ngIf="adminAddFlightForm.get('IsCancelled')?.errors?.required" >
-            <small class="text-danger">This field is required</small>
-        </div>         
-
-    </div>
-    </div>
-
+    
     <div class="form-group">
         <button class="btn btn-primary btn-lg" type="submit" [disabled]="!adminAddFlightForm.valid">ADD</button>
     </div>
-
 </form>
 
+<h3 class="text-danger">{{err}}</h3>
 
