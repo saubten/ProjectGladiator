@@ -91,6 +91,12 @@ export class UserFlightSelectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.route.parent?.routeConfig?.path == "userDashboard"){
+      if(sessionStorage.getItem('LoginCheckCode') != "User"){
+        this.router.navigate(['/loginPage/flightSearch'])
+      }
+    }
+
     this.pCount =Number(localStorage.getItem('passengervalue'))
     this.flag=JSON.parse(localStorage.getItem('flagTripType')!);
     if(this.flag)

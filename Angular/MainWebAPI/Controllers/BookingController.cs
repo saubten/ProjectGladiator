@@ -18,6 +18,7 @@ namespace MainWebAPI.Controllers
         {
             db = context;
         }
+
         [HttpPost("{id}")]
         public IActionResult OneWayBooking(int id,[FromBody] Booking booking)
         {
@@ -51,8 +52,6 @@ namespace MainWebAPI.Controllers
             {
                 return BadRequest("Invalid data");
             }
-
-
         }
 
         [HttpGet]
@@ -64,7 +63,6 @@ namespace MainWebAPI.Controllers
                        select new { t.TransactionId }).ToList().OrderByDescending(c => c.TransactionId).First();
 
             return Ok(tid);
-
         }
     }
 }

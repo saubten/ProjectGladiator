@@ -164,6 +164,10 @@ export class UserPaymentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem('LoginCheckCode') != "User"){
+      this.router.navigate(['/loginPage/flightSearch'])
+    }
+
     this.emailID = sessionStorage.getItem('EmailId')!
     this.passengerCount = Number(localStorage.getItem('passengervalue')!);
     this.passengerList = JSON.parse(localStorage.getItem('passengerList')!);

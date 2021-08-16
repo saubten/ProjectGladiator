@@ -28,6 +28,9 @@ import { AdminService } from './services/admin.service';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { UserServices } from './services/user.service';
+import { PaymentService } from './services/payment.service';
+import { CancellationService } from './services/cancellation.service';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
@@ -49,6 +52,7 @@ import { UserServices } from './services/user.service';
     UserSeatSelectionComponent,
     HomeComponent,
     AdminFlightScheduleComponent,
+    NotFoundComponent,
 
   ],
   imports: [
@@ -59,7 +63,7 @@ import { UserServices } from './services/user.service';
     HttpClientModule,
     Ng2SearchPipeModule
   ],
-  providers: [FlightService,SeatService,AdminService,UserServices],
+  providers: [FlightService,SeatService,AdminService,UserServices,PaymentService,CancellationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

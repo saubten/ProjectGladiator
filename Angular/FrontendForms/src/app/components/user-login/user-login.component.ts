@@ -55,18 +55,17 @@ export class UserLoginComponent implements OnInit {
         data => {
           this.admin = data as Admins;
           console.log(data);
-          if (data != "Invalid") {
-            localStorage.setItem('LoginCheckCode', 'F');
-            localStorage.setItem('EmailId', this.admin.adminId!);
-            localStorage.setItem('AdminFullName',(this.admin.firstName+" "+this.admin.lastName))
+            sessionStorage.clear();
+            sessionStorage.setItem('LoginCheckCode', 'Admin');
+            sessionStorage.setItem('EmailId', this.admin.adminId!);
+            sessionStorage.setItem('AdminFullName',(this.admin.firstName+" "+this.admin.lastName))
             this.router.navigate(['/adminDashboard']);
-          } 
-          else {
-            this.err = "Invalid username or password!!";
-          }
         },
         err => {
-          console.log(err)
+          if(err.error == "Invalid"){
+            this.err = "Invalid username or password!!";
+            console.log(this.err)
+          }
         }
       )
     }
@@ -75,8 +74,8 @@ export class UserLoginComponent implements OnInit {
         data => {
           this.user = data as Users;
           console.log(data);
-          if (data != "Invalid") {
-            sessionStorage.setItem('LoginCheckCode', 'F');
+            sessionStorage.clear();
+            sessionStorage.setItem('LoginCheckCode', 'User');
             sessionStorage.setItem('EmailId', this.user.emailId!);
             sessionStorage.setItem('UserFullName',this.user.firstName! +" "+this.user.lastName!)
             if(this.flowTrigger.localeCompare('1') == 0){
@@ -85,12 +84,12 @@ export class UserLoginComponent implements OnInit {
             else{
               this.router.navigate(['userDashboard',this.flowTrigger])
             }
-          } else {
-            this.err = "Invalid username or password!!";
-          }
         },
         err => {
-          console.log(err)
+          if(err.error == "Invalid"){
+            this.err = "Invalid username or password!!";
+            console.log(this.err)
+          }
         }
       )
       

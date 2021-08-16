@@ -5,6 +5,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { AdminDeleteFlightComponent } from './components/admin-delete-flight/admin-delete-flight.component';
 import { AdminFlightScheduleComponent } from './components/admin-flight-schedule/admin-flight-schedule.component';
 import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UserAddPassengerComponent } from './components/user-add-passenger/user-add-passenger.component';
 import { UserCancellationComponent } from './components/user-cancellation/user-cancellation.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path : "" , redirectTo : "home/flightSearch" ,pathMatch : "full"},
   {path : "home" , redirectTo : "home/flightSearch" ,pathMatch : "full"},
   {path : "adminDashboard" , redirectTo : "adminDashboard/flightSchedule" ,pathMatch : "full"},
+  {path : "userDashboard" , redirectTo : "userDashboard/flightSearch" ,pathMatch : "full"},
   {
     path : "home" , component:HomeComponent,
     children: [
@@ -83,6 +85,9 @@ const routes: Routes = [
         path : "deleteFlight", component:AdminDeleteFlightComponent
       },
     ]
+  },
+  {
+    path : "**", component : NotFoundComponent
   }
   
 ];

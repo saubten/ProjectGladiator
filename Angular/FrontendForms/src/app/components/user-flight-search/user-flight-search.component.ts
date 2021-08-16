@@ -32,8 +32,8 @@ export class UserFlightSearchComponent implements OnInit {
       from: new FormControl(null,[Validators.required,Validators.pattern(this.pattern)]),
       to: new FormControl(null,[Validators.required,Validators.pattern(this.pattern)]),
       departureDate: new FormControl(null,Validators.required),
-      returnDate: new FormControl(null),
-      passengersCount: new FormControl(null) 
+      returnDate: new FormControl(null,Validators.required),
+      passengersCount: new FormControl(null,Validators.required) 
     });
 
   }
@@ -160,9 +160,15 @@ export class UserFlightSearchComponent implements OnInit {
 
 
   ngOnInit(){
+    if(this.route.parent?.routeConfig?.path == "userDashboard"){
+      if(sessionStorage.getItem('LoginCheckCode') != "User"){
+        this.router.navigate(['/loginPage/flightSearch'])
+      }
+    }
+
     localStorage.clear();
     this.pastdatedisable();
-    console.log(this.route.routeConfig?.path)
+    console.log(this.route.parent?.routeConfig?.path)
   }
 }
 

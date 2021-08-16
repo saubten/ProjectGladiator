@@ -6,7 +6,7 @@ Insert into Users(EmailID,Title,FirstName,LastName,Password,DOB,PhoneNumber,Wall
 ('amit@gmail.com','Mr','Amit','Tiwari','amit@1','1998-05-29','9375918328',1000),('siddharth@gmail.com','Mr','Siddhartha','Ray','siddha@1','1994-04-16','7780692722',200)
 
 update Users set PhoneNumber='9623871237' where UserID=14
-select * from Users
+select * from Passegers
 delete from Users where LastName = 'Mane'
 
 
@@ -187,9 +187,10 @@ insert into Admins (AdminID , Password,FirstName , LastName) values
 ('admin.456@gmail.com','admin456','David','Friss'),
 ('admin.789@gmail.com','admin789','Eren','Yeager')
 
-
-
-
+delete from Passegers
+delete from Bookings
+delete from RoundTrip
+delete from TransactionTb
 
 
 

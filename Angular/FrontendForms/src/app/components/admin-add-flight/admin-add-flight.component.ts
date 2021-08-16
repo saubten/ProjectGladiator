@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Flights } from 'src/app/models/flights';
 import { AdminService } from 'src/app/services/admin.service';
 
@@ -36,7 +37,7 @@ export class AdminAddFlightComponent implements OnInit {
    }
 
 
-  constructor(private http:HttpClient,private adminService : AdminService) {
+  constructor(private http:HttpClient,private adminService : AdminService,private router : Router) {
 
     this.adminAddFlightForm = new FormGroup({
       RegistrationNumber: new FormControl(null,Validators.required),
@@ -97,6 +98,9 @@ export class AdminAddFlightComponent implements OnInit {
     }
 
     ngOnInit(): void {
+      if(sessionStorage.getItem('LoginCheckCode') != "Admin"){
+        this.router.navigate(['/loginPage/flightSearch'])
+      }
       this.getFlightdetails();
       this.pastdatedisable();
     }

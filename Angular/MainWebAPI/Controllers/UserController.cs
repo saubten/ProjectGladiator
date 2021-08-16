@@ -183,34 +183,6 @@ namespace MainWebAPI.Controllers
         {
             var id = db.Users.Where(u => u.EmailId == email).Select(u => u.UserId).First();
             var transactionIds = db.TransactionTbs.Where(u => u.UserId == id).Select(t => t.TransactionId).ToList();
-            //var bookings = (from b in db.Bookings
-            //                join f in db.Flights on b.FlightNumber equals f.FlightNumber
-            //                join sr in (from r in db.RoundTrips
-            //                            join fr in db.Flights on r.FlightNumber equals fr.FlightNumber
-            //                            select new { r,fr}) 
-            //                            on b.BookingId equals sr.r.BookingId into rs
-            //                from sr in rs.DefaultIfEmpty()
-            //                where transactionIds.Contains(b.TransactionId)
-            //                select new
-            //                {
-            //                    BookingID = b.BookingId,
-            //                    OFlight = b.FlightNumber,
-            //                    OTicketFare = b.TicketFare,
-            //                    OClass = b.IsBusiness,
-            //                    OSource = f.FromLocation,
-            //                    ODestination = f.ToLocation,
-            //                    ODepartureDate = f.DepartureDate,
-            //                    BCancelled = b.IsCancelled,
-            //                    RTripBool = b.IsReturn,
-            //                    RoundTripID = sr.r == null ? -1 : sr.r.RoundTripId,
-            //                    RFlight = sr.r == null ? "-" : sr.r.FlightNumber,
-            //                    RTicketFare = sr.r == null ? -1 : sr.r.TicketFare,
-            //                    RClass = sr.r == null ? false : sr.r.IsBusiness,
-            //                    RSource = sr.fr.FromLocation,
-            //                    RDestination = sr.fr.ToLocation,
-            //                    RDepartureDate = sr.fr.DepartureDate,
-            //                    RCancelled = sr.r == null ? false : sr.r.IsCancelled,
-            //                }).OrderByDescending(c=>c.BookingID).ToList();
 
             var bookings = ( from b in db.Bookings
                                 where transactionIds.Contains(b.TransactionId)
@@ -237,7 +209,7 @@ namespace MainWebAPI.Controllers
                               select new
                               {
                                   RBookingId = r.BookingId,
-                                  RoundTripID = r.RoundTripId,
+                                  RRoundTripId = r.RoundTripId,
                                   RFlight = r.FlightNumber,
                                   RTicketFare = r.TicketFare,
                                   RClass = r.IsBusiness,
@@ -263,7 +235,7 @@ namespace MainWebAPI.Controllers
                 }
                 else
                 {
-                    return Ok("Invalid");
+                    return NotFound("Invalid");
                 }
             }
             catch (Exception e)

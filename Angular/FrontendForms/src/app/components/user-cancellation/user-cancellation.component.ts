@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OWbookings } from 'src/app/models/owbookings';
 import { RTbookings } from 'src/app/models/rtbookings';
+import { CancellationService } from 'src/app/services/cancellation.service';
 import { UserServices } from 'src/app/services/user.service';
 
 @Component({
@@ -11,12 +12,18 @@ import { UserServices } from 'src/app/services/user.service';
 })
 export class UserCancellationComponent implements OnInit {
 
-  constructor(private userService : UserServices) { }
+  constructor(private userService : UserServices,private cancellationService : CancellationService) { }
 
   userEmail : string;
   temp : any;
   owBookings : OWbookings[];
   rtBookings : RTbookings[];
+
+  returnButton : any;
+  bookingButton : any; 
+
+  RTID : number;
+  BID : number;
 
   ngOnInit(): void {
     this.userEmail = sessionStorage.getItem('EmailId')!;
@@ -44,5 +51,25 @@ export class UserCancellationComponent implements OnInit {
 
   enter(f : FormGroup){
     console.log(f.value['BookingID'])
+  }
+
+  BookingCancel(event : any){
+    this.BID = Number(event.target.id);
+    this.cancellationService.cancelBookings(this.BID).subscribe(res => {
+      console.log(res);
+    },
+    err =>{
+      console.log(err)
+    });
+  }
+
+  ReturnCancel(event : any){
+    this.RTID =Number(event.target.id);
+    this.cancellationService.cancelRoundTrips(this.RTID).subscribe(res => {
+      console.log(res);
+    },
+    err =>{
+      console.log(err)
+    });
   }
 }

@@ -16,6 +16,9 @@ export class AdminDeleteFlightComponent implements OnInit {
   adminDeleteFlightForm:FormGroup;
 
   constructor(private http:HttpClient,private adminService : AdminService,private router : Router) { 
+    if(sessionStorage.getItem('LoginCheckCode') != "Admin"){
+      this.router.navigate(['/loginPage/flightSearch'])
+    }
 
     this.adminDeleteFlightForm = new FormGroup({
       FlightNumber: new FormControl(null,Validators.required)

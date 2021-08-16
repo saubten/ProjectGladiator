@@ -35,7 +35,11 @@ export class UserAddPassengerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    if(this.route.parent?.routeConfig?.path == "userDashboard"){
+      if(sessionStorage.getItem('LoginCheckCode') != "User"){
+        this.router.navigate(['/loginPage/flightSearch'])
+      }
+    } 
   }
 
   add(objFormGroup : FormGroup){

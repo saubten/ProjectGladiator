@@ -32,13 +32,13 @@ namespace MainWebAPI.Controllers
                     db.SaveChanges();
                 }
                 return Ok("Data Added Successfully");
-            }
-            catch (Exception e)
-            {
-                return BadRequest("Invalid data");
-            }
-            
-
         }
+                catch (Exception e)
+                {
+                    return BadRequest("Invalid data");
+    }
+
+
+}
     }
 }

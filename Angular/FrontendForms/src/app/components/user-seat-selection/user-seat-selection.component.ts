@@ -69,7 +69,6 @@ export class UserSeatSelectionComponent implements OnInit {
           }   
         }
       }
-      // For Debug
       console.log(this.selectedSeats)
       console.log(this.selectedSeatsId)
     }
@@ -100,52 +99,13 @@ export class UserSeatSelectionComponent implements OnInit {
           }   
         }
       }
-      //For debug
       console.log(this.selectedSeats)
       console.log(this.selectedSeatsId)
     }
   
-    // Submit(){
-    //   debugger;
-    //   this.updateSelectedSeats();
-    //   if(!this.availableBool){
-    //     this.updateAvailableSeatsInDb(this.OWflightNumber);
-    //     localStorage.setItem('OWseatsSelected',JSON.stringify(this.selectedSeats));
-    //     localStorage.setItem('OWseatsSelectedId',JSON.stringify(this.selectedSeatsId));
-    //     localStorage.setItem('OWclassBool',JSON.stringify(this.classBool));
-    //     if(!this.isReturn){
-    //       this.navigate();
-    //     }
-    //   }
-    //   else{
-    //     this.updateAvailableSeatsInDb(this.RTflightNumber!);
-    //     localStorage.setItem('RTseatsSelected',JSON.stringify(this.selectedSeats));
-    //     localStorage.setItem('RTseatsSelectedId',JSON.stringify(this.selectedSeatsId));
-    //     localStorage.setItem('RTclassBool',JSON.stringify(this.classBool));
-    //     this.navigate();
-    //   }
-    //   if(this.isReturn){
-    //     this.availableBool = true;
-    //     this.isReturn = false;
-    //     this.tripName = "Round Trip";
-    //     this.classBool = Boolean(JSON.parse(localStorage.getItem('RTflightType')!));
-    //     this.RTflightNumber = JSON.parse(localStorage.getItem('roundtripDetails')!)['flightNumber'];
-    //     this.seatCount = Number(JSON.parse(localStorage.getItem('passengerList')!).length);
-    //     this.seatTogglers.forEach((value,index) =>{
-    //       if(value == true)
-    //       value = false;
-    //       this.temp = document.getElementById(index.toString());
-    //       this.element = this.temp;
-    //       this.element?.setAttribute("class",'seat');
-    //     })
-    //     this.getSeats(this.RTflightNumber!);
-    //   }
-    //   this.selectedSeatsId = [];
-    //   this.selectedSeats = [];
-    // }
 
     Submit(){
-      debugger
+
       if(!this.skip){
         if(this.isReturn){
           this.OWselectedSeats = this.selectedSeats;
@@ -182,7 +142,7 @@ export class UserSeatSelectionComponent implements OnInit {
         localStorage.setItem('RTclassBool',JSON.stringify(this.classBool));
         this.navigate();
       }
-      debugger;
+
       if(!this.availableBool){
         this.updateSelectedSeats(this.selectedSeatsId);
         this.updateAvailableSeatsInDb(this.OWflightNumber);
@@ -204,6 +164,11 @@ export class UserSeatSelectionComponent implements OnInit {
     }
     
     ngOnInit(): void {
+      if(this.route.parent?.routeConfig?.path == "userDashboard"){
+        if(sessionStorage.getItem('LoginCheckCode') != "User"){
+          this.router.navigate(['/loginPage/flightSearch'])
+        }
+      }
       this.seatCount = Number(JSON.parse(localStorage.getItem('passengerList')!).length)
       this.classBool = Boolean(JSON.parse(localStorage.getItem('OWflightType')!))
       this.freezeCheck = this.seatCount;
@@ -229,7 +194,7 @@ export class UserSeatSelectionComponent implements OnInit {
     }
   
     updateSelectedSeats(selectedSeatsId : number[]){
-      debugger;
+
       this.service.updateSeats(selectedSeatsId).subscribe(data => 
         {
           console.log(data);
@@ -240,7 +205,7 @@ export class UserSeatSelectionComponent implements OnInit {
     }
 
     updateAvailableSeatsInDb(flightNumber : string){
-      debugger;
+
       this.service.availbleSeatsUpdate(flightNumber,this.classBool,this.freezeCheck).subscribe(data => 
         {
           console.log(data);

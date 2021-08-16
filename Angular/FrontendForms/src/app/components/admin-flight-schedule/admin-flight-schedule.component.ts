@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Flights } from 'src/app/models/flights';
 import { AdminService } from 'src/app/services/admin.service';
 
@@ -12,7 +13,7 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class AdminFlightScheduleComponent implements OnInit {
 
-  constructor(private http:HttpClient,private adminService : AdminService) { }
+  constructor(private http:HttpClient,private adminService : AdminService, private router : Router) { }
 
 
   term:any;
@@ -36,6 +37,9 @@ export class AdminFlightScheduleComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem('LoginCheckCode') != "Admin"){
+      this.router.navigate(['/loginPage/flightSearch'])
+    }
     this.getFlightdetails();
   }
 

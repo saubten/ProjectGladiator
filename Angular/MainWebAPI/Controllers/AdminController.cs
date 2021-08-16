@@ -63,7 +63,7 @@ namespace MainWebAPI.Controllers
                 }
                 else
                 {
-                    return Ok("Invalid");
+                    return NotFound("Invalid");
                 }
             }
             catch (Exception e)

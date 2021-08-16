@@ -1,4 +1,5 @@
 export class RTbookings{
+    rRoundTripId : number;
     rBookingId : number;
     rFlight : string;
     rTicketFare : number;

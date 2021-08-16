@@ -28,13 +28,15 @@
                             <div class="col">Class : {{r.rClass ?"Business" : "Economy"}}</div>
                             <div class="col">Fare : {{r.rTicketFare}}</div>
                         </div>
+                        <div class="row">
+                            <button [attr.id]="r.rRoundTripId"   *ngIf = "o.rTripBool" class="btn btn-danger border border-dark my-2 mx-auto w-25" (click) = "ReturnCancel($event)">Return Trip Cancel</button>
+                           </div>
                    </div>
                </div>
            </div>
         </div>
         <div class="row">
-            <button *ngIf = "o.rTripBool" class="btn btn-danger border border-dark mx-auto w-25">Return Trip Cancel</button>
-            <button class="btn btn-danger border border-dark mx-auto w-25">Booking Cancel</button>
+            <button [attr.id]="o.bookingID" class="btn btn-danger border border-dark my-2 mx-auto w-25" (click) = "BookingCancel($event)">Booking Cancel</button>
         </div>
     </div>
     
