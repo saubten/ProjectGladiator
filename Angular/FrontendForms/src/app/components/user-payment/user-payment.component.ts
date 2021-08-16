@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { compileNgModule } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookingPassenger } from 'src/app/models/bookingPassenger';
@@ -33,6 +34,8 @@ export class UserPaymentComponent implements OnInit {
   RTclassBool: boolean = false;
   OWprice: number;
   RTprice: number;
+
+  TotalFare : number;
 
   emailID : string;
   userid: number;
@@ -153,14 +156,44 @@ export class UserPaymentComponent implements OnInit {
     })
   }
 
+  checkWallet(email : string , amount : number){
+    this.paymentservice.checkUserWallet(email,amount).subscribe(res => {
+      console.log(res);
+      this.tempuserid = res;
+      this.userid = this.tempuserid;
+
+      if(!this.tripType){
+        this.transactionOneWay = {
+          UserId : this.userid,
+          TransactionAmount: this.OWprice
+        }
+        this.addTransaction(this.transactionOneWay)
+      }
+      else{
+        this.transactionRoundTip = {
+          UserId : this.userid,
+          TransactionAmount: this.OWprice + this.RTprice
+        }
+        this.addTransaction(this.transactionRoundTip)
+      }
+    },
+    err =>{
+      console.log(err);
+    })
+  } 
+
   transactionOneWay: TransactionTb
   transactionRoundTip: TransactionTb
   bookingOneWay: Bookings
   RoundTripBooking : RoundTrip
   
   Approve(){
-    this.getUserID(this.emailID);
+    this.checkWallet(this.emailID,this.TotalFare);
     this.router.navigate(['/userDashboard']);
+  }
+
+  Reject(){
+    this.router.navigate(['/userDashboard/flightSearch']);
   }
 
   ngOnInit(): void {
@@ -201,6 +234,11 @@ export class UserPaymentComponent implements OnInit {
         isCancelled: this.roundtripDetails.isCancelled,
         isBusiness: this.RTflightType
       }
+      this.TotalFare = this.OWprice + this.RTprice;
     }
+    else{
+      this.TotalFare = this.OWprice;
+    }
+    
   }
 }

@@ -97,7 +97,7 @@ export class UserLoginComponent implements OnInit {
   }
 
   Register(){
-    this.router.navigate(['/register']);
+    this.router.navigate(['/register',this.flowTrigger]);
   }
 
   Forgot(){

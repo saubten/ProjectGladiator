@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Users } from 'src/app/models/users';
 import { UserServices } from 'src/app/services/user.service';
 
@@ -15,7 +16,11 @@ export class UserRegistrationComponent implements OnInit {
   pattern="^[ a-zA-Z][a-zA-Z ]*$";
   pattern1:string="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"
   idToSend : number;
-  constructor(private userServices:UserServices) {
+  tempReader : any;
+  flowTrigger : string;
+
+
+  constructor(private userServices:UserServices,private router : Router,private route : ActivatedRoute) {
 
     this.userRegistrationForm= new FormGroup({
       title:new FormControl(''),
@@ -33,8 +38,6 @@ export class UserRegistrationComponent implements OnInit {
    }
 
   onSubmit1(){
-    alert("You have been successfully registered!");
-    alert("Thank You");
     this.addUser();
   }
   maxdate:any;
@@ -59,14 +62,13 @@ export class UserRegistrationComponent implements OnInit {
   }
   OnReset(){
     this.userRegistrationForm.reset();
+    
   }
-  
-
-
-
 
   ngOnInit() {
     this.pastdatedisable();
+    this.tempReader = this.route.snapshot.paramMap.get('id');
+    this.flowTrigger = this.tempReader
   }
 
 
@@ -113,7 +115,9 @@ export class UserRegistrationComponent implements OnInit {
   
     this.userServices.insertUser(this.User1).subscribe((data : any)=>
     {this.message=data;
+      alert("Check Email for Registration Number \n You have successfully registered")
      this.sendRegistrationId(this.User1.emailId!); 
+    this.router.navigate(["/loginPage",this.flowTrigger])
     });
     
 //to avoid reloading to see the inserted record in table

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { OWbookings } from 'src/app/models/owbookings';
 import { RTbookings } from 'src/app/models/rtbookings';
 import { CancellationService } from 'src/app/services/cancellation.service';
@@ -12,7 +13,7 @@ import { UserServices } from 'src/app/services/user.service';
 })
 export class UserCancellationComponent implements OnInit {
 
-  constructor(private userService : UserServices,private cancellationService : CancellationService) { }
+  constructor(private userService : UserServices,private cancellationService : CancellationService,private router : Router) { }
 
   userEmail : string;
   temp : any;
@@ -57,6 +58,7 @@ export class UserCancellationComponent implements OnInit {
     this.BID = Number(event.target.id);
     this.cancellationService.cancelBookings(this.BID).subscribe(res => {
       console.log(res);
+      this.router.navigate(['/userDashboard/bookings']);
     },
     err =>{
       console.log(err)
@@ -67,6 +69,7 @@ export class UserCancellationComponent implements OnInit {
     this.RTID =Number(event.target.id);
     this.cancellationService.cancelRoundTrips(this.RTID).subscribe(res => {
       console.log(res);
+      this.router.navigate(['/userDashboard/bookings']);
     },
     err =>{
       console.log(err)

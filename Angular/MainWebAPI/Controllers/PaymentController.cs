@@ -55,5 +55,22 @@ namespace MainWebAPI.Controllers
             return Ok(tid);
 
         }
+
+        [HttpGet]
+        [Route("checkUserWallet")]
+        public IActionResult CheckUserWallet([FromQuery(Name ="email")] string email, [FromQuery(Name = "amount")] decimal amount)
+        {
+
+            var user = db.Users.Where(u => u.EmailId == email).FirstOrDefault();
+            if (user.WalletAmount < amount)
+            {
+                return BadRequest("Not Enough Funds");
+            }
+            user.WalletAmount -= amount;
+            db.Users.Update(user);
+            db.SaveChanges();
+            return Ok(user.UserId);
+
+        }
     }
 }

@@ -64,7 +64,7 @@ const routes: Routes = [
     path : "loginPage/:id" , component:UserLoginComponent
   },
   {
-    path : "register" , component:UserRegistrationComponent
+    path : "register/:id" , component:UserRegistrationComponent
   },
   {
     path : "payment" , component:UserPaymentComponent

@@ -54,4 +54,8 @@ export class PaymentService
         return this.http.post(this.urix,passenger);
     }
 
+    checkUserWallet(email : string,amount : number){
+        return this.http.get(`${this.urip}/checkUserWallet?email=${email}&amount=${amount}`)
+    }
+
 }

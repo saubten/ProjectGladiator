@@ -41,12 +41,12 @@ namespace MainWebAPI.Controllers
                     db.FlightSeats.Update(s);
                 }
 
-                ////WALLET UPDATION
-                //var tid = db.Bookings.Where(b => b.BookingId == bookingId).Select(s => s.TransactionId).FirstOrDefault();
-                //var uid = db.TransactionTbs.Where(t => t.TransactionId == tid).Select(s => s.UserId).FirstOrDefault();
-                //var user = db.Users.Where(u => u.UserId == uid).FirstOrDefault();
-                //user.WalletAmount += (rticketfare * (decimal)0.9);
-                //db.Users.Update(user);
+                //WALLET UPDATION
+                var tid = db.Bookings.Where(b => b.BookingId == bookingId).Select(s => s.TransactionId).FirstOrDefault();
+                var uid = db.TransactionTbs.Where(t => t.TransactionId == tid).Select(s => s.UserId).FirstOrDefault();
+                var user = db.Users.Where(u => u.UserId == uid).FirstOrDefault();
+                user.WalletAmount += (rticketfare * (decimal)0.9);
+                db.Users.Update(user);
 
                 db.SaveChanges();
                 return Ok("Cancellation Done");
@@ -97,15 +97,18 @@ namespace MainWebAPI.Controllers
 
                 var totalfare = oticketfare + rticketfare;
 
-                
-                
 
-                ////WALLET UPDATION
-                //var tid = db.Bookings.Where(b => b.BookingId == bid).Select(s => s.TransactionId).FirstOrDefault();
-                //var uid = db.TransactionTbs.Where(t => t.TransactionId == tid).Select(s => s.UserId).FirstOrDefault();
-                //var user = db.Users.Where(u => u.UserId == uid).FirstOrDefault();
-                //user.WalletAmount += (totalfare * (decimal)0.9);
-                //db.Users.Update(user);
+
+
+                //WALLET UPDATION
+                var tid = db.Bookings.Where(b => b.BookingId == bid).Select(s => s.TransactionId).FirstOrDefault();
+                var uid = db.TransactionTbs.Where(t => t.TransactionId == tid).Select(s => s.UserId).FirstOrDefault();
+                var user = db.Users.Where(u => u.UserId == uid).FirstOrDefault();
+                double deductionRate = 0.9;
+                double amountToDeduct = (double)totalfare * deductionRate;
+
+                user.WalletAmount += (decimal)amountToDeduct;
+                db.Users.Update(user);
 
                 db.SaveChanges();
                 return Ok("Cancellation Done");

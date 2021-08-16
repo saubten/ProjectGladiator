@@ -19,6 +19,9 @@ export class UserFlightSearchComponent implements OnInit {
 
   flightsearchform:FormGroup;
 
+  rerr : string;
+  oerr : string;
+
 
   s:string[]=["Mumbai","Chennai","Delhi","Bangalore","Pune","Jammu","Hyderabad"].sort();;
   scopys:string[]=["Mumbai","Chennai","Delhi","Bangalore","Pune","Jammu","Hyderabad"].sort();
@@ -32,7 +35,7 @@ export class UserFlightSearchComponent implements OnInit {
       from: new FormControl(null,[Validators.required,Validators.pattern(this.pattern)]),
       to: new FormControl(null,[Validators.required,Validators.pattern(this.pattern)]),
       departureDate: new FormControl(null,Validators.required),
-      returnDate: new FormControl(null,Validators.required),
+      returnDate: new FormControl(null),
       passengersCount: new FormControl(null,Validators.required) 
     });
 
@@ -122,13 +125,21 @@ export class UserFlightSearchComponent implements OnInit {
         localStorage.setItem("roundtripDetails",JSON.stringify(this.roundtripdetails));
         console.log(res); 
         localStorage.setItem("passengervalue",JSON.stringify(this.flightsearchform.value['passengersCount']));
-        this.router.navigate(['../','flightSelect'],{relativeTo : this.route})     
+        if(this.roundtripdetails != undefined && this.onewaydetails != undefined){
+          this.router.navigate(['../','flightSelect'],{relativeTo : this.route}) 
+        }
         },
         (err : any) => {
+          if(err.error == "No available flight"){
+            this.rerr = "Return flights not available"
+          }
           console.log(err)
         })
       },
       (err : any)=>{
+        if(err.error == "No available flight"){
+          this.oerr = "One Way flights not available"
+        }
         console.log(err)
       })
     }
