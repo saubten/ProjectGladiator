@@ -19,6 +19,7 @@ namespace MainWebAPI.Controllers
             db = context;
         }
 
+        #region GetAllFlightDetails
         [HttpGet]
         public IActionResult GetFlights([FromQuery] string FromLocation, [FromQuery] string ToLocation, [FromQuery] DateTime DepartureDate)
         {
@@ -38,6 +39,8 @@ namespace MainWebAPI.Controllers
 
             return Ok(flights);
         }
+
+        #endregion
 
     }
 }

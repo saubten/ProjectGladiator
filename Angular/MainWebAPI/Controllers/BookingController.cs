@@ -19,6 +19,14 @@ namespace MainWebAPI.Controllers
             db = context;
         }
 
+        /// <summary>
+        /// To add the booking details for one way
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="booking"></param>
+        /// <returns> returns the booking based on the transaction id</returns>
+
+        #region OnewayBooking
         [HttpPost("{id}")]
         public IActionResult OneWayBooking(int id,[FromBody] Booking booking)
         {
@@ -37,7 +45,14 @@ namespace MainWebAPI.Controllers
             
 
         }
+        #endregion
 
+        /// <summary>
+        /// To add booking details for round trip
+        /// </summary>
+        /// <param name="roundTrip"></param>
+        /// <returns></returns>
+        #region RoundTripBooking
         [HttpPost]
         [Route("RoundTripBooking")]
         public IActionResult ReturnBooking([FromBody] RoundTrip roundTrip)
@@ -53,7 +68,14 @@ namespace MainWebAPI.Controllers
                 return BadRequest("Invalid data");
             }
         }
+        #endregion
 
+        /// <summary>
+        /// To fetch the most recent transaction id
+        /// </summary>
+        /// <param name="UserID"></param>
+        /// <returns>Transaction Id</returns>
+        #region BookingID
         [HttpGet]
         public IActionResult GetBookingID([FromQuery(Name ="userId")] int UserID)
         {
@@ -64,5 +86,6 @@ namespace MainWebAPI.Controllers
 
             return Ok(tid);
         }
+        #endregion
     }
 }

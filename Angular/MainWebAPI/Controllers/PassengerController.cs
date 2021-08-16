@@ -19,6 +19,7 @@ namespace MainWebAPI.Controllers
             db = context;
         }
 
+        #region PassengerAddition
         [HttpPost]
         public IActionResult Passengers([FromBody] List<Passeger> passenger)
         {
@@ -32,13 +33,14 @@ namespace MainWebAPI.Controllers
                     db.SaveChanges();
                 }
                 return Ok("Data Added Successfully");
-        }
+            }
                 catch (Exception e)
                 {
                     return BadRequest("Invalid data");
-    }
+                }   
 
 
-}
+        }
+        #endregion
     }
 }

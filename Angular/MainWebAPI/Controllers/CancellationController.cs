@@ -18,7 +18,7 @@ namespace MainWebAPI.Controllers
         {
             db = context;
         }
-
+        #region RoundTripCancellation
         [HttpPut]
         [Route("roundTripCancellation")]
         public IActionResult roundTripCancellation([FromQuery(Name = "rtid")] int rtid)
@@ -57,7 +57,9 @@ namespace MainWebAPI.Controllers
             }
             
         }
+        #endregion
 
+        #region Booking Cancellation
         [HttpPut]
         [Route("bookingCancellation")]
         public IActionResult bookingCancellation([FromQuery(Name = "bid")] int bid)
@@ -119,5 +121,6 @@ namespace MainWebAPI.Controllers
             }
 
         }
+        #endregion
     }
 }

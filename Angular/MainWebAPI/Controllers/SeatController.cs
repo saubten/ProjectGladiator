@@ -20,6 +20,7 @@ namespace MainWebAPI.Controllers
             db = context;
         }
 
+        #region GetAllSeats
         [HttpGet]
         public List<FlightSeat> GetSeats([FromQuery(Name = "flightNumber")] string FlightNumber)
         {
@@ -29,7 +30,9 @@ namespace MainWebAPI.Controllers
 
             return res;
         }
+        #endregion
 
+        #region Updateseats
         [HttpPut]
         public IActionResult UpdateSeatStatus([FromBody] List<int> selectedSeat)
         {
@@ -47,6 +50,9 @@ namespace MainWebAPI.Controllers
             return Ok();
         }
 
+        #endregion
+
+        #region UpdateAvailableSeats
         [HttpPut]
         [Route("updAvailableSeat")]
         public IActionResult UpdateAvailableSeats([FromQuery(Name = "flightNumber")] string FlightNumber,[FromQuery(Name = "classBool")] bool ClassType, [FromQuery(Name = "seatsToUpdate")] int UpdatedSeats)
@@ -79,7 +85,9 @@ namespace MainWebAPI.Controllers
             
         }
 
+        #endregion
+
 
     }
-    
+
 }

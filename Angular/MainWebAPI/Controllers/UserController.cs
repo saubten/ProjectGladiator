@@ -22,6 +22,7 @@ namespace MainWebAPI.Controllers
             db = context;
         }
 
+        #region SendingEmailOtp
         private int SendEmailOtp(string to)
         {
             using SmtpClient smtp = new SmtpClient
@@ -48,6 +49,10 @@ namespace MainWebAPI.Controllers
                 return -1;
             }   
         }
+
+        #endregion
+
+        #region ForgotPassword
         [HttpGet]
         [Route("forgotpassword")]
         public IActionResult SendOTPtoEmail([FromQuery(Name = "regId")] int regId, [FromQuery(Name = "email")] string email)
@@ -86,6 +91,9 @@ namespace MainWebAPI.Controllers
             }
         }
 
+        #endregion
+
+        #region UpdatePassword
         [HttpPut]
         [Route("updatepassword")]
         public IActionResult updatePassword([FromQuery(Name ="newpassword")] string newpassword, [FromQuery(Name = "email")] string email)
@@ -107,12 +115,18 @@ namespace MainWebAPI.Controllers
             }
         }
 
+        #endregion
+
+        #region GetAllUsers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await db.Users.ToListAsync();
         }
 
+        #endregion
+
+        #region GetUserbyID
         // GET: api/Users/5
         [HttpGet("(e)")]
         public async Task<ActionResult<User>> GetUser(string e)
@@ -127,7 +141,9 @@ namespace MainWebAPI.Controllers
             return user;
         }
 
+        #endregion
 
+        #region Add User
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
@@ -138,6 +154,9 @@ namespace MainWebAPI.Controllers
             return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
+        #endregion
+
+        #region sendingRegistrationId
         [HttpGet]
         [Route("sendRegId")]
         public IActionResult ForTheUser([FromQuery(Name ="email")] string email)
@@ -160,6 +179,9 @@ namespace MainWebAPI.Controllers
             return Ok("Check Your Email");
         }
 
+        #endregion
+
+        #region GetUser
         [HttpGet]
         [Route("getUserId")]
         public IActionResult GetUserId([FromQuery(Name = "email")] string email)
@@ -167,7 +189,7 @@ namespace MainWebAPI.Controllers
             var id = db.Users.Where(u => u.EmailId == email).Select(u => u.UserId).FirstOrDefault();
             return Ok(id);
         }
-
+        #endregion
         //NOT SERVICED YET 
         [HttpGet]
         [Route("checkPassword")]

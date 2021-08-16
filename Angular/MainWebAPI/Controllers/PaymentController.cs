@@ -20,6 +20,7 @@ namespace MainWebAPI.Controllers
             db = context;
         }
 
+        #region AddTransaction
         [HttpPost]
         public IActionResult AddTransaction([FromBody] AddTransaction transactionTb)
         {
@@ -44,6 +45,9 @@ namespace MainWebAPI.Controllers
             
         }
 
+        #endregion
+
+        #region TransactionId
         [HttpGet]
         public IActionResult GetTransactionId([FromQuery] int UserID)
         {
@@ -56,6 +60,9 @@ namespace MainWebAPI.Controllers
 
         }
 
+        #endregion
+
+        #region UserWallet
         [HttpGet]
         [Route("checkUserWallet")]
         public IActionResult CheckUserWallet([FromQuery(Name ="email")] string email, [FromQuery(Name = "amount")] decimal amount)
@@ -72,5 +79,7 @@ namespace MainWebAPI.Controllers
             return Ok(user.UserId);
 
         }
+
+        #endregion
     }
 }

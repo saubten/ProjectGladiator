@@ -19,6 +19,11 @@ namespace MainWebAPI.Controllers
             db = context;
         }
 
+        /// <summary>
+        /// To get all the flight details by date
+        /// </summary>
+        /// <returns>Flights</returns>
+        #region GetFlightDetails
         [HttpGet]
         public IActionResult GetFlights()
         {
@@ -26,6 +31,10 @@ namespace MainWebAPI.Controllers
 
             return Ok(allFlights);
         }
+        #endregion
+
+
+        #region DeleteFlight
 
         [HttpPut]
         [Route("softFDeleteFlight")]
@@ -88,7 +97,14 @@ namespace MainWebAPI.Controllers
             }
             
         }
+        #endregion
 
+        /// <summary>
+        /// For Admin to add flight
+        /// </summary>
+        /// <param name="flight"></param>
+        /// <returns>Success message</returns>
+        #region AddFlights
         [HttpPost]
         public IActionResult  PostFlight([FromBody] Flight flight)
         {
@@ -105,6 +121,9 @@ namespace MainWebAPI.Controllers
             }
         }
 
+        #endregion
+
+        #region AdminLogin
         [HttpGet]
         [Route("login")]
         public IActionResult checkLogin([FromQuery(Name = "email")] string email, [FromQuery(Name = "password")] string password)
@@ -126,5 +145,6 @@ namespace MainWebAPI.Controllers
                 return Ok(e.Message);
             }
         }
+        #endregion
     }
 }
