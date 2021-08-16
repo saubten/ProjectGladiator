@@ -1,3 +1,5 @@
+import { Time } from "@angular/common";
+
 export class RTbookings{
     rRoundTripId : number;
     rBookingId : number;
@@ -7,5 +9,6 @@ export class RTbookings{
     rSource : string;
     rDestination : string;
     rDepartureDate: Date;
+    rDepartureTime: Time;
     rCancelled : boolean;
 }

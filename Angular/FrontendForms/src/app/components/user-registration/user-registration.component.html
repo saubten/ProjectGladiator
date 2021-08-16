@@ -1,6 +1,6 @@
 
 
-<h1 class="text-center">Register Here!</h1>
+<h1 class="text-center bg-info">Register Here!</h1>
 <div class="register-form" style="text-align:center;">
     <form [formGroup]="userRegistrationForm" class="mx-auto w-25 p-3">
         <fieldset>
@@ -87,7 +87,6 @@
             </div>
             <div class="form-group">
                 <button type="submit" [disabled]="userRegistrationForm.invalid || confirmPasswordValidator()" (click)="onSubmit1()"  class="btn btn-primary">SIGNUP</button>   
-                <span><button type="button" (click)="OnReset()" class="btn btn-warning ">CANCEL</button></span>
             </div>                                                                                               
         </fieldset>
     </form>

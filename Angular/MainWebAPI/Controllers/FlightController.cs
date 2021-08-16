@@ -28,7 +28,7 @@ namespace MainWebAPI.Controllers
             {
                 flights = (from f in db.Flights
                            where f.FromLocation == FromLocation &&
-                           f.ToLocation == ToLocation && f.DepartureDate == DepartureDate
+                           f.ToLocation == ToLocation && f.DepartureDate == DepartureDate && f.IsCancelled != true
                            select f).ToList();
             }
             catch (Exception e)

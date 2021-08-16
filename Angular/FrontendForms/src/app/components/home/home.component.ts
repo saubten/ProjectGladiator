@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   constructor(private route : ActivatedRoute,private router : Router) { }
 
   ngOnInit(): void {
+    sessionStorage.clear();
     console.log(this.route.firstChild?.routeConfig?.path)
   }
 

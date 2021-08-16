@@ -117,15 +117,18 @@ export class UserFlightSearchComponent implements OnInit {
       this.flightservice.getFlightDetails(this.fromLocation,this.toLocation,this.departureDate).subscribe((res)=>{    
       this.onewaydetails = res;
       localStorage.setItem("onewayDetails",JSON.stringify(this.onewaydetails));
-      console.log(res);
+      console.log(this.onewaydetails);
 
       this.flightservice.getFlightDetails(this.toLocation,this.fromLocation,this.returnDate).subscribe((res)=>{
         this.roundtripdetails = res;
         localStorage.setItem("roundtripDetails",JSON.stringify(this.roundtripdetails));
-        console.log(res); 
+        console.log(this.roundtripdetails); 
         localStorage.setItem("passengervalue",JSON.stringify(this.flightsearchform.value['passengersCount']));
-        if(this.roundtripdetails != undefined && this.onewaydetails != undefined){
+        if(this.onewaydetails.length != 0){
           this.router.navigate(['../','flightSelect'],{relativeTo : this.route}) 
+        }
+        else{
+          alert("No one way flights for the selected day");
         }
         },
         (err : any) => {
@@ -157,9 +160,14 @@ export class UserFlightSearchComponent implements OnInit {
       this.flightservice.getFlightDetails(this.fromLocation,this.toLocation,this.departureDate).subscribe((res)=>{    
       this.onewaydetails=res;
       localStorage.setItem("onewayDetails",JSON.stringify(this.onewaydetails));
-      console.log(res);
+      console.log(this.onewaydetails);
       localStorage.setItem("passengervalue",JSON.stringify(this.flightsearchform.value['passengersCount']));
-      this.router.navigate(['../','flightSelect'],{relativeTo : this.route})
+      if(this.onewaydetails.length !=0){
+        this.router.navigate(['../','flightSelect'],{relativeTo : this.route})
+      }
+      else{
+        alert("No flights for the selected date")
+      }
       },
       (err : any)=>{
         console.log(err)

@@ -31,14 +31,62 @@ namespace MainWebAPI.Controllers
         [Route("softFDeleteFlight")]
         public IActionResult DeleteFlight([FromQuery(Name ="flightNumber")] string flightNumber)
         {
-            var flight = (from f in db.Flights
-                          where f.FlightNumber == flightNumber
-                          select f).First();
-            flight.IsCancelled = true;
+            try
+            {
+                var flight = (from f in db.Flights
+                              where f.FlightNumber == flightNumber
+                              select f).First();
+                flight.IsCancelled = true;
 
-            db.SaveChanges();
+                //Both trips
+                var allFlightBookings = db.Bookings.Where(b => b.FlightNumber == flightNumber).ToList();
+                foreach (var afb in allFlightBookings)
+                {
+                    afb.IsCancelled = true;
+                    db.Bookings.Update(afb);
+                    var oticketfare = afb.TicketFare;
+                    var rticketfare = (decimal)0.00;
+                    if (afb.IsReturn)
+                    {
+                        var rflight = db.RoundTrips.Where(r => r.BookingId == afb.BookingId).FirstOrDefault();
+                        rflight.IsCancelled = true;
+                        rticketfare = rflight.TicketFare;
+                        db.RoundTrips.Update(rflight);
+                    }
+                    var totalfare = oticketfare + rticketfare;
 
-            return Ok(flight);
+                    var tid = db.Bookings.Where(b => b.BookingId == afb.BookingId).Select(s => s.TransactionId).FirstOrDefault();
+                    var uid = db.TransactionTbs.Where(t => t.TransactionId == tid).Select(s => s.UserId).FirstOrDefault();
+                    var user = db.Users.Where(u => u.UserId == uid).FirstOrDefault();
+
+                    user.WalletAmount += totalfare;
+                    db.Users.Update(user);
+                }
+
+                var returnFlightBookings = db.RoundTrips.Where(b => b.FlightNumber == flightNumber).ToList();
+                foreach (var rfb in returnFlightBookings)
+                {
+                    rfb.IsCancelled = true;
+                    db.RoundTrips.Update(rfb);
+                    var rticketfare = rfb.TicketFare;
+
+                    var tid = db.Bookings.Where(b => b.BookingId == rfb.BookingId).Select(s => s.TransactionId).FirstOrDefault();
+                    var uid = db.TransactionTbs.Where(t => t.TransactionId == tid).Select(s => s.UserId).FirstOrDefault();
+                    var user = db.Users.Where(u => u.UserId == uid).FirstOrDefault();
+                    user.WalletAmount += rticketfare;
+                    db.Users.Update(user);
+                }
+
+
+                db.SaveChanges();
+
+                return Ok("Flight Deleted");
+            }
+            catch(Exception e)
+            {
+                return NotFound("Wrong Flight Number");
+            }
+            
         }
 
         [HttpPost]

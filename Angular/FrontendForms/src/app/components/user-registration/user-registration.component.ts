@@ -36,10 +36,10 @@ export class UserRegistrationComponent implements OnInit {
       
     });
    }
-
   onSubmit1(){
     this.addUser();
   }
+
   maxdate:any;
   pastdatedisable(){
     var date = new Date();
@@ -54,8 +54,7 @@ export class UserRegistrationComponent implements OnInit {
     if(month<10){
       month = '0' + month;
     }
-  console.log(month);
-  console.log(year);
+
 
   this.maxdate = year + "-" + month + "-" +todayDate;    
 

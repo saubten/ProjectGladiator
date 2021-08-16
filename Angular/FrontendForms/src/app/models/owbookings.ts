@@ -1,3 +1,5 @@
+import { Time } from "@angular/common";
+
 export class OWbookings{
     bookingID : number;
     oFlight : string;
@@ -6,6 +8,7 @@ export class OWbookings{
     oSource : string;
     oDestination : string;
     oDepartureDate: Date;
+    oDepartureTime: Time;
     bCancelled : boolean;
     rTripBool :boolean
 }

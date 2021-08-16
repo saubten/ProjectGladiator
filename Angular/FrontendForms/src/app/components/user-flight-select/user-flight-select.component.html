@@ -1,4 +1,4 @@
-<div class="container" *ngIf = "oneway.length">
+<div class="container mt-3" *ngIf = "oneway.length">
     <div class='parent d-flex grid-parent'>
         <div class='child flex-fill'>
             <h2>{{oneway[0].fromLocation}} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -35,10 +35,10 @@
     </div>
 </div>
 
-<div class="mx-auto w-50 d-grid gap-2" *ngIf="!flag">
+<div class="my-3 mx-auto w-50 d-grid gap-2" *ngIf="!flag">
     <button class="btn btn-primary" [disabled]="!(OWselect)" (click)="Continue()">Continue</button>
 </div>
-<div class="mx-auto w-50 d-grid gap-2" *ngIf="flag">
+<div class="my-3 mx-auto w-50 d-grid gap-2" *ngIf="flag">
     <button class="btn btn-primary" [disabled]="!(OWselect && RTselect)"(click)="Continue()">Continue</button>
 </div>
 

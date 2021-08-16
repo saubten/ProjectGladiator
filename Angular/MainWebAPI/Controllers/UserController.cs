@@ -186,7 +186,7 @@ namespace MainWebAPI.Controllers
 
             var bookings = ( from b in db.Bookings
                                 where transactionIds.Contains(b.TransactionId)
-                                select b.BookingId ).ToList(); 
+                                select b.BookingId ).ToList();
 
             var OWbookings = (from b in db.Bookings
                               join f in db.Flights on b.FlightNumber equals f.FlightNumber
@@ -200,6 +200,7 @@ namespace MainWebAPI.Controllers
                                   OSource = f.FromLocation,
                                   ODestination = f.ToLocation,
                                   ODepartureDate = f.DepartureDate,
+                                  ODepartureTime = f.DepartureTime,
                                   BCancelled = b.IsCancelled,
                                   RTripBool = b.IsReturn,
                               }).OrderByDescending(c => c.BookingID).ToList();
@@ -216,6 +217,7 @@ namespace MainWebAPI.Controllers
                                   RSource = f.FromLocation,
                                   RDestination = f.ToLocation,
                                   RDepartureDate = f.DepartureDate,
+                                  RDepartureTime = f.DepartureTime,
                                   RCancelled = r.IsCancelled,
                               }).ToList();
 

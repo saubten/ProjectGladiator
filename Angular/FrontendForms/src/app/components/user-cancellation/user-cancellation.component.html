@@ -1,47 +1,52 @@
-<div class="container mx-auto px-auto my-2 py-auto border border-primary rounded" *ngFor = "let o of owBookings">
+<div *ngFor = "let o of owBookings">
     <div *ngIf = "!o.bCancelled">
-        <div class="container mx-auto px-auto my-2 py-auto border border-primary rounded">
-            <div class="row">BookingID : {{o.bookingID}}</div>
-            <div class="row">Flight Number : {{o.oFlight}}</div>
-            <div class="row">
-                <div class="col">From : {{o.oSource}}</div>
-                <div class="col">To : {{o.oDestination}}</div>
-                <div class="col">Departure Date : {{o.oDepartureDate.toString().slice(0,10)}}</div>
-            </div>
-            <div class="row">
-                <div class="col">Class : {{o.oClass ?"Business" : "Economy"}}</div>
-                <div class="col">Fare : {{o.oTicketFare}}</div>
-            </div>
-            
-        </div>
-        <div *ngIf = "o.rTripBool">
-           <div *ngFor = "let r of rtBookings">
-               <div *ngIf = "r.rBookingId == o.bookingID && !r.rCancelled">
-                   <div class="container mx-auto px-auto my-2 py-auto border border-primary rounded">
-                        <div class="row">Flight Number : {{r.rFlight}}</div>
-                        <div class="row">
-                            <div class="col">From : {{r.rSource}}</div>
-                            <div class="col">To : {{r.rDestination}}</div>
-                            <div class="col">Departure Date : {{r.rDepartureDate.toString().slice(0,10)}}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col">Class : {{r.rClass ?"Business" : "Economy"}}</div>
-                            <div class="col">Fare : {{r.rTicketFare}}</div>
-                        </div>
-                        <div class="row">
-                            <button [attr.id]="r.rRoundTripId"   *ngIf = "o.rTripBool" class="btn btn-danger border border-dark my-2 mx-auto w-25" (click) = "ReturnCancel($event)">Return Trip Cancel</button>
+        <div class="container mx-auto px-auto my-2 py-auto border border-primary rounded" >
+            <div >
+                <div class="container mx-auto px-auto my-2 py-auto border border-primary rounded">
+                    <div class="row">BookingID : {{o.bookingID}}</div>
+                    <div class="row">Flight Number : {{o.oFlight}}</div>
+                    <div class="row">
+                        <div class="col">From : {{o.oSource}}</div>
+                        <div class="col">To : {{o.oDestination}}</div>
+                        <div class="col">Departure Date : {{o.oDepartureDate.toString().slice(0,10)}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">Class : {{o.oClass ?"Business" : "Economy"}}</div>
+                        <div class="col">Fare : {{o.oTicketFare}}</div>
+                    </div>
+                    
+                </div>
+                <div *ngIf = "o.rTripBool">
+                   <div *ngFor = "let r of rtBookings">
+                       <div *ngIf = "r.rBookingId == o.bookingID && !r.rCancelled">
+                           <div class="container mx-auto px-auto my-2 py-auto border border-primary rounded">
+                                <div class="row">Flight Number : {{r.rFlight}}</div>
+                                <div class="row">
+                                    <div class="col">From : {{r.rSource}}</div>
+                                    <div class="col">To : {{r.rDestination}}</div>
+                                    <div class="col">Departure Date : {{r.rDepartureDate.toString().slice(0,10)}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Class : {{r.rClass ?"Business" : "Economy"}}</div>
+                                    <div class="col">Fare : {{r.rTicketFare}}</div>
+                                </div>
+                                <div class="row">
+                                    <button [attr.id]="r.rRoundTripId" [disabled]="lessThan(r.rDepartureDate.toString().slice(0,10),getCurrentDate())"   *ngIf = "o.rTripBool" class="btn btn-danger border border-dark my-2 mx-auto w-25" (click) = "ReturnCancel($event,r.rDepartureTime,r.rDepartureDate.toString().slice(0,10))">Return Trip Cancel</button>
+                                   </div>
                            </div>
+                       </div>
                    </div>
-               </div>
-           </div>
-        </div>
-        <div class="row">
-            <button [attr.id]="o.bookingID" class="btn btn-danger border border-dark my-2 mx-auto w-25" (click) = "BookingCancel($event)">Booking Cancel</button>
+                </div>
+                <div class="row">
+                    <button [attr.id]="o.bookingID" [disabled]="lessThan(o.oDepartureDate.toString().slice(0,10),getCurrentDate())" class="btn btn-danger border border-dark my-2 mx-auto w-25" (click) = "BookingCancel($event,o.oDepartureTime,o.oDepartureDate.toString().slice(0,10))">Booking Cancel</button>
+                </div>
+            </div>
         </div>
     </div>
-    
-
 </div>
+
+
+
 
 
 
