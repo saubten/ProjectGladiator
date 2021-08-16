@@ -12,7 +12,7 @@ export class UserSeatSelectionComponent implements OnInit {
 
     seats : Seats [];
     seatIndex : number;
-    seatTogglers = new Array<boolean>().fill(false);
+    seatTogglers = new Array<boolean>(158).fill(false);
   
     element? : HTMLDivElement;
     temp : any;
@@ -117,23 +117,23 @@ export class UserSeatSelectionComponent implements OnInit {
           this.classBool = Boolean(JSON.parse(localStorage.getItem('RTflightType')!));
           this.RTflightNumber = JSON.parse(localStorage.getItem('roundtripDetails')!)['flightNumber'];
           this.seatCount = Number(JSON.parse(localStorage.getItem('passengerList')!).length);
-          this.seatTogglers.forEach((value,index) =>{
-            if(value == true)
-            value = false;
+          this.seatTogglers.forEach((seat,index) =>{
+            this.seatTogglers[index] = false;
             this.temp = document.getElementById(index.toString());
             this.element = this.temp;
             this.element?.setAttribute("class",'seat');
           })
+          console.log(this.seatTogglers)
           this.selectedSeatsId = [];
           this.selectedSeats = [];
           this.getSeats(this.RTflightNumber!);
         }
       }
       else{
-        this.updateSelectedSeats(this.OWselectedSeatsId);
-        this.updateSelectedSeats(this.selectedSeatsId);
-        this.updateAvailableSeatsInDb(this.RTflightNumber!);
-        this.updateAvailableSeatsInDb(this.OWflightNumber);
+        //this.updateSelectedSeats(this.OWselectedSeatsId);
+        //this.updateSelectedSeats(this.selectedSeatsId);
+        //this.updateAvailableSeatsInDb(this.RTflightNumber!);
+        //this.updateAvailableSeatsInDb(this.OWflightNumber);
         localStorage.setItem('OWseatsSelected',JSON.stringify(this.OWselectedSeats));
         localStorage.setItem('OWseatsSelectedId',JSON.stringify(this.OWselectedSeatsId));
         localStorage.setItem('OWclassBool',JSON.stringify(this.OWclassBool));
@@ -144,8 +144,8 @@ export class UserSeatSelectionComponent implements OnInit {
       }
 
       if(!this.availableBool){
-        this.updateSelectedSeats(this.selectedSeatsId);
-        this.updateAvailableSeatsInDb(this.OWflightNumber);
+        //this.updateSelectedSeats(this.selectedSeatsId);
+        //this.updateAvailableSeatsInDb(this.OWflightNumber);
         localStorage.setItem('OWseatsSelected',JSON.stringify(this.selectedSeats));
         localStorage.setItem('OWseatsSelectedId',JSON.stringify(this.selectedSeatsId));
         localStorage.setItem('OWclassBool',JSON.stringify(this.classBool));
@@ -193,27 +193,27 @@ export class UserSeatSelectionComponent implements OnInit {
         });
     }
   
-    updateSelectedSeats(selectedSeatsId : number[]){
+    // updateSelectedSeats(selectedSeatsId : number[]){
 
-      this.service.updateSeats(selectedSeatsId).subscribe(data => 
-        {
-          console.log(data);
-        },(err) =>{
-          console.log(err)
-        }
-      );
-    }
+    //   this.service.updateSeats(selectedSeatsId).subscribe(data => 
+    //     {
+    //       console.log(data);
+    //     },(err) =>{
+    //       console.log(err)
+    //     }
+    //   );
+    // }
 
-    updateAvailableSeatsInDb(flightNumber : string){
+    // updateAvailableSeatsInDb(flightNumber : string){
 
-      this.service.availbleSeatsUpdate(flightNumber,this.classBool,this.freezeCheck).subscribe(data => 
-        {
-          console.log(data);
-        },(err) =>{
-          console.log(err)
-        }
-      );
-    }
+    //   this.service.availbleSeatsUpdate(flightNumber,this.classBool,this.freezeCheck).subscribe(data => 
+    //     {
+    //       console.log(data);
+    //     },(err) =>{
+    //       console.log(err)
+    //     }
+    //   );
+    // }
   }
 
 

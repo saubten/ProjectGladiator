@@ -3,7 +3,7 @@ export class Bookings
     BookingID?:number
     FlightNumber?:string
     TransactionID?:number
-    Passenger?:number
+    Passengers?:number
     TicketFare?:number
     isBusiness?:boolean
     isCancelled?:boolean

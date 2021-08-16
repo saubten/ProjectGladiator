@@ -12,10 +12,10 @@ export class CancellationService{
     url : string = "http://localhost:13972/api/Cancellation"
 
     cancelRoundTrips(rtid : number){
-        return this.http.put(`${this.url}/roundTripCancellation?rtid=${rtid}`,null);
+        return this.http.put(`${this.url}/roundTripCancellation?rtid=${rtid}`,null,{responseType : "text"});
     }
 
     cancelBookings(bid : number){
-        return this.http.put(`${this.url}/bookingCancellation?bid=${bid}`,null);
+        return this.http.put(`${this.url}/bookingCancellation?bid=${bid}`,null,{responseType : "text"});
     }
 }

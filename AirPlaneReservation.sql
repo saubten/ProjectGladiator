@@ -10,6 +10,9 @@ CREATE TABLE Admins (
 	LastName nvarchar(20) NOT NULL,
 	CONSTRAINT pk_Admin PRIMARY KEY (AdminID)
 )
+USE AirlineReservation
+DROP DATABASE AirlineReservation
+CREATE DATABASE AirlineReservation
 
 CREATE TABLE Airplanes (
 	RegistrationNumber nvarchar(20) NOT NULL,
@@ -31,7 +34,7 @@ CREATE TABLE Flights (
 	BusinessPrice money NOT NULL,
 	AvailableEconomySeats int NOT NULL,
 	AvailableBusinessSeats int NOT NULL,
-	isCancelled bit NOT NULL,
+	isCancelled bit default(0) NOT NULL,
 	CONSTRAINT pk_Flights PRIMARY KEY (FlightNumber),
 	CONSTRAINT fk_AirplanesFlights FOREIGN KEY (RegistrationNumber) REFERENCES Airplanes(RegistrationNumber) ON DELETE CASCADE ON UPDATE CASCADE
 )
@@ -53,7 +56,7 @@ CREATE TABLE TransactionTb (
 	TransactionID int NOT NULL IDENTITY (1,1),
 	UserID int NOT NULL,
 	TransactionAmount money NOT NULL,
-	DateOfTransaction datetime NOT NULL,
+	DateOfTransaction datetime NOT NULL default(getdate()),
 	CONSTRAINT pk_TransactionTb PRIMARY KEY (TransactionID),
 	CONSTRAINT fk_UsersTransactionTb FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE ON UPDATE CASCADE,
 )

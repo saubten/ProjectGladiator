@@ -190,7 +190,8 @@ namespace MainWebAPI.Controllers
             return Ok(id);
         }
         #endregion
-        //NOT SERVICED YET 
+
+        #region CheckUserPassword
         [HttpGet]
         [Route("checkPassword")]
         public IActionResult CheckPassword([FromQuery(Name = "email")] string email)
@@ -198,7 +199,9 @@ namespace MainWebAPI.Controllers
             var id = db.Users.Where(u => u.EmailId == email).Select(u => u.UserId).First();
             return Ok(id);
         }
+        #endregion
 
+        #region GetBookingsByEmail(OW/RT) 
         [HttpGet]
         [Route("getBookings")]
         public IActionResult GetBookings([FromQuery(Name = "email")] string email)
@@ -245,7 +248,9 @@ namespace MainWebAPI.Controllers
 
             return Ok(new {OWbookings,RTbookings});
         }
+        #endregion
 
+        #region Login
         [HttpGet]
         [Route("login")]
         public IActionResult checkLogin([FromQuery(Name ="email")] string email, [FromQuery(Name = "password")] string password)
@@ -267,5 +272,6 @@ namespace MainWebAPI.Controllers
                 return Ok(e.Message);
             }
         }
+        #endregion
     }
 }

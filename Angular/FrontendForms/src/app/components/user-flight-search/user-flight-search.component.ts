@@ -23,8 +23,8 @@ export class UserFlightSearchComponent implements OnInit {
   oerr : string;
 
 
-  s:string[]=["Mumbai","Chennai","Delhi","Bangalore","Pune","Jammu","Hyderabad"].sort();;
-  scopys:string[]=["Mumbai","Chennai","Delhi","Bangalore","Pune","Jammu","Hyderabad"].sort();
+  s:string[]=["Mumbai","Chennai","Delhi","Bangalore","Pune","Jammu","Hyderabad","Puducherry"].sort();;
+  scopys:string[]=["Mumbai","Chennai","Delhi","Bangalore","Pune","Jammu","Hyderabad","Puducherry"].sort();
   name?:string;
   index?:number;
 
@@ -41,14 +41,14 @@ export class UserFlightSearchComponent implements OnInit {
 
   }
 
-  c(){
+  c()
+  {
     console.log(this.flightsearchform.value['from']);
-    this.s=["Mumbai","Chennai","Delhi","Bangalore","Pune","Jammu","Hyderabad"].sort();
+    this.s=["Mumbai","Chennai","Delhi","Bangalore","Pune","Jammu","Hyderabad","Puducherry"].sort();
     this.index=this.s.findIndex(a=>a===this.flightsearchform.value['from'])
     console.log(this.index)
     if(this.index!=-1){
       this.s.splice(this.index,1);
-
     }
     
     console.log(this.s);

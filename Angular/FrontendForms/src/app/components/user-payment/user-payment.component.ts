@@ -9,6 +9,7 @@ import { Passenger } from 'src/app/models/passengers';
 import { RoundTrip } from 'src/app/models/roundTrip';
 import { TransactionTb } from 'src/app/models/transactionTb';
 import { PaymentService } from 'src/app/services/payment.service';
+import { SeatService } from 'src/app/services/seats.service';
 import { UserServices } from 'src/app/services/user.service';
 
 @Component({
@@ -43,7 +44,7 @@ export class UserPaymentComponent implements OnInit {
   temptrans : any;
   tempbooking : any;
 
-  constructor(private http: HttpClient, private paymentservice: PaymentService ,private userService : UserServices ,private router : Router) { }
+  constructor(private http: HttpClient, private paymentservice: PaymentService, private service : SeatService ,private userService : UserServices ,private router : Router) { }
 
   transactionID: any;
   transactiondetails: TransactionTb = {}
@@ -168,6 +169,8 @@ export class UserPaymentComponent implements OnInit {
           TransactionAmount: this.OWprice
         }
         this.addTransaction(this.transactionOneWay)
+        this.updateAvailableSeatsInDb(this.onewayDetails.flightNumber,this.OWclassBool,this.passengerCount)
+        this.updateSelectedSeats(this.OWseatsSelectedId)
       }
       else{
         this.transactionRoundTip = {
@@ -175,12 +178,38 @@ export class UserPaymentComponent implements OnInit {
           TransactionAmount: this.OWprice + this.RTprice
         }
         this.addTransaction(this.transactionRoundTip)
+        this.updateAvailableSeatsInDb(this.onewayDetails.flightNumber,this.OWclassBool,this.passengerCount)
+        this.updateAvailableSeatsInDb(this.roundtripDetails.flightNumber,this.RTclassBool,this.passengerCount)
+        this.updateSelectedSeats(this.OWseatsSelectedId)
+        this.updateSelectedSeats(this.RTseatsSelectedId)
       }
     },
     err =>{
       console.log(err);
     })
   } 
+
+  updateSelectedSeats(selectedSeatsId : number[]){
+
+    this.service.updateSeats(selectedSeatsId).subscribe(data => 
+      {
+        console.log(data);
+      },(err) =>{
+        console.log(err)
+      }
+    );
+  }
+
+  updateAvailableSeatsInDb(flightNumber : string,classBool : boolean, freezeCheck : number){
+
+    this.service.availbleSeatsUpdate(flightNumber,classBool,freezeCheck).subscribe(data => 
+      {
+        console.log(data);
+      },(err) =>{
+        console.log(err)
+      }
+    );
+  }
 
   transactionOneWay: TransactionTb
   transactionRoundTip: TransactionTb
@@ -214,7 +243,7 @@ export class UserPaymentComponent implements OnInit {
     this.bookingOneWay = {
       FlightNumber: this.onewayDetails.flightNumber,
       TransactionID: this.transactionID,
-      Passenger: this.passengerCount,
+      Passengers: this.passengerCount,
       TicketFare: this.OWprice * this.passengerCount,
       isBusiness: this.OWflightType,
       isCancelled: this.onewayDetails.isCancelled,

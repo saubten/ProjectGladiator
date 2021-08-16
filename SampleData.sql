@@ -193,7 +193,15 @@ delete from RoundTrip
 delete from TransactionTb
 
 
+alter table Flights Add constraint DF_isCancellation default(0) for isCancelled
 
 
+Insert into Flights(RegistrationNumber,FlightNumber,FromLocation,ToLocation,DepartureDate,DepartureTime,ArrivalDate,ArrivalTime,EconomyPrice,BusinessPrice,AvailableEconomySeats,AvailableBusinessSeats,isCancelled) values
+('AB123','L9532','Bangalore','Pune','2021-07-28','6:30 PM','2021-09-28','9:30 PM',2000,3000,138,20,0),
+('AB123','K9532','Mumbai','Pune','2021-08-16','8:00 PM','2021-09-28','9:30 PM',2000,3000,138,20,0)
 
+insert into TransactionTb(UserID,TransactionAmount) values (8,2000),(8,2000)
 
+insert into Bookings(FlightNumber,TransactionID,Passengers,TicketFare,isBusiness,isCancelled,isReturn) values
+('L9532',61,1,2000,1,0,0),
+('K9532',62,1,2000,1,0,0)
